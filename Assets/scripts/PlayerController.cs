@@ -1,70 +1,65 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController: MonoBehaviour {
     private Rigidbody2D body;
     private BoxCollider2D collider;
-    private Vector3 moveVector;
-
-    private enum MovementType { useVelocity, useTransform };
-    [SerializeField] private MovementType useMovement;
-    [SerializeField] private LayerMask groundLayer;
+    private Animator animator;
+    private Vector2 moveVector;
+    public LayerMask groundLayer;
     public float jumpForce;
+    public float walkSpeed;
+    public float runSpeed;
+    [HideInInspector] public bool isGrounded;
 
-    private float max=0f;
+    float nextJump = 0;
+
+    public event EventHandler OnJumpEvent;
     // Start is called before the first frame updat
-    void Start()
-    {
+    void Start() {
+        animator = GetComponentsInChildren<Animator>()[0];
         body = GetComponent<Rigidbody2D>();
         collider = GetComponent<BoxCollider2D>();
-
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+        isGrounded = getIsGrounded();
         moveVector = getMovement();
-        if (body.transform.position.y > max)
-        {
-            max = body.transform.position.y;
-           // Debug.Log(max);
+    }
+
+    private void FixedUpdate() {
+        body.velocity = moveVector;
+    }
+
+    Vector2 getMovement() {
+        float moveY = body.velocity.y;
+        float moveX = Input.GetAxisRaw("Horizontal") * walkSpeed;
+
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetAxisRaw("Horizontal") != 0 && isGrounded) {
+            moveX = Input.GetAxisRaw("Horizontal") * runSpeed;
         }
-    }
 
-    private void FixedUpdate()
-    {
-       // if (useMovement.Equals(MovementType.useVelocity)) useVelocity();
-
-    }
-
-    void useTransform() {
-        transform.position += moveVector / 10;
-    }
-
-    void useVelocity()
-    {
-        body.velocity = moveVector * 10;
-    }
-
-    Vector3 getMovement()
-    {
-        bool grounded = isGrounded();
-        float moveX = 0;
-        float moveY = 0;
-        if (Input.GetKey(KeyCode.D)) moveX = 1f;
-        if (Input.GetKey(KeyCode.A)) moveX = -1f;
-        if (Input.GetKey(KeyCode.Space) && grounded) {
-
-            body.velocity = new Vector3(moveX, jumpForce, 0); 
+        if (Input.GetKey(KeyCode.Space) && isGrounded) {
+            Debug.Log("jumping");
+            StartCoroutine(performJump());
         }
-        
-        return new Vector3(moveX, moveY, 0);
+
+        //Debug.Log("isGrounded" + !!isGrounded);
+
+        return new Vector2(moveX, moveY);
     }
 
-    private bool isGrounded()
-    {
+    IEnumerator performJump() {
+        OnJumpEvent?.Invoke(this, EventArgs.Empty);
+        yield return new WaitForSeconds(.1f);
+        moveVector.y = 1f * jumpForce;
+        animator.ResetTrigger("triggerJump");
+    }
+
+    private bool getIsGrounded() {
         float downBy = .05f;
         RaycastHit2D cast = Physics2D.BoxCast(collider.bounds.center, collider.bounds.size, 0f, Vector2.down, downBy, groundLayer);
         ExtDebug.DebugHitBox(cast, collider, downBy);
