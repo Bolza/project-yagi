@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController: MonoBehaviour {
+    private Animator animator;
     private Rigidbody2D body;
     private BoxCollider2D collider;
-    private Animator animator;
     private Vector2 moveVector;
     public LayerMask groundLayer;
     public float jumpForce;
@@ -16,7 +16,8 @@ public class PlayerController: MonoBehaviour {
 
     float nextJump = 0;
 
-    public event EventHandler OnJumpEvent;
+    public event EventHandler JumpEvent;
+    public event EventHandler SwingEvent;
     // Start is called before the first frame updat
     void Start() {
         animator = GetComponentsInChildren<Animator>()[0];
@@ -36,27 +37,32 @@ public class PlayerController: MonoBehaviour {
 
     Vector2 getMovement() {
         float moveY = body.velocity.y;
-        float moveX = Input.GetAxisRaw("Horizontal") * walkSpeed;
+
+        // bad practice to read state from animator also controller should be animator-independent
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+        float actionMultiplierX = 1f; // c'mon
+        if (state.IsName("swing")) actionMultiplierX = 0f;
+        float moveX = Input.GetAxisRaw("Horizontal") * walkSpeed * actionMultiplierX;
 
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetAxisRaw("Horizontal") != 0 && isGrounded) {
-            moveX = Input.GetAxisRaw("Horizontal") * runSpeed;
+            moveX = Input.GetAxisRaw("Horizontal") * runSpeed * actionMultiplierX;
         }
 
         if (Input.GetKey(KeyCode.Space) && isGrounded) {
-            Debug.Log("jumping");
             StartCoroutine(performJump());
         }
 
-        //Debug.Log("isGrounded" + !!isGrounded);
+        if ((Input.GetMouseButton(0) || Input.GetKey(KeyCode.C)) && isGrounded) {
+            SwingEvent?.Invoke(this, EventArgs.Empty);
+        }
 
         return new Vector2(moveX, moveY);
     }
 
     IEnumerator performJump() {
-        OnJumpEvent?.Invoke(this, EventArgs.Empty);
+        JumpEvent?.Invoke(this, EventArgs.Empty);
         yield return new WaitForSeconds(.1f);
         moveVector.y = 1f * jumpForce;
-        animator.ResetTrigger("triggerJump");
     }
 
     private bool getIsGrounded() {
