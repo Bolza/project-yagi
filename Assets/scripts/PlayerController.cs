@@ -37,7 +37,7 @@ public class PlayerController: MonoBehaviour {
 
     Vector2 getMovement() {
         float moveY = body.velocity.y;
-
+        Debug.Log(Input.GetAxisRaw("Horizontal"));
         // bad practice to read state from animator also controller should be animator-independent
         AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
         float actionMultiplierX = 1f; // c'mon
