@@ -4,6 +4,10 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "newPlayerData", menuName = "Data/Player Data/Base Data")]
 public class PlayerData: ScriptableObject {
+
+    [Header("World State")]
+    public float gravity = -25f;
+
     [Header("Move State")]
     public float runSpeed = 5f;
 

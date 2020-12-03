@@ -49,6 +49,6 @@ public class PlayerInAirState: PlayerState {
 
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
-        if (!isGrounded) player.MoveY(-2.2f * Time.fixedDeltaTime);
+        //if (!isGrounded) player.MoveY(-2.2f * Time.fixedDeltaTime);
     }
 }
