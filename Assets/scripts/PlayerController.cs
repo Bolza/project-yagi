@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 
 public class PlayerController: MonoBehaviour {
     private Animator animator;
@@ -14,7 +16,6 @@ public class PlayerController: MonoBehaviour {
     public float runSpeed;
     [HideInInspector] public bool isGrounded;
 
-    float nextJump = 0;
 
     public event EventHandler JumpEvent;
     public event EventHandler SwingEvent;
@@ -28,36 +29,58 @@ public class PlayerController: MonoBehaviour {
     // Update is called once per frame
     void Update() {
         isGrounded = getIsGrounded();
-        moveVector = getMovement();
+        //moveVector = getMovement();
     }
 
     private void FixedUpdate() {
-        body.velocity = moveVector;
+        //body.velocity = moveVector;
+
     }
 
-    Vector2 getMovement() {
-        float moveY = body.velocity.y;
-        Debug.Log(Input.GetAxisRaw("Horizontal"));
-        // bad practice to read state from animator also controller should be animator-independent
-        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
-        float actionMultiplierX = 1f; // c'mon
-        if (state.IsName("swing")) actionMultiplierX = 0f;
-        float moveX = Input.GetAxisRaw("Horizontal") * walkSpeed * actionMultiplierX;
+    public void OnMove(InputAction.CallbackContext context) {
+        Vector2 move = context.ReadValue<Vector2>();
+        Debug.Log("Move " + context.phase);
 
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetAxisRaw("Horizontal") != 0 && isGrounded) {
-            moveX = Input.GetAxisRaw("Horizontal") * runSpeed * actionMultiplierX;
-        }
-
-        if (Input.GetKey(KeyCode.Space) && isGrounded) {
-            StartCoroutine(performJump());
-        }
-
-        if ((Input.GetMouseButton(0) || Input.GetKey(KeyCode.C)) && isGrounded) {
-            SwingEvent?.Invoke(this, EventArgs.Empty);
-        }
-
-        return new Vector2(moveX, moveY);
+        //float moveX = move.x * walkSpeed;
+        //moveVector = new Vector2(moveX, moveVector.y);
+        //body.velocity = new Vector2(moveX * walkSpeed, body.velocity.y);
     }
+
+    public void OnJump(InputAction.CallbackContext context) {
+        Debug.Log("Jump " + context.phase);
+
+        //body.velocity = new Vector2(body.velocity.x, jumpForce);
+        //moveVector = new Vector2(moveVector.x, jumpForce);
+        //if (isGrounded) StartCoroutine(performJump());
+    }
+
+    public void OnFire() {
+        SwingEvent?.Invoke(this, EventArgs.Empty);
+    }
+
+    //Vector2 getMovement() {
+    //    float moveY = body.velocity.y;
+    //    Debug.Log(Input.GetAxisRaw("Horizontal"));
+    //    // bad practice to read state from animator also controller should be animator-independent
+    //    AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+    //    float actionMultiplierX = 1f; // c'mon
+    //    if (state.IsName("swing")) actionMultiplierX = 0f;
+    //    float moveX = Input.GetAxisRaw("Horizontal") * walkSpeed * actionMultiplierX;
+
+    //    if (Input.GetKey(KeyCode.LeftShift) && Input.GetAxisRaw("Horizontal") != 0 && isGrounded) {
+    //        moveX = Input.GetAxisRaw("Horizontal") * runSpeed * actionMultiplierX;
+    //    }
+
+    //    if (Input.GetKey(KeyCode.Space) && isGrounded) {
+    //        StartCoroutine(performJump());
+    //    }
+
+    //    if ((Input.GetMouseButton(0) || Input.GetKey(KeyCode.C)) && isGrounded) {
+    //        SwingEvent?.Invoke(this, EventArgs.Empty);
+    //    }
+
+    //    return new Vector2(moveX, moveY);
+    //}
 
     IEnumerator performJump() {
         JumpEvent?.Invoke(this, EventArgs.Empty);
