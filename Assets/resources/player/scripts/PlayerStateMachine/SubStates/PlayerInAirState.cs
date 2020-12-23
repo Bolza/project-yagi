@@ -26,6 +26,9 @@ public class PlayerInAirState: PlayerState {
         if (isGrounded && player.CurrentVelocity.y < 0.01f) {
             stateMachine.ChangeState(player.LandState);
         }
+        else if (jumpInput && isWalled) {
+            stateMachine.ChangeState(player.WallJumpState);
+        }
         else if (jumpInput && player.JumpState.CanJump()) {
             // we can make this action more smooth
             if (playerData.canJumpFromWall) {
@@ -49,6 +52,5 @@ public class PlayerInAirState: PlayerState {
 
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
-        //if (!isGrounded) player.MoveY(-2.2f * Time.fixedDeltaTime);
     }
 }

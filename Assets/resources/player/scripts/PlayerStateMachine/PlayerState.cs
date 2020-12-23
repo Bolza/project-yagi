@@ -27,10 +27,11 @@ public class PlayerState {
         player.Anim.SetBool(animBoolName, true);
         startTime = Time.time;
         isAnimationFinished = false;
+        isExitingState = false;
     }
 
     public virtual void Exit() {
-        //isExitingState = true;
+        isExitingState = true;
         player.Anim.SetBool(animBoolName, false);
     }
 

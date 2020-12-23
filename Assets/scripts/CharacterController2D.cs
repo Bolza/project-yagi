@@ -533,5 +533,7 @@ public class CharacterController2D: MonoBehaviour {
     }
 
     #endregion
-
+    private void ResetSlopeSpeedMultiplier() {
+        slopeSpeedMultiplier = new AnimationCurve(new Keyframe(-90f, 1.5f), new Keyframe(0f, 1f), new Keyframe(90f, 0f));
+    }
 }

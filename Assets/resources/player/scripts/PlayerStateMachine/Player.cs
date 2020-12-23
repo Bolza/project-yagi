@@ -17,6 +17,7 @@ public class Player: MonoBehaviour {
     public PlayerWallSlideState WallSlideState { get; private set; }
     public PlayerWallGrabState WallGrabState { get; private set; }
     public PlayerWallClimbState WallClimbState { get; private set; }
+    public PlayerWallJumpState WallJumpState { get; private set; }
 
     [SerializeField] private PlayerData playerData;
     #endregion
@@ -24,15 +25,12 @@ public class Player: MonoBehaviour {
     public Animator Anim { get; private set; }
     public Rigidbody2D Body { get; private set; }
     public Collider2D Collider { get; private set; }
-    public GroundTrigger GroundCheck { get; private set; }
+    public CharacterController2D CC { get; private set; }
     [SerializeField] public Transform wallCheck;
     [SerializeField] public LayerMask groundLayer;
 
-    public CharacterController2D CC;
     public Vector2 CurrentVelocity;
-    private Vector2 workspace;
     public int FacingDirection { get; private set; }
-    private bool isGrounded = false;
 
     private void Awake() {
         StateMachine = new PlayerStateMachine();
@@ -44,6 +42,7 @@ public class Player: MonoBehaviour {
         WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, "wallSlide");
         WallGrabState = new PlayerWallGrabState(this, StateMachine, playerData, "wallGrab");
         WallClimbState = new PlayerWallClimbState(this, StateMachine, playerData, "wallClimb");
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, "wallJump");
     }
 
     private void Start() {
@@ -52,11 +51,9 @@ public class Player: MonoBehaviour {
         Body = GetComponentInChildren<Rigidbody2D>();
         Collider = GetComponent<Collider2D>();
         CC = GetComponent<CharacterController2D>();
-        GroundCheck = GetComponentInChildren<CircleCollider2D>().GetComponent<GroundTrigger>();
 
         StateMachine.Initialize(IdleState);
         FacingDirection = 1;
-        //GroundCheck.OnGroundEnter += OnGroundEnter;
     }
 
     private void Update() {
@@ -68,8 +65,6 @@ public class Player: MonoBehaviour {
 
     private void FixedUpdate() {
         StateMachine.CurrentState.PhysicsUpdate();
-
-
     }
 
     public void SetVelocityX(float velocity) {
@@ -87,26 +82,12 @@ public class Player: MonoBehaviour {
     }
 
     public bool CheckIsWalled() {
-        Vector2 v = new Vector2(wallCheck.position.x + (0.2f * FacingDirection), wallCheck.position.y);
-        //Debug.DrawLine(wallCheck.position, v, Color.red, 0.0f);
         return Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, 0.2f, groundLayer);
     }
 
     public bool CheckIsGrounded() {
         return CC.isGrounded;
     }
-
-    //private void OnGroundEnter(object sender, EventArgs e) {
-    //    isGrounded = true;
-    //    GroundCheck.OnGroundEnter -= OnGroundEnter;
-    //    GroundCheck.OnGroundExit += OnGroundExit;
-    //}
-
-    //private void OnGroundExit(object sender, EventArgs e) {
-    //    isGrounded = false;
-    //    GroundCheck.OnGroundEnter += OnGroundEnter;
-    //    GroundCheck.OnGroundExit -= OnGroundExit;
-    //}
 
     public void CheckIfShouldFlip(float xInput) {
         if (xInput != 0 && xInput != FacingDirection) Flip();

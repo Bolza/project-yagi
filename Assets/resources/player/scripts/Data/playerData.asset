@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df3947b23a3d4f65b69ce30bb4f2955, type: 3}
   m_Name: playerData
   m_EditorClassIdentifier: 
+  gravity: -25
   runSpeed: 5
-  jumpForce: 8
+  jumpForce: 3
   airMovementSpeed: 2.8
   jumpsAmount: 1
   coyoteTime: 0.05
@@ -21,3 +22,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   wallSlideVelocity: 2
+  wallGrabDuration: 0.3
+  canJumpFromWall: 1
