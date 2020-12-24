@@ -21,6 +21,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  wallJumpForce: 10
+  wallJumpTime: 0.4
+  wallJumpAngle: {x: 1, y: 2}
   wallSlideVelocity: 2
   wallGrabDuration: 0.3
   canJumpFromWall: 1

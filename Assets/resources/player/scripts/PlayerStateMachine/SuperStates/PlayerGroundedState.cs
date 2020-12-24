@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerGroundedState: PlayerState {
 
-    public bool jumpInput;
     private float lastGroundedTime;
 
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) {
@@ -25,7 +24,6 @@ public class PlayerGroundedState: PlayerState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
-        jumpInput = player.InputHandler.JumpInput;
         bool isCoyoteTimeOn = Time.time <= lastGroundedTime + playerData.coyoteTime;
 
         if (jumpInput && player.JumpState.CanJump()) {

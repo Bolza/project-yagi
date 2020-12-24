@@ -17,6 +17,9 @@ public class PlayerData: ScriptableObject {
     public int jumpsAmount = 1;
     public float coyoteTime = 0.05f;
     public LayerMask groundLayer;
+    public float wallJumpForce = 10f;
+    public float wallJumpTime = 0.4f;
+    public Vector2 wallJumpAngle = new Vector2(1, 2);
 
     [Header("Wall State")]
     public float wallSlideVelocity = 3f;

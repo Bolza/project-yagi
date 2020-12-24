@@ -12,6 +12,7 @@ public class PlayerState {
     protected bool isWalled;
     protected bool isAnimationFinished;
     protected float inputX;
+    public bool jumpInput;
     protected bool isExitingState { get; private set; }
 
     public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) {
@@ -45,6 +46,7 @@ public class PlayerState {
         isGrounded = player.CheckIsGrounded();
         isWalled = player.CheckIsWalled();
         inputX = player.InputHandler.NormInputX;
+        jumpInput = player.InputHandler.JumpInput;
     }
 
     public virtual void AnimationTrigger() { }

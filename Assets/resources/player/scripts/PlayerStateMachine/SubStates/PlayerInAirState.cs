@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInAirState: PlayerState {
-    private bool jumpInput;
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) {
     }
 
@@ -21,13 +20,12 @@ public class PlayerInAirState: PlayerState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
-        jumpInput = player.InputHandler.JumpInput;
 
         if (isGrounded && player.CurrentVelocity.y < 0.01f) {
             stateMachine.ChangeState(player.LandState);
         }
         else if (jumpInput && isWalled) {
-            stateMachine.ChangeState(player.WallJumpState);
+            //stateMachine.ChangeState(player.WallJumpState);
         }
         else if (jumpInput && player.JumpState.CanJump()) {
             // we can make this action more smooth

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerWallGrabState: PlayerTouchingWallState {
+    bool permamentGrab = true;
     public PlayerWallGrabState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) {
     }
 
@@ -28,10 +29,13 @@ public class PlayerWallGrabState: PlayerTouchingWallState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
-
-        if (Time.time >= startTime + playerData.wallGrabDuration && !isExitingState) {
+        //start sliding after wallGrab Duration
+        if (!permamentGrab && Time.time >= startTime + playerData.wallGrabDuration && !isExitingState) {
             //stateMachine.ChangeState(player.InAirState);
             stateMachine.ChangeState(player.WallSlideState);
+        }
+        else if (jumpInput) {
+            stateMachine.ChangeState(player.WallJumpState);
         }
         else {
             player.SetVelocityY(0);

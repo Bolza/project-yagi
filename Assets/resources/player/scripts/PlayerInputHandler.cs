@@ -13,7 +13,6 @@ public class PlayerInputHandler: MonoBehaviour {
     [SerializeField] private float inputHoldTime = 0.2f;
 
     private float jumpStartTime;
-    private float moveStartTime;
 
     public void Update() {
         CheckJumpInputExpired();
@@ -21,7 +20,6 @@ public class PlayerInputHandler: MonoBehaviour {
 
 
     public void OnMoveInput(InputAction.CallbackContext ctx) {
-        moveStartTime = Time.time;
         RawMovementInput = ctx.ReadValue<Vector2>();
         NormInputX = (RawMovementInput.x * Vector2.right).normalized.x;
         NormInputY = (RawMovementInput.y * Vector2.up).normalized.y;

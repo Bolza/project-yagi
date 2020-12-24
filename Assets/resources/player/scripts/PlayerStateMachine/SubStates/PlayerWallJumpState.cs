@@ -20,6 +20,10 @@ public class PlayerWallJumpState: PlayerAbilityState {
 
     public override void Enter() {
         base.Enter();
+        player.JumpState.ResetJumpsLeft();
+        player.SetVelocity(playerData.wallJumpForce, playerData.wallJumpAngle, -player.FacingDirection);
+        player.CheckIfShouldFlip(-player.FacingDirection);
+        player.JumpState.DecreaseJumps();
     }
 
     public override void Exit() {
@@ -28,9 +32,18 @@ public class PlayerWallJumpState: PlayerAbilityState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
+        player.Anim.SetFloat("ySpeed", player.CurrentVelocity.y);
+        player.Anim.SetFloat("xSpeed", Mathf.Abs(player.CurrentVelocity.x));
+        if (Time.time >= startTime + playerData.wallJumpTime) {
+            isAbilityDone = true;
+        }
     }
 
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
+    }
+
+    public void DetermineWallJumpDirection(bool isWalled) {
+        // https://youtu.be/xetW10MUI0o?list=PLy78FINcVmjA0zDBhLuLNL1Jo6xNMMq-W&t=655
     }
 }

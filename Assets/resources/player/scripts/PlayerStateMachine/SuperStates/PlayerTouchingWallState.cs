@@ -30,6 +30,7 @@ public class PlayerTouchingWallState: PlayerState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
+
         if (isGrounded) {
             stateMachine.ChangeState(player.IdleState);
         }

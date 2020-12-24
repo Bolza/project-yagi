@@ -42,7 +42,7 @@ public class Player: MonoBehaviour {
         WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, "wallSlide");
         WallGrabState = new PlayerWallGrabState(this, StateMachine, playerData, "wallGrab");
         WallClimbState = new PlayerWallClimbState(this, StateMachine, playerData, "wallClimb");
-        WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, "wallJump");
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, "inAir");
     }
 
     private void Start() {
@@ -76,13 +76,19 @@ public class Player: MonoBehaviour {
         //Debug.Log(velocity + " / " + CurrentVelocity.y + " / " + InputHandler.NormInputY);
     }
 
+    public void SetVelocity(float v, Vector2 angle, int dir) {
+        angle.Normalize();
+        CurrentVelocity.Set(angle.x * v * dir, angle.y * v);
+    }
+
     private void Flip() {
         FacingDirection *= -1;
         transform.Rotate(0f, 180f, 0f);
     }
 
     public bool CheckIsWalled() {
-        return Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, 0.2f, groundLayer);
+        return CC.isWalled;
+        //return Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, 0.2f, groundLayer);
     }
 
     public bool CheckIsGrounded() {
