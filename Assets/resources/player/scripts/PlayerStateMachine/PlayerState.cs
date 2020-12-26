@@ -7,12 +7,13 @@ public class PlayerState {
     protected PlayerStateMachine stateMachine;
     protected PlayerData playerData;
     private string animBoolName;
+    protected float inputX;
     protected float startTime;
     protected bool isGrounded;
     protected bool isWalled;
     protected bool isAnimationFinished;
-    protected float inputX;
-    public bool jumpInput;
+    protected bool isLedged;
+    protected bool jumpInput;
     protected bool isExitingState { get; private set; }
 
     public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) {
@@ -28,7 +29,6 @@ public class PlayerState {
         player.Anim.SetBool(animBoolName, true);
         startTime = Time.time;
         isAnimationFinished = false;
-        isExitingState = false;
     }
 
     public virtual void Exit() {
@@ -43,10 +43,17 @@ public class PlayerState {
     }
 
     public virtual void DoChecks() {
-        isGrounded = player.CheckIsGrounded();
-        isWalled = player.CheckIsWalled();
         inputX = player.InputHandler.NormInputX;
         jumpInput = player.InputHandler.JumpInput;
+        isGrounded = player.CheckIsGrounded();
+        isWalled = player.CheckIsWalled();
+        isLedged = !player.CheckHeadIsWalled() && player.CheckIsTouchingLedge();
+        if (isLedged) {
+            player.LedgeClimbState.setDetectedPosition(
+                player.transform.position
+            );
+        }
+
     }
 
     public virtual void AnimationTrigger() { }

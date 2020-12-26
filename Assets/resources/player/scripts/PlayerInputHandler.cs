@@ -10,12 +10,16 @@ public class PlayerInputHandler: MonoBehaviour {
     public float NormInputX { get; private set; }
     public float NormInputY { get; private set; }
     public bool JumpInput { get; private set; }
+    public bool AttackInput { get; private set; }
     [SerializeField] private float inputHoldTime = 0.2f;
+    [SerializeField] private float attackHoldTime = 0.2f;
 
     private float jumpStartTime;
+    private float attackStartTime;
 
     public void Update() {
         CheckJumpInputExpired();
+        CheckAttackInputExpired();
     }
 
 
@@ -32,12 +36,23 @@ public class PlayerInputHandler: MonoBehaviour {
         }
     }
 
+    public void OnFireInput(InputAction.CallbackContext ctx) {
+        if (ctx.started) {
+            attackStartTime = Time.time;
+            AttackInput = true;
+        }
+    }
+
     public void UseJumpInput() {
         JumpInput = false;
     }
 
     private void CheckJumpInputExpired() {
         if (Time.time >= jumpStartTime + inputHoldTime) JumpInput = false;
+    }
+
+    private void CheckAttackInputExpired() {
+        if (Time.time >= attackStartTime + attackHoldTime) AttackInput = false;
     }
 
 }

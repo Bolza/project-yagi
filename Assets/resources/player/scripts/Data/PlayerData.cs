@@ -22,6 +22,7 @@ public class PlayerData: ScriptableObject {
     public Vector2 wallJumpAngle = new Vector2(1, 2);
 
     [Header("Wall State")]
+    public bool enableWallGrab = false;
     public float wallSlideVelocity = 3f;
     public float wallGrabDuration = 0.3f;
     public bool canJumpFromWall = true;

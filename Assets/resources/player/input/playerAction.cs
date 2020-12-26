@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/input/playerAction.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/resources/player/input/playerAction.inputactions'
 
 using System;
 using System.Collections;
@@ -268,6 +268,17 @@ public class @PlayerAction : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XR"",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1b9f792-4dc5-40a1-8ffa-9d97412d0426"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

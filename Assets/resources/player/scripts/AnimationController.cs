@@ -8,4 +8,5 @@ public class AnimationController: MonoBehaviour {
         player = GetComponentInParent<Player>();
     }
     public void AnimationFinishTrigger() => player.AnimationFinishTrigger();
+    public void AnimationStartTrigger() => player.AnimationTrigger();
 }

@@ -24,6 +24,9 @@ public class PlayerInAirState: PlayerState {
         if (isGrounded && player.CurrentVelocity.y < 0.01f) {
             stateMachine.ChangeState(player.LandState);
         }
+        else if (isLedged && inputX == player.FacingDirection) {
+            stateMachine.ChangeState(player.LedgeClimbState);
+        }
         else if (jumpInput && isWalled) {
             //stateMachine.ChangeState(player.WallJumpState);
         }
@@ -34,7 +37,7 @@ public class PlayerInAirState: PlayerState {
                 stateMachine.ChangeState(player.JumpState);
             }
         }
-        else if (isWalled && inputX == player.FacingDirection) {
+        else if (isWalled && inputX == player.FacingDirection && playerData.enableWallGrab) {
             stateMachine.ChangeState(player.WallGrabState);
         }
         else if (isWalled && inputX == player.FacingDirection && player.CurrentVelocity.y <= 0) {
