@@ -14,6 +14,7 @@ public class PlayerState {
     protected bool isAnimationFinished;
     protected bool isLedged;
     protected bool jumpInput;
+    protected bool headIsFree;
     protected bool isExitingState { get; private set; }
 
     public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) {
@@ -47,11 +48,11 @@ public class PlayerState {
         jumpInput = player.InputHandler.JumpInput;
         isGrounded = player.CheckIsGrounded();
         isWalled = player.CheckIsWalled();
-        isLedged = !player.CheckHeadIsWalled() && player.CheckIsTouchingLedge();
+        headIsFree = !player.CheckHeadIsWalled();
+        bool ledgeRay = player.CheckIsTouchingLedge();
+        isLedged = headIsFree && ledgeRay;
         if (isLedged) {
-            player.LedgeClimbState.setDetectedPosition(
-                player.transform.position
-            );
+            player.LedgeClimbState.setDetectedPosition(player.transform.position);
         }
 
     }

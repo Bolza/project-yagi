@@ -283,6 +283,7 @@ public class CharacterController2D: MonoBehaviour {
     /// moves directly down until grounded
     /// </summary>
     public void warpToGrounded() {
+        Debug.Break();
         do {
             move(new Vector3(0, -1f, 0));
         } while (!isGrounded);

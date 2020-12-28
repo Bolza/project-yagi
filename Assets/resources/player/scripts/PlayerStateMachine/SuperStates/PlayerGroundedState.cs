@@ -30,7 +30,8 @@ public class PlayerGroundedState: PlayerState {
             player.InputHandler.UseJumpInput();
             stateMachine.ChangeState(player.JumpState);
         }
-        if (!isGrounded && !isCoyoteTimeOn) {
+        else if (!isGrounded && !isCoyoteTimeOn) {
+            // Falling w/o jumping
             player.JumpState.DecreaseJumps();
             player.StateMachine.ChangeState(player.InAirState);
         }

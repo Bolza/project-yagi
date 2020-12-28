@@ -24,6 +24,7 @@ public class Player: MonoBehaviour {
     public Animator Anim { get; private set; }
     public Rigidbody2D Body { get; private set; }
     public Collider2D Collider { get; private set; }
+
     public CharacterController2D CC { get; private set; }
 
     public Vector2 CurrentVelocity;
@@ -31,6 +32,16 @@ public class Player: MonoBehaviour {
     private bool freezeMovement;
 
     [SerializeField] bool debugMode;
+
+    private BoxCollider2D BoxCollider;
+    private Vector2 BoxDefaultSize;
+    [SerializeField] private Transform leftFoot;
+    [SerializeField] private Transform rightFoot;
+    [SerializeField] private Transform head;
+    [SerializeField] private GameObject model;
+    private SkinnedMeshRenderer mesh;
+    public float climbWhyPos = 1.4f;
+    public float fastestFallVel = 0f;
 
     private void Awake() {
         StateMachine = new PlayerStateMachine();
@@ -50,17 +61,26 @@ public class Player: MonoBehaviour {
         Anim = GetComponentInChildren<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
         Body = GetComponentInChildren<Rigidbody2D>();
-        Collider = GetComponent<Collider2D>();
         CC = GetComponent<CharacterController2D>();
-
+        Collider = GetComponent<Collider2D>();
+        BoxCollider = GetComponent<BoxCollider2D>();
         StateMachine.Initialize(IdleState);
         FacingDirection = 1;
+        BoxDefaultSize = BoxCollider.size;
+        mesh = model.GetComponent<SkinnedMeshRenderer>();
     }
 
+
     private void Update() {
+        //float newY = mesh.bounds.extents.y;
+        float newY = Mathf.Abs(head.position.y - Mathf.Min(leftFoot.position.y, rightFoot.position.y)) / this.transform.localScale.y;
+        BoxCollider.size = new Vector2(BoxDefaultSize.x, newY);
+
         StateMachine.CurrentState.LogicUpdate();
         if (freezeMovement) return;
-        float yPlusGravity = CurrentVelocity.y + playerData.gravity * Time.deltaTime;
+        float gravity = CheckIsGrounded() ? 0 : playerData.gravity;
+        float yPlusGravity = CurrentVelocity.y + gravity * Time.deltaTime;
+        fastestFallVel = Mathf.Min(yPlusGravity, fastestFallVel);
         CurrentVelocity.Set(CurrentVelocity.x, yPlusGravity);
         CC.move(CurrentVelocity * Time.deltaTime);
     }
@@ -68,6 +88,7 @@ public class Player: MonoBehaviour {
 
     private void FixedUpdate() {
         StateMachine.CurrentState.PhysicsUpdate();
+
     }
 
     public void SetVelocityX(float velocity) {
@@ -88,7 +109,12 @@ public class Player: MonoBehaviour {
     }
 
     public void FreezeMovement() {
+        CurrentVelocity.Set(0, 0);
         freezeMovement = true;
+    }
+
+    public void SetPosition(Vector2 pos) {
+        transform.position = pos;
     }
 
     private void Flip() {

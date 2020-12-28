@@ -20,11 +20,13 @@ public class PlayerData: ScriptableObject {
     public float wallJumpForce = 10f;
     public float wallJumpTime = 0.4f;
     public Vector2 wallJumpAngle = new Vector2(1, 2);
+    public float landAnimationSpeedLimit = 4f;
 
     [Header("Wall State")]
     public bool enableWallGrab = false;
     public float wallSlideVelocity = 3f;
     public float wallGrabDuration = 0.3f;
     public bool canJumpFromWall = true;
+
 
 }
