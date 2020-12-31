@@ -88,8 +88,9 @@ public class Player: MonoBehaviour {
 
     private void FixedUpdate() {
         StateMachine.CurrentState.PhysicsUpdate();
-
     }
+
+    #region Movement
 
     public void SetVelocityX(float velocity) {
         freezeMovement = false;
@@ -121,6 +122,10 @@ public class Player: MonoBehaviour {
         FacingDirection *= -1;
         transform.Rotate(0f, 180f, 0f);
     }
+
+    #endregion
+
+    #region Checks
 
     public bool CheckIsWalled() {
         Vector2 side = new Vector2(
@@ -168,6 +173,18 @@ public class Player: MonoBehaviour {
 
     }
 
+    #endregion
+
+    #region Events
     public void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
+    #endregion
+
+    #region Combat
+
+    public void GotHit(int dmg) {
+        Debug.Log("Player got hit by " + dmg);
+    }
+
+    #endregion
 }
