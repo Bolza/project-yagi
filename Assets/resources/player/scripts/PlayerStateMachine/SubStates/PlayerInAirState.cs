@@ -35,7 +35,7 @@ public class PlayerInAirState: PlayerState {
         else if (jumpInput && isWalled) {
             //stateMachine.ChangeState(player.WallJumpState);
         }
-        else if (jumpInput && player.JumpState.CanJump()) {
+        else if (jumpInput && player.JumpState.CanPerform()) {
             // we can make this action more smooth
             if (playerData.canJumpFromWall) {
                 player.InputHandler.UseJumpInput();

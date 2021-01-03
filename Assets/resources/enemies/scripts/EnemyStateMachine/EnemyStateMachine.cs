@@ -24,6 +24,4 @@ public class EnemyStateMachine {
 
     public void DebugModeOn() => debugMode = true;
     public void DebugModeOff() => debugMode = false;
-
-
 }

@@ -14,7 +14,6 @@ public class Enemy: MonoBehaviour {
     public Rigidbody2D Body { get; private set; }
     public Collider2D Collider { get; private set; }
     public Animator Anim { get; private set; }
-    //public BoxCollider2D Hitpoint { get; private set; }
     public EnemyAnimationController ATSM { get; private set; }
     public Hitpoint hitpoint { get; private set; }
     public int FacingDirection { get; private set; }
@@ -101,6 +100,21 @@ public class Enemy: MonoBehaviour {
 
     public void AnimationStartTrigger() => stateMachine.currentState.AnimationTrigger();
     public void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
+    public event Action onGotHit;
+    public event Action onGotBlocked;
 
+    #region Combat
+
+    public void GotHit(Player player, int dmg) {
+        Debug.Log("Enemy got hit by " + dmg);
+        onGotHit?.Invoke();
+    }
+
+    public void GotBlocked(Player player, int dmg) {
+        Debug.Log("Enemy got hit by " + dmg);
+        onGotBlocked?.Invoke();
+    }
+
+    #endregion
 
 }

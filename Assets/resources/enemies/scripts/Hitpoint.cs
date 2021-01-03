@@ -12,7 +12,7 @@ public class Hitpoint: MonoBehaviour {
 
     private void Start() {
         Collider = GetComponent<Collider2D>();
-        hit = new Collider2D[1];
+        hit = new Collider2D[10];
     }
 
     private void Update() {

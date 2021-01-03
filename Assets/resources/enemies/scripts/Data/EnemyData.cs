@@ -22,4 +22,5 @@ public class EnemyData: ScriptableObject {
     public float attackSpeed = 1f;
     public float attackRange = 1f;
     public int attackDamage = 10;
+    public float knockbackDampen = 0;
 }

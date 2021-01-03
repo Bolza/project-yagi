@@ -38,15 +38,13 @@ public class Skeleton_TargetDetectedState: TargetDetectedState {
         else {
             if (targetDetectedBackward) entity.Flip();
             if (distanceFromTarget > enemyData.attackRange) {
-                entity.setVelocityX(entity.FacingDirection * enemyData.walkSpeed);
+                stateMachine.ChangeState(enemy.PursuitState);
             }
-            else {
+            else if (enemy.AttackState.CanPerform()) {
                 stateMachine.ChangeState(enemy.AttackState);
             }
+
         }
     }
 
-    public override void PhysicsUpdate() {
-        base.PhysicsUpdate();
-    }
 }

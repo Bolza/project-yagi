@@ -12,8 +12,9 @@ public class EnemyState {
     protected bool groundDetected;
     protected RaycastHit2D targetDetectedForward;
     protected RaycastHit2D targetDetectedBackward;
-    protected bool targetDetected;
+    protected RaycastHit2D targetDetected;
     protected float distanceFromTarget;
+    protected bool duringAnimation;
 
     public EnemyState(Enemy entity, EnemyStateMachine stateMachine, string animBoolName, EnemyData enemyData) {
         this.entity = entity;
@@ -25,12 +26,17 @@ public class EnemyState {
     public virtual void Enter() {
         startTime = Time.time;
         entity.Anim.SetBool(animBoolName, true);
+        duringAnimation = true;
+        entity.onGotBlocked += OnGotBlocked;
+        entity.onGotHit += OnGotHit;
     }
 
     public virtual void Exit() {
         entity.Anim.SetBool(animBoolName, false);
+        duringAnimation = false;
+        entity.onGotBlocked -= OnGotBlocked;
+        entity.onGotHit -= OnGotHit;
     }
-
 
     public virtual void LogicUpdate() {
         DoChecks();
@@ -44,14 +50,23 @@ public class EnemyState {
         groundDetected = entity.CheckIsGrounded();
         targetDetectedForward = entity.CheckTargetForward();
         targetDetectedBackward = entity.CheckTargetBackward();
-        targetDetected = targetDetectedForward || targetDetectedBackward;
+        targetDetected = targetDetectedForward ? targetDetectedForward : targetDetectedBackward;
 
         if (targetDetectedForward) distanceFromTarget = targetDetectedForward.distance;
         else if (targetDetectedBackward) distanceFromTarget = targetDetectedBackward.distance;
-
     }
 
-    public virtual void AnimationTrigger() { }
+    public virtual void AnimationTrigger() {
+        duringAnimation = true;
 
-    public virtual void AnimationFinishTrigger() { }
+    }
+    public virtual void AnimationFinishTrigger() {
+        duringAnimation = false;
+    }
+
+    public virtual void OnGotBlocked() { }
+
+    public virtual void OnGotHit() { }
+
+
 }

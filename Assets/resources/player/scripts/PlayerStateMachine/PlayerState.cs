@@ -11,10 +11,15 @@ public class PlayerState {
     protected float startTime;
     protected bool isGrounded;
     protected bool isWalled;
-    protected bool isAnimationFinished;
+    protected bool duringAnimation;
     protected bool isLedged;
     protected bool jumpInput;
+    protected bool attackInput;
+    protected bool blockInput;
+    protected bool rollInput;
     protected bool headIsFree;
+    protected bool gotHit;
+
     protected bool isExitingState { get; private set; }
 
     public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) {
@@ -24,28 +29,39 @@ public class PlayerState {
         this.animBoolName = animBoolName;
     }
 
+
     public virtual void Enter() {
         isExitingState = false;
-        DoChecks();
+        duringAnimation = true;
         player.Anim.SetBool(animBoolName, true);
         startTime = Time.time;
-        isAnimationFinished = false;
+        player.onGotBlocked += OnGotBlocked;
+        player.onGotHit += OnGotHit;
+        gotHit = false;
+        DoChecks();
     }
 
     public virtual void Exit() {
+        player.onGotBlocked -= OnGotBlocked;
+        player.onGotHit -= OnGotHit;
         isExitingState = true;
+        duringAnimation = false;
         player.Anim.SetBool(animBoolName, false);
     }
 
-    public virtual void LogicUpdate() { }
+    public virtual void LogicUpdate() {
+        DoChecks();
+    }
 
     public virtual void PhysicsUpdate() {
-        DoChecks();
     }
 
     public virtual void DoChecks() {
         inputX = player.InputHandler.NormInputX;
-        jumpInput = player.InputHandler.JumpInput;
+        jumpInput = player.InputHandler.jump.hasInput;
+        attackInput = player.InputHandler.attack.hasInput;
+        blockInput = player.InputHandler.block.hasInput;
+        rollInput = player.InputHandler.roll.hasInput;
         isGrounded = player.CheckIsGrounded();
         isWalled = player.CheckIsWalled();
         headIsFree = !player.CheckHeadIsWalled();
@@ -54,12 +70,20 @@ public class PlayerState {
         if (isLedged) {
             player.LedgeClimbState.setDetectedPosition(player.transform.position);
         }
-
     }
 
-    public virtual void AnimationTrigger() { }
+    public virtual void AnimationTrigger() {
+        duringAnimation = true;
+    }
 
     public virtual void AnimationFinishTrigger() {
-        isAnimationFinished = true;
+        duringAnimation = false;
+    }
+
+
+    public virtual void OnGotBlocked() { }
+
+    public virtual void OnGotHit() {
+        gotHit = true;
     }
 }

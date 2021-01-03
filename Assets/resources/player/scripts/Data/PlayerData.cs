@@ -10,6 +10,7 @@ public class PlayerData: ScriptableObject {
 
     [Header("Move State")]
     public float runSpeed = 5f;
+    public float rollSpeed = 3f;
 
     [Header("Jump State")]
     public float jumpForce = 10f;
@@ -28,5 +29,7 @@ public class PlayerData: ScriptableObject {
     public float wallGrabDuration = 0.3f;
     public bool canJumpFromWall = true;
 
-
+    [Header("Stats")]
+    public float attackSpeed = 1f;//currently not really implemented
+    public int attackDamage = 10;
 }

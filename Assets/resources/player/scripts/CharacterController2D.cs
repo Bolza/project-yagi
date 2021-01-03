@@ -506,6 +506,13 @@ public class CharacterController2D: MonoBehaviour {
         }
     }
 
+    public RaycastHit2D GroundRaycast(float distance) {
+        float centerOfCollider = (_raycastOrigins.bottomLeft.x + _raycastOrigins.bottomRight.x) * 0.5f;
+        Vector2 rayDirection = -Vector2.up;
+        Vector2 slopeRay = new Vector2(centerOfCollider, _raycastOrigins.bottomLeft.y);
+        DrawRay(slopeRay, rayDirection * distance, Color.yellow);
+        return Physics2D.Raycast(slopeRay, rayDirection, distance, platformMask);
+    }
 
     /// <summary>
     /// checks the center point under the BoxCollider2D for a slope. If it finds one then the deltaMovement is adjusted so that
@@ -514,15 +521,12 @@ public class CharacterController2D: MonoBehaviour {
     /// <param name="deltaMovement">Delta movement.</param>
     private void handleVerticalSlope(ref Vector3 deltaMovement) {
         // slope check from the center of our collider
-        var centerOfCollider = (_raycastOrigins.bottomLeft.x + _raycastOrigins.bottomRight.x) * 0.5f;
-        var rayDirection = -Vector2.up;
-
+        float centerOfCollider = (_raycastOrigins.bottomLeft.x + _raycastOrigins.bottomRight.x) * 0.5f;
+        Vector2 slopeRay = new Vector2(centerOfCollider, _raycastOrigins.bottomLeft.y);
         // the ray distance is based on our slopeLimit
-        var slopeCheckRayDistance = _slopeLimitTangent * (_raycastOrigins.bottomRight.x - centerOfCollider);
+        float slopeCheckRayDistance = _slopeLimitTangent * (_raycastOrigins.bottomRight.x - centerOfCollider);
 
-        var slopeRay = new Vector2(centerOfCollider, _raycastOrigins.bottomLeft.y);
-        DrawRay(slopeRay, rayDirection * slopeCheckRayDistance, Color.yellow);
-        _raycastHit = Physics2D.Raycast(slopeRay, rayDirection, slopeCheckRayDistance, platformMask);
+        RaycastHit2D _raycastHit = GroundRaycast(slopeCheckRayDistance);
         if (_raycastHit) {
             // bail out if we have no slope
             var angle = Vector2.Angle(_raycastHit.normal, Vector2.up);

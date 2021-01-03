@@ -37,7 +37,7 @@ public class PlayerLedgeClimbState: PlayerState {
     public override void LogicUpdate() {
         base.LogicUpdate();
 
-        if (isAnimationFinished) {
+        if (!duringAnimation) {
             if (player.FacingDirection > 0) player.SetPosition(detectedPos + new Vector2(0.3f, player.climbWhyPos));
             if (player.FacingDirection < 0) player.SetPosition(detectedPos + new Vector2(-0.3f, player.climbWhyPos));
             stateMachine.ChangeState(player.MoveState);

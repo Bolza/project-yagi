@@ -25,5 +25,7 @@ MonoBehaviour:
   maxIdleTime: 2
   health: 100
   targetDetectionRange: 3
-  attackSpeed: 3
-  attackRange: 1
+  attackSpeed: 1
+  attackRange: 0.7
+  attackDamage: 10
+  knockbackDampen: 0
