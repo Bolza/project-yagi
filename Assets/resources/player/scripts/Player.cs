@@ -132,7 +132,6 @@ public class Player: MonoBehaviour {
 
     private void FixedUpdate() {
         StateMachine.CurrentState.PhysicsUpdate();
-
         if (debugMode) StateMachine.DebugModeOn();
         else StateMachine.DebugModeOff();
     }

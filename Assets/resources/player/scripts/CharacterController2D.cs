@@ -73,11 +73,8 @@ public class CharacterController2D: MonoBehaviour {
         }
     }
 
-
-    /// <summary>
-    /// mask with all layers that the player should interact with
-    /// </summary>
-    public LayerMask platformMask = 0;
+    [SerializeField] PlayerData playerData;
+    public LayerMask platformMask { get; private set; }
 
     /// <summary>
     /// mask with all layers that trigger events should fire when intersected
@@ -175,6 +172,7 @@ public class CharacterController2D: MonoBehaviour {
     #region Monobehaviour
 
     void Awake() {
+        platformMask = playerData.groundLayer;
         // add our one-way platforms to our normal platform mask so that we can land on them from above
         platformMask |= oneWayPlatformMask;
 

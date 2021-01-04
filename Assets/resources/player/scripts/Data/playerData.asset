@@ -14,17 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravity: -25
   runSpeed: 5
+  rollSpeed: 5
   jumpForce: 2
   airMovementSpeed: 2.8
   jumpsAmount: 1
   coyoteTime: 0.05
   groundLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
   wallJumpForce: 10
   wallJumpTime: 0.4
   wallJumpAngle: {x: 1, y: 2}
+  landAnimationSpeedLimit: 4
   enableWallGrab: 0
   wallSlideVelocity: 2
   wallGrabDuration: 0.3
-  canJumpFromWall: 1
+  canJumpFromWall: 0
+  attackSpeed: 1
+  attackDamage: 10

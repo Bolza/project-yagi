@@ -36,8 +36,9 @@ public class PlayerJumpState: PlayerAbilityState {
     public override void LogicUpdate() {
         base.LogicUpdate();
         if (isAbilityDone) {
-            if (isGrounded && player.CurrentVelocity.y < 0.01f) stateMachine.ChangeState(player.IdleState);
-            else stateMachine.ChangeState(player.InAirState);
+            //if (isGrounded && player.CurrentVelocity.y < 0.01f) stateMachine.ChangeState(player.IdleState);
+            //else
+            stateMachine.ChangeState(player.InAirState);
         }
     }
 

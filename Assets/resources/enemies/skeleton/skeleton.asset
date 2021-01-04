@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
   playerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2048
   wallDetectionRange: 1
   walkSpeed: 3
   runSpeed: 5

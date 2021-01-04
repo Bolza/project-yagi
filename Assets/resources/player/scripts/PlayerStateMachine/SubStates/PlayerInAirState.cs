@@ -29,6 +29,7 @@ public class PlayerInAirState: PlayerState {
             stateMachine.ChangeState(player.IdleState);
         }
         else if (isLedged && inputX == player.FacingDirection) {
+            Debug.Log(isLedged);
             player.FreezeMovement();
             stateMachine.ChangeState(player.LedgeClimbState);
         }
