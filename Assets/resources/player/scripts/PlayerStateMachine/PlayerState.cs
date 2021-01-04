@@ -19,6 +19,7 @@ public class PlayerState {
     protected bool rollInput;
     protected bool headIsFree;
     protected bool gotHit;
+    public bool colliderShouldFitAnimation;
 
     protected bool isExitingState { get; private set; }
 
@@ -38,6 +39,7 @@ public class PlayerState {
         player.onGotBlocked += OnGotBlocked;
         player.onGotHit += OnGotHit;
         gotHit = false;
+        colliderShouldFitAnimation = false;
         DoChecks();
     }
 
@@ -47,6 +49,7 @@ public class PlayerState {
         isExitingState = true;
         duringAnimation = false;
         player.Anim.SetBool(animBoolName, false);
+        colliderShouldFitAnimation = false;
     }
 
     public virtual void LogicUpdate() {

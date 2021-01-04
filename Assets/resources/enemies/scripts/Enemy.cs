@@ -105,13 +105,16 @@ public class Enemy: MonoBehaviour {
 
     #region Combat
 
+    public void HitCurrentTarget() {
+        Player tgt = hitpoint.currentHit.gameObject.GetComponent<Player>();
+        tgt.GotHit(this, enemyData.attackDamage);
+    }
+
     public virtual void GotHit(Player player, int dmg) {
-        Debug.Log("Enemy got hit by " + dmg);
         onGotHit?.Invoke();
     }
 
     public virtual void GotBlocked(Player player, int dmg) {
-        Debug.Log("Enemy got hit by " + dmg);
         onGotBlocked?.Invoke();
     }
 

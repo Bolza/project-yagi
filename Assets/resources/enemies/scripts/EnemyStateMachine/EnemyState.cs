@@ -15,6 +15,8 @@ public class EnemyState {
     protected RaycastHit2D targetDetected;
     protected float distanceFromTarget;
     protected bool duringAnimation;
+    protected bool gotHit;
+    protected bool gotBlocked;
 
     public EnemyState(Enemy entity, EnemyStateMachine stateMachine, string animBoolName, EnemyData enemyData) {
         this.entity = entity;
@@ -29,6 +31,8 @@ public class EnemyState {
         duringAnimation = true;
         entity.onGotBlocked += OnGotBlocked;
         entity.onGotHit += OnGotHit;
+        gotHit = false;
+        gotBlocked = false;
     }
 
     public virtual void Exit() {
@@ -64,9 +68,13 @@ public class EnemyState {
         duringAnimation = false;
     }
 
-    public virtual void OnGotBlocked() { }
+    public virtual void OnGotBlocked() {
+        gotBlocked = true;
+    }
 
-    public virtual void OnGotHit() { }
+    public virtual void OnGotHit() {
+        gotHit = true;
+    }
 
 
 }

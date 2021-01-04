@@ -96,6 +96,7 @@ public class Player: MonoBehaviour {
         StateMachine.Initialize(IdleState);
         FacingDirection = 1;
         BoxDefaultSize = BoxCollider.size;
+
     }
 
     public Vector2 getRenderedPosition() {
@@ -106,12 +107,20 @@ public class Player: MonoBehaviour {
         );
     }
 
-    private void Update() {
+    private void FitColliderToAnimation() {
         float lowerBound = Mathf.Min(leftFoot.position.y, rightFoot.position.y);
         float upperBound = Mathf.Max(head.position.y, lowerBound);
         float newY = Math.Max(upperBound - lowerBound, 0.1f) / this.transform.localScale.y;
         BoxCollider.size = new Vector2(BoxDefaultSize.x, newY);
+    }
 
+    private void Update() {
+        if (StateMachine.CurrentState.colliderShouldFitAnimation && BoxCollider.size.y == BoxDefaultSize.y) {
+            FitColliderToAnimation();
+        }
+        else if (BoxCollider.size.y != BoxDefaultSize.y) {
+            BoxCollider.size = BoxDefaultSize;
+        }
 
         StateMachine.CurrentState.LogicUpdate();
         if (freezeMovement) return;
@@ -119,7 +128,6 @@ public class Player: MonoBehaviour {
         float yPlusGravity = CurrentVelocity.y + gravity * Time.deltaTime;
         CurrentVelocity.Set(CurrentVelocity.x, yPlusGravity);
         CC.move(CurrentVelocity * Time.deltaTime);
-
     }
 
     private void FixedUpdate() {
@@ -127,14 +135,9 @@ public class Player: MonoBehaviour {
 
         if (debugMode) StateMachine.DebugModeOn();
         else StateMachine.DebugModeOff();
-
-        //if (ColorMe) {
-        //    if (meshColorer)
-        //        meshColorer.SetTintColor(gameController.Stylesheet.playerHitOverlay);
-        //    ColorMe = false;
-        //}
-
     }
+
+
 
     #region Movement
 
@@ -244,6 +247,11 @@ public class Player: MonoBehaviour {
     #endregion
 
     #region Combat
+
+    public void HitCurrentTarget() {
+        Enemy tgt = hitpoint.currentHit.gameObject.GetComponent<Enemy>();
+        tgt.GotHit(this, playerData.attackDamage);
+    }
 
     public void GotHit(Enemy enemy, int dmg) {
         if (BlockState.duringHitboxTime) {

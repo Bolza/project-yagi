@@ -31,7 +31,10 @@ public class Skeleton_PursuitState: PursuitState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
-        if (!targetDetected) {
+        if (gotHit) {
+            stateMachine.ChangeState(enemy.HitState);
+        }
+        else if (!targetDetected) {
             stateMachine.ChangeState(enemy.IdleState);
         }
         else {

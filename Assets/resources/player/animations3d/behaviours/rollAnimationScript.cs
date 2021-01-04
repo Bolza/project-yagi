@@ -26,7 +26,7 @@ public class rollAnimationScript: StateMachineBehaviour {
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        Debug.Log(time);
+        //Debug.Log(time);
         if (exited) return;
         if (time <= 0.35f || time >= 0.7f) {
             animator.speed = fast;

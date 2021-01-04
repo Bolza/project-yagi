@@ -21,12 +21,6 @@ public class SkeletonAI: Enemy {
         HitState = new Skeleton_HitState(this, stateMachine, "hit", enemyData);
         stateMachine.Initialize(IdleState);
     }
-
-    public override void GotHit(Player player, int dmg) {
-        Debug.Log("Enemy got hit by " + dmg);
-        stateMachine.ChangeState(HitState);
-    }
-
 }
 
 

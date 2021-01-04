@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Skeleton_AttackState: AttackState {
     private SkeletonAI enemy;
-    private bool gotBlocked;
     public Skeleton_AttackState(Enemy entity, EnemyStateMachine stateMachine, string animBoolName, EnemyData enemyData, Transform attackPosition) : base(entity, stateMachine, animBoolName, enemyData, attackPosition) {
         this.enemy = (SkeletonAI)entity;
     }
@@ -24,7 +23,6 @@ public class Skeleton_AttackState: AttackState {
     public override void Enter() {
         base.Enter();
         enemy.setVelocityX(0);
-        gotBlocked = false;
     }
 
     public override void Exit() {
@@ -33,12 +31,15 @@ public class Skeleton_AttackState: AttackState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
+        if (gotHit) {
+            Debug.Log("Unhandled State, Skelly hit during attack");
+        }
         if (duringAnimation) {
             if (gotBlocked) {
                 stateMachine.ChangeState(enemy.HitState);
             }
             else if (duringHitboxTime && enemy.hitpoint.currentHit) {
-                enemy.hitpoint.currentHit.gameObject.GetComponent<Player>().GotHit(enemy, enemyData.attackDamage);
+                enemy.HitCurrentTarget();
                 EndHitbox();
             }
         }
@@ -59,12 +60,6 @@ public class Skeleton_AttackState: AttackState {
 
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
-    }
-
-    public override void OnGotBlocked() {
-        base.OnGotBlocked();
-        gotBlocked = true;
-        Debug.Log("OnGotBlocked");
     }
 
 
