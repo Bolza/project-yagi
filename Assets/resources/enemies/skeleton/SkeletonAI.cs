@@ -9,6 +9,7 @@ public class SkeletonAI: Enemy {
     public Skeleton_AttackState AttackState { get; private set; }
     public Skeleton_PursuitState PursuitState { get; private set; }
     public Skeleton_HitState HitState { get; private set; }
+    public Skeleton_StunState StunState { get; private set; }
 
 
     public override void Start() {
@@ -19,6 +20,7 @@ public class SkeletonAI: Enemy {
         AttackState = new Skeleton_AttackState(this, stateMachine, "attack", enemyData, transform);
         PursuitState = new Skeleton_PursuitState(this, stateMachine, "move", enemyData);
         HitState = new Skeleton_HitState(this, stateMachine, "hit", enemyData);
+        StunState = new Skeleton_StunState(this, stateMachine, "stun", enemyData);
         stateMachine.Initialize(IdleState);
     }
 }

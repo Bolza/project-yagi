@@ -32,14 +32,14 @@ public class Skeleton_AttackState: AttackState {
     public override void LogicUpdate() {
         base.LogicUpdate();
         if (gotHit) {
-            Debug.Log("Unhandled State, Skelly hit during attack");
+            stateMachine.ChangeState(enemy.HitState);
         }
-        if (duringAnimation) {
+        else if (duringAnimation) {
             if (gotBlocked) {
                 stateMachine.ChangeState(enemy.HitState);
             }
             else if (duringHitboxTime && enemy.hitpoint.currentHit) {
-                enemy.HitCurrentTarget();
+                enemy.HitCurrentTarget(enemyData.attackDamage);
                 EndHitbox();
             }
         }

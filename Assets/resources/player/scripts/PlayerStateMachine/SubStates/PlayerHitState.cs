@@ -10,7 +10,10 @@ public class PlayerHitState: PlayerState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
-        if (!duringAnimation) {
+        if (gotHit) {
+            stateMachine.ChangeState(player.HitState);
+        }
+        else if (!duringAnimation) {
             stateMachine.ChangeState(player.IdleState);
         }
         else {

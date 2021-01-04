@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(MeshColorer3D))]
 
-public class Player: MonoBehaviour {
+public class Player: HittableEntity {
     #region States
     public PlayerInputHandler InputHandler { get; private set; }
     public PlayerStateMachine StateMachine { get; private set; }
@@ -36,7 +36,6 @@ public class Player: MonoBehaviour {
     public Collider2D Collider { get; private set; }
     public AnimationController ATSM { get; private set; }
     public CharacterController2D CC { get; private set; }
-    public Hitpoint hitpoint { get; private set; }
     public MeshColorer3D meshColorer { get; private set; }
 
 
@@ -73,7 +72,8 @@ public class Player: MonoBehaviour {
         RollState = new PlayerRollState(this, StateMachine, playerData, "roll");
     }
 
-    private void Start() {
+    public override void Start() {
+        base.Start();
         InputHandler = GetComponent<PlayerInputHandler>();
         CC = GetComponent<CharacterController2D>();
         Collider = GetComponent<Collider2D>();
@@ -83,7 +83,6 @@ public class Player: MonoBehaviour {
         Anim = GetComponentInChildren<Animator>();
         Body = GetComponentInChildren<Rigidbody2D>();
         ATSM = GetComponentInChildren<AnimationController>();
-        hitpoint = GetComponentInChildren<Hitpoint>();
 
         weaponpoint = GameObject.FindGameObjectWithTag("weaponpoint");
 
@@ -240,21 +239,19 @@ public class Player: MonoBehaviour {
 
     public void AnimationStartTrigger() => StateMachine.CurrentState.AnimationTrigger();
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
-    public event Action onGotHit;
-    public event Action onGotBlocked;
 
     #endregion
 
     #region Combat
 
-    public void HitCurrentTarget() {
-        Enemy tgt = hitpoint.currentHit.gameObject.GetComponent<Enemy>();
-        tgt.GotHit(this, playerData.attackDamage);
-    }
+    //public void HitCurrentTarget() {
+    //    Enemy tgt = hitpoint.currentHit.gameObject.GetComponent<Enemy>();
+    //    tgt.GotHit(this, playerData.attackDamage);
+    //}
 
-    public void GotHit(Enemy enemy, int dmg) {
+    public override void GotHit(HittableEntity entity, int dmg) {
         if (BlockState.duringHitboxTime) {
-            enemy.GotBlocked(this, dmg);
+            entity.GotBlocked(this, dmg);
             gameController.NotifyPlayerBlock(this);
             Vector2 pos = new Vector2(weaponpoint.transform.position.x, weaponpoint.transform.position.y);
             Instantiate(gameController.BlockSparks, pos, Quaternion.identity); ;
@@ -264,10 +261,12 @@ public class Player: MonoBehaviour {
         }
         else {
             gameController.NotifyPlayerHit();
-            onGotHit?.Invoke();
             meshColorer.SetTintColor(gameController.Stylesheet.playerHitOverlay);
+            base.GotHit(entity, dmg);
         }
     }
+
+
 
     #endregion
 }

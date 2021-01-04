@@ -11,7 +11,7 @@ public class PlayerAttackState: PlayerAbilityState {
         base.LogicUpdate();
         if (duringAnimation) {
             if (duringHitboxTime && player.hitpoint.currentHit) {
-                player.HitCurrentTarget();
+                player.HitCurrentTarget(playerData.attackDamage);
                 EndHitbox();
             }
         }
