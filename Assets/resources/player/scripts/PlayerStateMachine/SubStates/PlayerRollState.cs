@@ -17,9 +17,6 @@ public class PlayerRollState: PlayerAbilityState {
             if (duringHitboxTime) {
                 player.SetVelocityX(playerData.rollSpeed * player.FacingDirection);
             }
-            else {
-                player.SetVelocityX(0);
-            }
         }
         else {
             stateMachine.ChangeState(player.IdleState);

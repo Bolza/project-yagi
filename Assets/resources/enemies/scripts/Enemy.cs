@@ -105,12 +105,12 @@ public class Enemy: MonoBehaviour {
 
     #region Combat
 
-    public void GotHit(Player player, int dmg) {
+    public virtual void GotHit(Player player, int dmg) {
         Debug.Log("Enemy got hit by " + dmg);
         onGotHit?.Invoke();
     }
 
-    public void GotBlocked(Player player, int dmg) {
+    public virtual void GotBlocked(Player player, int dmg) {
         Debug.Log("Enemy got hit by " + dmg);
         onGotBlocked?.Invoke();
     }

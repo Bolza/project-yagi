@@ -9,7 +9,6 @@ public class PlayerBlockState: PlayerAbilityState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
-
         if (!duringAnimation) {
             stateMachine.ChangeState(player.IdleState);
         }
