@@ -26,7 +26,6 @@ public class PlayerJumpState: PlayerAbilityState {
         DecreaseJumps();
         float jumpy = Mathf.Sqrt(2f * playerData.jumpForce * -playerData.gravity);
         player.SetVelocityY(jumpy);
-        isAbilityDone = true;
     }
 
     public override void Exit() {
@@ -35,13 +34,20 @@ public class PlayerJumpState: PlayerAbilityState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
+        if (isAbilityDone) {
+            if (isGrounded && player.CurrentVelocity.y < 0.01f) stateMachine.ChangeState(player.IdleState);
+            else stateMachine.ChangeState(player.InAirState);
+        }
     }
 
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
     }
 
-    public bool CanJump() => jumpsLeft > 0;
+
+    public override bool CanPerform() {
+        return base.CanPerform() && jumpsLeft > 0;
+    }
 
     public void ResetJumpsLeft() => jumpsLeft = playerData.jumpsAmount;
 

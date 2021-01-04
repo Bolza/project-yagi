@@ -30,9 +30,25 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Block",
+                    "type": "Button",
+                    "id": "430d5165-3232-467d-8ee1-3c2d905ddd59",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "6b84a1db-226f-4d85-a7d0-05d12664f7e1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Roll",
+                    "type": "Button",
+                    "id": "238ed418-c79c-4448-8372-17a288d3f15b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -217,17 +233,6 @@
                 },
                 {
                     "name": "",
-                    "id": "05f6913d-c316-48b2-a6bb-e225f14c7960",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Fire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "886e731e-7071-4ae4-95c0-e61739dad6fd",
                     "path": "<Touchscreen>/primaryTouch/tap",
                     "interactions": "",
@@ -261,12 +266,45 @@
                 },
                 {
                     "name": "",
+                    "id": "f1b9f792-4dc5-40a1-8ffa-9d97412d0426",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4082f27e-04f5-4310-8321-10311d18cfd6",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "04c402db-c3cc-432e-af64-3d44fb97613c",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cb223d8e-0947-4580-b03d-b632c25f75c6",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

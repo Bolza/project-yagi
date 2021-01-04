@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gravity: -25
   runSpeed: 5
-  jumpForce: 3
+  jumpForce: 2
   airMovementSpeed: 2.8
   jumpsAmount: 1
   coyoteTime: 0.05
@@ -24,6 +24,7 @@ MonoBehaviour:
   wallJumpForce: 10
   wallJumpTime: 0.4
   wallJumpAngle: {x: 1, y: 2}
+  enableWallGrab: 0
   wallSlideVelocity: 2
   wallGrabDuration: 0.3
   canJumpFromWall: 1
