@@ -9,6 +9,7 @@ public class PlayerState {
     private string animBoolName;
     protected float inputX;
     protected float startTime;
+    protected float endTime;
     protected bool isGrounded;
     protected bool isWalled;
     protected bool duringAnimation;
@@ -19,6 +20,7 @@ public class PlayerState {
     protected bool rollInput;
     protected bool headIsFree;
     protected bool gotHit;
+    public bool colliderShouldFitAnimation;
 
     protected bool isExitingState { get; private set; }
 
@@ -38,6 +40,7 @@ public class PlayerState {
         player.onGotBlocked += OnGotBlocked;
         player.onGotHit += OnGotHit;
         gotHit = false;
+        colliderShouldFitAnimation = false;
         DoChecks();
     }
 
@@ -47,6 +50,8 @@ public class PlayerState {
         isExitingState = true;
         duringAnimation = false;
         player.Anim.SetBool(animBoolName, false);
+        colliderShouldFitAnimation = false;
+        endTime = Time.time;
     }
 
     public virtual void LogicUpdate() {
@@ -62,11 +67,11 @@ public class PlayerState {
         attackInput = player.InputHandler.attack.hasInput;
         blockInput = player.InputHandler.block.hasInput;
         rollInput = player.InputHandler.roll.hasInput;
-        isGrounded = player.CheckIsGrounded();
-        isWalled = player.CheckIsWalled();
-        headIsFree = !player.CheckHeadIsWalled();
-        bool ledgeRay = player.CheckIsTouchingLedge();
-        isLedged = headIsFree && ledgeRay;
+        isGrounded = player.isGrounded;
+        isWalled = player.isWalled;
+        isLedged = player.isLedged;
+        headIsFree = !isWalled;
+
         if (isLedged) {
             player.LedgeClimbState.setDetectedPosition(player.transform.position);
         }

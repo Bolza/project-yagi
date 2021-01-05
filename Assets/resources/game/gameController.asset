@@ -15,3 +15,6 @@ MonoBehaviour:
   Stylesheet: {fileID: 11400000, guid: 92a3610d8dbaa41f7afe21bf09ba1079, type: 2}
   BlockSparks: {fileID: 8114067559503501554, guid: d7fa82e28e4544a2ca094a72bd51a4a0,
     type: 3}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512

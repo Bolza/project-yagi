@@ -31,7 +31,10 @@ public class Skeleton_IdleState: IdleState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
-        if (targetDetected) {
+        if (gotHit) {
+            stateMachine.ChangeState(enemy.HitState);
+        }
+        else if (targetDetected) {
             DontFlipAfterIdle();
             stateMachine.ChangeState(enemy.TargetDetectedState);
         }

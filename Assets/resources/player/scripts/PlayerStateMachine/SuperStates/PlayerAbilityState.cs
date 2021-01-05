@@ -39,6 +39,9 @@ public class PlayerAbilityState: PlayerState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
+        if (duringAnimation) {
+            player.SetVelocityX(0);
+        }
     }
 
     public override void PhysicsUpdate() {

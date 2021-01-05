@@ -13,9 +13,13 @@ public class Skeleton_HitState: HitState {
     public override void LogicUpdate() {
         base.LogicUpdate();
         if (!duringAnimation) {
-            enemy.setVelocityX(0);
-            stateMachine.ChangeState(enemy.IdleState);
+            stateMachine.ChangeState(enemy.StunState);
+            //stateMachine.ChangeState(enemy.HitState);
         }
+        //else if (!duringAnimation) {
+        //    enemy.setVelocityX(0);
+        //    stateMachine.ChangeState(enemy.IdleState);
+        //}
     }
 
     public override void Enter() {

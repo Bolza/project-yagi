@@ -10,12 +10,11 @@ enum FacingDirections {
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
-public class Enemy: MonoBehaviour {
+public class Enemy: HittableEntity {
     public Rigidbody2D Body { get; private set; }
     public Collider2D Collider { get; private set; }
     public Animator Anim { get; private set; }
     public EnemyAnimationController ATSM { get; private set; }
-    public Hitpoint hitpoint { get; private set; }
     public int FacingDirection { get; private set; }
     public EnemyStateMachine stateMachine { get; private set; }
     [SerializeField] private FacingDirections animationIsFacing = new FacingDirections();
@@ -27,16 +26,15 @@ public class Enemy: MonoBehaviour {
 
     private Vector2 workspace;
 
-    public virtual void Start() {
+    public override void Start() {
+        base.Start();
         FacingDirection = (int)animationIsFacing;
         if (startDirection != animationIsFacing) Flip();
         Body = GetComponent<Rigidbody2D>();
         Collider = GetComponent<Collider2D>();
         Anim = GetComponentInChildren<Animator>();
-        hitpoint = GetComponentInChildren<Hitpoint>();
         ATSM = GetComponentInChildren<EnemyAnimationController>();
         if (!Anim) Debug.LogError("Animator required in children");
-        if (!hitpoint) Debug.LogError("Hitpoint required in children");
         if (!ATSM) Debug.LogError("EnemyAnimationController required in children");
         ATSM.OnAnimationStart += AnimationStartTrigger;
         ATSM.OnAnimationFinish += AnimationFinishTrigger;
@@ -100,20 +98,11 @@ public class Enemy: MonoBehaviour {
 
     public void AnimationStartTrigger() => stateMachine.currentState.AnimationTrigger();
     public void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
-    public event Action onGotHit;
-    public event Action onGotBlocked;
+
 
     #region Combat
 
-    public void GotHit(Player player, int dmg) {
-        Debug.Log("Enemy got hit by " + dmg);
-        onGotHit?.Invoke();
-    }
-
-    public void GotBlocked(Player player, int dmg) {
-        Debug.Log("Enemy got hit by " + dmg);
-        onGotBlocked?.Invoke();
-    }
+    //override HitCurrentTGt to pass dmg?
 
     #endregion
 
