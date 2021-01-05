@@ -9,10 +9,14 @@ public class PlayerRollState: PlayerAbilityState {
 
     public override void Enter() {
         base.Enter();
+        colliderShouldFitAnimation = true;
     }
 
     public override void LogicUpdate() {
         base.LogicUpdate();
+        if (!isGrounded) {
+            Debug.LogError("Not grounded during roll");
+        }
         if (duringAnimation) {
             if (duringHitboxTime) {
                 player.SetVelocityX(playerData.rollSpeed * player.FacingDirection);

@@ -10,11 +10,11 @@ using UnityEngine.SceneManagement;
 public class SO_GameController: ScriptableObject {
     public SO_Stylesheet Stylesheet;
     public GameObject BlockSparks;
+    public LayerMask groundLayer;
 
     public event Action onPlayerBlocked;
     public event Action onPlayerDodged;
     public event Action onPlayerHit;
-    private FunctionTimer timer;
 
     private void Awake() {
     }
@@ -22,7 +22,7 @@ public class SO_GameController: ScriptableObject {
     public void NotifyPlayerBlock(Player player) {
         onPlayerBlocked?.Invoke();
         Time.timeScale = 0.5f;
-        timer = FunctionTimer.Create(ResetTimescale, 0.4f);
+        FunctionTimer.Create(ResetTimescale, 0.4f);
     }
 
     public void NotifyPlayerDodged(Player player) {

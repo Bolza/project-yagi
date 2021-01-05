@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HittableEntity: MonoBehaviour {
+    [SerializeField] protected SO_GameController gameController;
+
     public event Action onGotHit;
     public event Action onGotBlocked;
-
     public Hitpoint hitpoint { get; private set; }
 
     public virtual void Start() {

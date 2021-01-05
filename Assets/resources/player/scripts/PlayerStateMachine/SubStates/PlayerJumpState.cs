@@ -24,7 +24,6 @@ public class PlayerJumpState: PlayerAbilityState {
     public override void Enter() {
         base.Enter();
         DecreaseJumps();
-        colliderShouldFitAnimation = true;
         float jumpy = Mathf.Sqrt(2f * playerData.jumpForce * -playerData.gravity);
         player.SetVelocityY(jumpy);
     }
@@ -45,7 +44,6 @@ public class PlayerJumpState: PlayerAbilityState {
     public override void PhysicsUpdate() {
         base.PhysicsUpdate();
     }
-
 
     public override bool CanPerform() {
         return base.CanPerform() && jumpsLeft > 0;

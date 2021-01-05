@@ -215,7 +215,7 @@ public class CharacterController2D: MonoBehaviour {
 
     [System.Diagnostics.Conditional("DEBUG_CC2D_RAYS")]
     void DrawRay(Vector3 start, Vector3 dir, Color color) {
-        Debug.DrawRay(start, dir, color);
+        if (false) Debug.DrawRay(start, dir, color);
     }
 
 
@@ -412,6 +412,7 @@ public class CharacterController2D: MonoBehaviour {
         if (angle < slopeLimit) {
             // we only need to adjust the deltaMovement if we are not jumping
             // TODO: this uses a magic number which isn't ideal! The alternative is to have the user pass in if there is a jump this frame
+            Debug.Log("handleHorizontalSlope");
             if (deltaMovement.y < jumpingThreshold) {
                 // apply the slopeModifier to slow our movement up the slope
                 var slopeModifier = slopeSpeedMultiplier.Evaluate(angle);
@@ -531,6 +532,7 @@ public class CharacterController2D: MonoBehaviour {
             if (angle == 0)
                 return;
 
+            //Debug.Log("handleVerticalSlope " + _raycastHit.collider.gameObject);
             // we are moving down the slope if our normal and movement direction are in the same x direction
             var isMovingDownSlope = Mathf.Sign(_raycastHit.normal.x) == Mathf.Sign(deltaMovement.x);
             if (isMovingDownSlope) {

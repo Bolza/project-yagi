@@ -13,6 +13,7 @@ public class PlayerInAirState: PlayerState {
 
     public override void Enter() {
         base.Enter();
+        colliderShouldFitAnimation = true;
     }
 
     public override void Exit() {

@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(MeshColorer3D))]
 
-public class Player: HittableEntity {
+public class Player: LivingEntity {
     #region States
     public PlayerInputHandler InputHandler { get; private set; }
     public PlayerStateMachine StateMachine { get; private set; }
@@ -27,23 +27,20 @@ public class Player: HittableEntity {
     public PlayerHitState HitState { get; private set; }
     public PlayerRollState RollState { get; private set; }
 
-    [SerializeField] private PlayerData playerData;
-    [SerializeField] private SO_GameController gameController;
     #endregion
+
+    [SerializeField] private PlayerData playerData;
 
     public Animator Anim { get; private set; }
     public Rigidbody2D Body { get; private set; }
-    public Collider2D Collider { get; private set; }
     public AnimationController ATSM { get; private set; }
     public CharacterController2D CC { get; private set; }
     public MeshColorer3D meshColorer { get; private set; }
 
 
     public Vector2 CurrentVelocity;
-    public int FacingDirection { get; private set; }
     private bool freezeMovement;
 
-    [SerializeField] bool debugMode;
     [SerializeField] bool ColorMe;
 
     private GameObject weaponpoint;
@@ -76,7 +73,6 @@ public class Player: HittableEntity {
         base.Start();
         InputHandler = GetComponent<PlayerInputHandler>();
         CC = GetComponent<CharacterController2D>();
-        Collider = GetComponent<Collider2D>();
         meshColorer = GetComponent<MeshColorer3D>();
         BoxCollider = (BoxCollider2D)Collider;
 
@@ -93,9 +89,7 @@ public class Player: HittableEntity {
         ATSM.OnAnimationFinish += AnimationFinishTrigger;
 
         StateMachine.Initialize(IdleState);
-        FacingDirection = 1;
         BoxDefaultSize = BoxCollider.size;
-
     }
 
     public Vector2 getRenderedPosition() {
@@ -113,8 +107,10 @@ public class Player: HittableEntity {
         BoxCollider.size = new Vector2(BoxDefaultSize.x, newY);
     }
 
-    private void Update() {
-        if (StateMachine.CurrentState.colliderShouldFitAnimation && BoxCollider.size.y == BoxDefaultSize.y) {
+    protected override void Update() {
+        base.Update();
+
+        if (StateMachine.CurrentState.colliderShouldFitAnimation) {
             FitColliderToAnimation();
         }
         else if (BoxCollider.size.y != BoxDefaultSize.y) {
@@ -169,61 +165,10 @@ public class Player: HittableEntity {
         transform.position = pos;
     }
 
-    private void Flip() {
-        FacingDirection *= -1;
-        transform.Rotate(0f, 180f, 0f);
-    }
+
 
     #endregion
 
-    #region Checks
-
-    private Vector2 getRayDistance() {
-        return Vector2.right * FacingDirection * CC.skinWidth * 2;
-    }
-
-    public bool CheckIsWalled() {
-        Vector2 side = new Vector2(
-            Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection) - (CC.skinWidth * FacingDirection),
-            Collider.bounds.center.y);
-        bool hittin = Physics2D.Raycast(side, getRayDistance(), CC.platformMask);
-
-        if (debugMode) Debug.DrawRay(side, getRayDistance(), hittin ? Color.red : Color.green);
-        return hittin;
-    }
-
-    public bool CheckIsGrounded() {
-        Vector2 side = new Vector2(
-            Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection) - (CC.skinWidth * FacingDirection),
-            Collider.bounds.center.y - Collider.bounds.extents.y);
-        bool hittin = Physics2D.Raycast(side, Vector2.down, CC.skinWidth * 2, playerData.groundLayer);
-        if (debugMode) Debug.DrawRay(side, Vector2.down * CC.skinWidth * 2, hittin ? Color.cyan : Color.green);
-        return hittin;
-    }
-
-    public void CheckIfShouldFlip(float xInput) {
-        if (xInput != 0 && xInput != FacingDirection) Flip();
-    }
-
-    public bool CheckIsTouchingLedge() {
-        Vector2 side = new Vector2(
-            Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection) - (CC.skinWidth * FacingDirection),
-            Collider.bounds.center.y + (Collider.bounds.extents.y / 3 * 2));
-        bool hittin = Physics2D.Raycast(side, getRayDistance(), CC.platformMask);
-
-        if (debugMode) Debug.DrawRay(side, getRayDistance(), hittin ? Color.red : Color.green);
-        return hittin;
-    }
-
-    public bool CheckHeadIsWalled() {
-        Vector2 side = new Vector2(
-            Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection) - (CC.skinWidth * FacingDirection),
-            Collider.bounds.center.y + Collider.bounds.extents.y);
-        bool hittin = Physics2D.Raycast(side, getRayDistance(), CC.platformMask);
-
-        if (debugMode) Debug.DrawRay(side, getRayDistance(), hittin ? Color.red : Color.green);
-        return hittin;
-    }
 
     public Vector2 getCornerPosition() {
         // OR THIS https://youtu.be/0OE-jSDRIok?list=PLy78FINcVmjA0zDBhLuLNL1Jo6xNMMq-W&t=983
@@ -233,7 +178,6 @@ public class Player: HittableEntity {
 
     }
 
-    #endregion
 
     #region Events
 
@@ -243,11 +187,6 @@ public class Player: HittableEntity {
     #endregion
 
     #region Combat
-
-    //public void HitCurrentTarget() {
-    //    Enemy tgt = hitpoint.currentHit.gameObject.GetComponent<Enemy>();
-    //    tgt.GotHit(this, playerData.attackDamage);
-    //}
 
     public override void GotHit(HittableEntity entity, int dmg) {
         if (BlockState.duringHitboxTime) {

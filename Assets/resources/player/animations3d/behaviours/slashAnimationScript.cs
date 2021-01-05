@@ -6,11 +6,11 @@ public class slashAnimationScript: StateMachineBehaviour {
     private float time;
     private bool exited;
     private float fast = 1.5f;
-
+    public bool enabled;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         time = 0;
-        exited = false;
+        exited = !enabled;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
