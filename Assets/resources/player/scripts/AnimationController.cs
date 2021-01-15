@@ -14,4 +14,13 @@ public class AnimationController: MonoBehaviour {
 
     public void AttackStartHitbox() => OnAttackStartHitbox?.Invoke();
     public void AttackEndHitbox() => OnAttackEndHitbox?.Invoke();
+
+    public ParticleSystem vfx;
+
+    public bool showTrail;
+
+    private void Update() {
+        if (showTrail && !vfx.isPlaying) vfx.Play();
+    }
+
 }

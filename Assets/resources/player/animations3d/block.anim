@@ -11843,7 +11843,7 @@ AnimationClip:
     m_LoopTime: 0
     m_LoopBlend: 0
     m_LoopBlendOrientation: 1
-    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionY: 1
     m_LoopBlendPositionXZ: 0
     m_KeepOriginalOrientation: 0
     m_KeepOriginalPositionY: 1
@@ -22756,7 +22756,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.033333335
+  - time: 0.23333333
     functionName: AttackStartHitbox
     data: 
     objectReferenceParameter: {fileID: 0}

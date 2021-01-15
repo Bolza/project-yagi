@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "newPlayerData", menuName = "Data/Player Data/Base Data")]
-public class PlayerData: ScriptableObject {
+public class PlayerData: LivingEntityData {
 
     [Header("World State")]
     public float gravity = -25f;
 
     [Header("Move State")]
-    public float runSpeed = 5f;
-    public float rollSpeed = 3f;
+    public float rollSpeed = 4f;
+    public float rollDistance = 3f;
 
     [Header("Jump State")]
     public float jumpForce = 10f;
+    public float jumpMaxY = 3f;
     public float airMovementSpeed = 4f;
+    public float jumpMaxX = 3f;
     public int jumpsAmount = 1;
     public float coyoteTime = 0.05f;
-    public LayerMask groundLayer;
     public float wallJumpForce = 10f;
     public float wallJumpTime = 0.4f;
     public Vector2 wallJumpAngle = new Vector2(1, 2);
@@ -29,7 +30,8 @@ public class PlayerData: ScriptableObject {
     public float wallGrabDuration = 0.3f;
     public bool canJumpFromWall = true;
 
-    [Header("Stats")]
-    public float attackSpeed = 1f;//currently not really implemented
-    public int attackDamage = 10;
+    [Header("Attack State")]
+    public float attackMotionX = 2f;
+    public float blockKnockbackAttenuation = 2f;
+
 }

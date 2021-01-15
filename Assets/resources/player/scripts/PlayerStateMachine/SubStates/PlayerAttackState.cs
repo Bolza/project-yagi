@@ -10,9 +10,12 @@ public class PlayerAttackState: PlayerAbilityState {
     public override void LogicUpdate() {
         base.LogicUpdate();
         if (duringAnimation) {
-            if (duringHitboxTime && player.hitpoint.currentHit) {
-                player.HitCurrentTarget(playerData.attackDamage);
-                EndHitbox();
+            if (duringHitboxTime) {
+                player.SetVelocityX(baseData.attackMotionX * player.FacingDirection);
+                if (player.hitpoint.currentHit) {
+                    player.HitCurrentTarget(player.GenerateAttack());
+                    EndHitbox();
+                }
             }
         }
         else {

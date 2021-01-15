@@ -3,6 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum FacingDirections {
+    right = 1,
+    left = -1,
+};
+
+[RequireComponent(typeof(Collider2D))]
 public class LivingEntity: HittableEntity {
     public float skinWidth = 1f;
     public bool debugMode;
@@ -13,12 +19,15 @@ public class LivingEntity: HittableEntity {
     public bool isWalled { get; protected set; }
     public bool isLedged { get; protected set; }
     public bool headIsFree { get; protected set; }
+    [SerializeField] private FacingDirections animationIsFacing = new FacingDirections();
+    [SerializeField] private FacingDirections startDirection = new FacingDirections();
 
 
     public override void Start() {
         base.Start();
         Collider = GetComponent<Collider2D>();
-        FacingDirection = 1;
+        FacingDirection = (int)animationIsFacing;
+        if (startDirection != animationIsFacing) Flip();
     }
 
     protected virtual void Update() {
@@ -74,7 +83,7 @@ public class LivingEntity: HittableEntity {
         return hittin;
     }
 
-    protected void Flip() {
+    public void Flip() {
         FacingDirection *= -1;
         transform.Rotate(0f, 180f, 0f);
     }

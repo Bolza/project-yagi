@@ -12,23 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df3947b23a3d4f65b69ce30bb4f2955, type: 3}
   m_Name: playerData
   m_EditorClassIdentifier: 
-  gravity: -25
-  runSpeed: 5
-  rollSpeed: 5
-  jumpForce: 2
-  airMovementSpeed: 2.8
-  jumpsAmount: 1
-  coyoteTime: 0.05
-  groundLayer:
+  totalHealth: 100
+  attackDamage: 10
+  attackKnockback: 10
+  knockbackAttenuation: 0
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  groundMask:
     serializedVersion: 2
     m_Bits: 512
+  walkSpeed: 3
+  runSpeed: 5
+  gravity: -25
+  rollSpeed: 10
+  rollDistance: 5
+  jumpForce: 3
+  jumpMaxY: 0
+  airMovementSpeed: 3
+  jumpMaxX: 0
+  jumpsAmount: 1
+  coyoteTime: 0.05
   wallJumpForce: 10
   wallJumpTime: 0.4
   wallJumpAngle: {x: 1, y: 2}
   landAnimationSpeedLimit: 4
   enableWallGrab: 0
-  wallSlideVelocity: 2
+  wallSlideVelocity: 3
   wallGrabDuration: 0.3
-  canJumpFromWall: 0
-  attackSpeed: 1
-  attackDamage: 10
+  canJumpFromWall: 1
+  attackMotionX: 2
+  blockKnockbackAttenuation: 0

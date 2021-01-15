@@ -172,7 +172,7 @@ public class CharacterController2D: MonoBehaviour {
     #region Monobehaviour
 
     void Awake() {
-        platformMask = playerData.groundLayer;
+        platformMask = GetComponent<Player>().baseData.groundMask;
         // add our one-way platforms to our normal platform mask so that we can land on them from above
         platformMask |= oneWayPlatformMask;
 

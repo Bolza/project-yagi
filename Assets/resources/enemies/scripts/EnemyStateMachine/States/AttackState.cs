@@ -55,7 +55,7 @@ public class AttackState: EnemyState {
     }
 
     public virtual bool CanPerform() {
-        bool recovered = Time.time >= lastAttackTime + enemyData.attackSpeed;
+        bool recovered = Time.time >= lastAttackTime + baseData.attackSpeed;
         return recovered;
     }
 

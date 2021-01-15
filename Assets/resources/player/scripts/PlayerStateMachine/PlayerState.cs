@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerState {
     protected Player player;
     protected PlayerStateMachine stateMachine;
-    protected PlayerData playerData;
+    protected PlayerData baseData;
     private string animBoolName;
     protected float inputX;
     protected float startTime;
@@ -21,18 +21,24 @@ public class PlayerState {
     protected bool headIsFree;
     protected bool gotHit;
     public bool colliderShouldFitAnimation;
+    protected Vector2 startPosition;
+    protected float maxYMovement;
+    protected float maxXMovement;
 
     protected bool isExitingState { get; private set; }
 
     public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) {
         this.player = player;
         this.stateMachine = stateMachine;
-        this.playerData = playerData;
+        this.baseData = playerData;
         this.animBoolName = animBoolName;
     }
 
 
     public virtual void Enter() {
+        maxXMovement = 0;
+        maxYMovement = 0;
+        startPosition = player.transform.position;
         isExitingState = false;
         duringAnimation = true;
         player.Anim.SetBool(animBoolName, true);
@@ -71,11 +77,17 @@ public class PlayerState {
         isWalled = player.isWalled;
         isLedged = player.isLedged;
         headIsFree = !isWalled;
-
         if (isLedged) {
             player.LedgeClimbState.setDetectedPosition(player.transform.position);
         }
     }
+
+    protected virtual bool canMoveX() =>
+        maxXMovement == 0 || Mathf.Abs(startPosition.x - player.transform.position.x) < maxXMovement;
+
+    protected virtual bool canMoveY() =>
+        maxYMovement == 0 || Mathf.Abs(startPosition.y - player.transform.position.y) < maxYMovement;
+
 
     public virtual void AnimationTrigger() {
         duringAnimation = true;

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f644dd893899d46d9920469d32d56360, type: 3}
   m_Name: gameStylesheet
   m_EditorClassIdentifier: 
-  playerHitOverlay: {r: 1, g: 0, b: 0.029585838, a: 0.078431375}
+  playerHitOverlay: {r: 1, g: 1, b: 1, a: 0.15686275}
