@@ -27,8 +27,8 @@ public class IdleState: EnemyState {
         base.Enter();
         counter++;
         idleIsExpired = false;
-        entity.setVelocityX(0f);
-        idleTime = Random.Range(enemyData.minIdleTime, enemyData.maxIdleTime);
+        entity.SetVelocityX(0f);
+        idleTime = Random.Range(baseData.minIdleTime, baseData.maxIdleTime);
     }
 
     public override void Exit() {

@@ -24,7 +24,7 @@ public class PlayerJumpState: PlayerAbilityState {
     public override void Enter() {
         base.Enter();
         DecreaseJumps();
-        float jumpy = Mathf.Sqrt(2f * playerData.jumpForce * -playerData.gravity);
+        float jumpy = Mathf.Sqrt(2f * baseData.jumpForce * -baseData.gravity);
         player.SetVelocityY(jumpy);
     }
 
@@ -49,7 +49,7 @@ public class PlayerJumpState: PlayerAbilityState {
         return base.CanPerform() && jumpsLeft > 0;
     }
 
-    public void ResetJumpsLeft() => jumpsLeft = playerData.jumpsAmount;
+    public void ResetJumpsLeft() => jumpsLeft = baseData.jumpsAmount;
 
     public void DecreaseJumps() => jumpsLeft--;
 

@@ -29,7 +29,7 @@ public class MoveState: EnemyState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
-        entity.setVelocityX(entity.FacingDirection * enemyData.walkSpeed);
+        entity.SetVelocityX(entity.FacingDirection * baseData.walkSpeed);
     }
 
     public override void PhysicsUpdate() {

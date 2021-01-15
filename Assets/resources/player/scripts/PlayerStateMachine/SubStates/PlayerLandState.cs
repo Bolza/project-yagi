@@ -12,7 +12,7 @@ public class PlayerLandState: PlayerGroundedState {
 
     public override void Enter() {
         base.Enter();
-        colliderShouldFitAnimation = true;
+        //colliderShouldFitAnimation = true;
     }
 
     public override void Exit() {

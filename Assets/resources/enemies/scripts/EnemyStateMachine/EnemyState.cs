@@ -7,7 +7,7 @@ public class EnemyState {
     protected Enemy entity;
     protected float startTime;
     protected string animBoolName;
-    protected EnemyData enemyData;
+    protected EnemyData baseData;
     protected bool wallDetected;
     protected bool groundDetected;
     protected RaycastHit2D targetDetectedForward;
@@ -22,7 +22,7 @@ public class EnemyState {
         this.entity = entity;
         this.stateMachine = stateMachine;
         this.animBoolName = animBoolName;
-        this.enemyData = enemyData;
+        this.baseData = enemyData;
     }
 
     public virtual void Enter() {
@@ -50,14 +50,13 @@ public class EnemyState {
     }
 
     public virtual void DoChecks() {
-        wallDetected = entity.CheckWall();
-        groundDetected = entity.CheckIsGrounded();
-        targetDetectedForward = entity.CheckTargetForward();
-        targetDetectedBackward = entity.CheckTargetBackward();
-        targetDetected = targetDetectedForward ? targetDetectedForward : targetDetectedBackward;
+        wallDetected = entity.wallDetected;
+        groundDetected = entity.isGrounded;
+        targetDetectedForward = entity.targetDetectedForward;
+        targetDetectedBackward = entity.targetDetectedBackward;
 
-        if (targetDetectedForward) distanceFromTarget = targetDetectedForward.distance;
-        else if (targetDetectedBackward) distanceFromTarget = targetDetectedBackward.distance;
+        targetDetected = targetDetectedForward ? targetDetectedForward : targetDetectedBackward;
+        distanceFromTarget = targetDetected.distance;
     }
 
     public virtual void AnimationTrigger() {

@@ -22,7 +22,7 @@ public class PlayerMoveState: PlayerGroundedState {
     public override void LogicUpdate() {
         base.LogicUpdate();
         player.CheckIfShouldFlip(inputX);
-        player.SetVelocityX(playerData.runSpeed * inputX);
+        player.SetVelocityX(baseData.runSpeed * inputX);
         if (inputX == 0f && !isExitingState) stateMachine.ChangeState(player.IdleState);
     }
 

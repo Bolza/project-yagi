@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInAirState: PlayerState {
-    float oldYVelocity = 0;
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) {
     }
 
@@ -13,7 +12,8 @@ public class PlayerInAirState: PlayerState {
 
     public override void Enter() {
         base.Enter();
-        colliderShouldFitAnimation = true;
+        maxYMovement = baseData.jumpMaxY;
+        maxXMovement = baseData.jumpMaxX;
     }
 
     public override void Exit() {
@@ -23,7 +23,7 @@ public class PlayerInAirState: PlayerState {
     public override void LogicUpdate() {
         base.LogicUpdate();
         // check oldVelocity to avoid LandState from programmatic Y adjustements
-        if (isGrounded && player.CurrentVelocity.y < -playerData.landAnimationSpeedLimit) {
+        if (isGrounded && player.CurrentVelocity.y < -baseData.landAnimationSpeedLimit) {
             stateMachine.ChangeState(player.LandState);
         }
         else if (isGrounded && player.CurrentVelocity.y < 0) {
@@ -39,12 +39,12 @@ public class PlayerInAirState: PlayerState {
         }
         else if (jumpInput && player.JumpState.CanPerform()) {
             // we can make this action more smooth
-            if (playerData.canJumpFromWall) {
+            if (baseData.canJumpFromWall) {
                 player.InputHandler.UseJumpInput();
                 stateMachine.ChangeState(player.JumpState);
             }
         }
-        else if (isWalled && inputX == player.FacingDirection && playerData.enableWallGrab) {
+        else if (isWalled && inputX == player.FacingDirection && baseData.enableWallGrab) {
             stateMachine.ChangeState(player.WallGrabState);
         }
         else if (isWalled && inputX == player.FacingDirection && player.CurrentVelocity.y <= 0) {
@@ -52,12 +52,17 @@ public class PlayerInAirState: PlayerState {
         }
         else {
             player.CheckIfShouldFlip(inputX);
-            player.SetVelocityX(playerData.airMovementSpeed * inputX);
-            player.Anim.SetFloat("xSpeed", Mathf.Abs(player.CurrentVelocity.x) / playerData.airMovementSpeed * 100);
-            player.Anim.SetFloat("ySpeed", player.CurrentVelocity.y / playerData.jumpForce * 100);
+
+            if (canMoveX()) player.SetVelocityX(baseData.airMovementSpeed * inputX);
+
+            if (!canMoveY() && player.CurrentVelocity.y > 0) {
+                player.SetVelocityY(0);
+            }
+
+            player.Anim.SetFloat("xSpeed", Mathf.Abs(player.CurrentVelocity.x));
+            player.Anim.SetFloat("ySpeed", player.CurrentVelocity.y);
         }
 
-        oldYVelocity = player.CurrentVelocity.y;
     }
 
     public override void PhysicsUpdate() {

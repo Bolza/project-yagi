@@ -73,7 +73,7 @@ public class PlayerInputHandler: MonoBehaviour {
         if (ctx.started) roll.Start();
     }
 
-    public void FreezeInput() => frozen = true;
-    public void UnfreezeInput() => frozen = false;
+    public void MuteInput() => frozen = true;
+    public void UnmuteInput() => frozen = false;
 }
 

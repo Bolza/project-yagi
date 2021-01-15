@@ -22,7 +22,7 @@ public class PlayerGroundedState: PlayerState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
-        bool isCoyoteTimeOn = Time.time <= lastGroundedTime + playerData.coyoteTime;
+        bool isCoyoteTimeOn = Time.time <= lastGroundedTime + baseData.coyoteTime;
         if (gotHit) {
             stateMachine.ChangeState(player.HitState);
         }

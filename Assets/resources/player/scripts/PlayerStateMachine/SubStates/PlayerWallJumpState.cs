@@ -21,7 +21,7 @@ public class PlayerWallJumpState: PlayerAbilityState {
     public override void Enter() {
         base.Enter();
         player.JumpState.ResetJumpsLeft();
-        player.SetVelocity(playerData.wallJumpForce, playerData.wallJumpAngle, -player.FacingDirection);
+        player.SetVelocity(baseData.wallJumpForce, baseData.wallJumpAngle, -player.FacingDirection);
         player.CheckIfShouldFlip(-player.FacingDirection);
         player.JumpState.DecreaseJumps();
     }
@@ -34,7 +34,7 @@ public class PlayerWallJumpState: PlayerAbilityState {
         base.LogicUpdate();
         player.Anim.SetFloat("ySpeed", player.CurrentVelocity.y);
         player.Anim.SetFloat("xSpeed", Mathf.Abs(player.CurrentVelocity.x));
-        if (Time.time >= startTime + playerData.wallJumpTime) {
+        if (Time.time >= startTime + baseData.wallJumpTime) {
             isAbilityDone = true;
         }
     }

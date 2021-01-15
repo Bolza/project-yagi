@@ -16,6 +16,7 @@ public class SO_GameController: ScriptableObject {
     public event Action onPlayerDodged;
     public event Action onPlayerHit;
 
+
     private void Awake() {
     }
 

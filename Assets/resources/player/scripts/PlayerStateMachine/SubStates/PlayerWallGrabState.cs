@@ -30,7 +30,7 @@ public class PlayerWallGrabState: PlayerTouchingWallState {
     public override void LogicUpdate() {
         base.LogicUpdate();
         //start sliding after wallGrab Duration
-        if (!permaGrab && Time.time >= startTime + playerData.wallGrabDuration && !isExitingState) {
+        if (!permaGrab && Time.time >= startTime + baseData.wallGrabDuration && !isExitingState) {
             //stateMachine.ChangeState(player.InAirState);
             stateMachine.ChangeState(player.WallSlideState);
         }

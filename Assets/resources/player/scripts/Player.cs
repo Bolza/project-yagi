@@ -5,7 +5,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerInputHandler))]
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(MeshColorer3D))]
 
 public class Player: LivingEntity {
@@ -29,7 +28,7 @@ public class Player: LivingEntity {
 
     #endregion
 
-    [SerializeField] private PlayerData playerData;
+    public PlayerData baseData;
 
     public Animator Anim { get; private set; }
     public Rigidbody2D Body { get; private set; }
@@ -53,20 +52,20 @@ public class Player: LivingEntity {
 
     private void Awake() {
         StateMachine = new PlayerStateMachine();
-        IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
-        MoveState = new PlayerMoveState(this, StateMachine, playerData, "move");
-        JumpState = new PlayerJumpState(this, StateMachine, playerData, "inAir");
-        InAirState = new PlayerInAirState(this, StateMachine, playerData, "inAir");
-        LandState = new PlayerLandState(this, StateMachine, playerData, "land");
-        WallSlideState = new PlayerWallSlideState(this, StateMachine, playerData, "wallSlide");
-        WallGrabState = new PlayerWallGrabState(this, StateMachine, playerData, "wallGrab");
-        WallClimbState = new PlayerWallClimbState(this, StateMachine, playerData, "wallClimb");
-        WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, "inAirn");
-        LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, playerData, "ledgeClimbState");
-        AttackState = new PlayerAttackState(this, StateMachine, playerData, "slash");
-        BlockState = new PlayerBlockState(this, StateMachine, playerData, "block");
-        HitState = new PlayerHitState(this, StateMachine, playerData, "hit");
-        RollState = new PlayerRollState(this, StateMachine, playerData, "roll");
+        IdleState = new PlayerIdleState(this, StateMachine, baseData, "idle");
+        MoveState = new PlayerMoveState(this, StateMachine, baseData, "move");
+        JumpState = new PlayerJumpState(this, StateMachine, baseData, "inAir");
+        InAirState = new PlayerInAirState(this, StateMachine, baseData, "inAir");
+        LandState = new PlayerLandState(this, StateMachine, baseData, "land");
+        WallSlideState = new PlayerWallSlideState(this, StateMachine, baseData, "wallSlide");
+        WallGrabState = new PlayerWallGrabState(this, StateMachine, baseData, "wallGrab");
+        WallClimbState = new PlayerWallClimbState(this, StateMachine, baseData, "wallClimb");
+        WallJumpState = new PlayerWallJumpState(this, StateMachine, baseData, "inAirn");
+        LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, baseData, "ledgeClimbState");
+        AttackState = new PlayerAttackState(this, StateMachine, baseData, "slash");
+        BlockState = new PlayerBlockState(this, StateMachine, baseData, "block");
+        HitState = new PlayerHitState(this, StateMachine, baseData, "hit");
+        RollState = new PlayerRollState(this, StateMachine, baseData, "roll");
     }
 
     public override void Start() {
@@ -82,6 +81,7 @@ public class Player: LivingEntity {
 
         weaponpoint = GameObject.FindGameObjectWithTag("weaponpoint");
 
+        if (!weaponpoint) Debug.LogError("Weaponpoint tag required in children");
         if (!Anim) Debug.LogError("Animator required in children");
         if (!hitpoint) Debug.LogError("Hitpoint required in children");
         if (!ATSM) Debug.LogError("EnemyAnimationController required in children");
@@ -119,8 +119,9 @@ public class Player: LivingEntity {
 
         StateMachine.CurrentState.LogicUpdate();
         if (freezeMovement) return;
-        float gravity = CheckIsGrounded() ? 0 : playerData.gravity;
+        float gravity = CheckIsGrounded() ? 0 : baseData.gravity;
         float yPlusGravity = CurrentVelocity.y + gravity * Time.deltaTime;
+        CurrentVelocity.x = Math.Sign(CurrentVelocity.x) * ((Math.Abs(CurrentVelocity.x)) - 9f * Time.deltaTime);
         CurrentVelocity.Set(CurrentVelocity.x, yPlusGravity);
         CC.move(CurrentVelocity * Time.deltaTime);
     }
@@ -188,9 +189,13 @@ public class Player: LivingEntity {
 
     #region Combat
 
-    public override void GotHit(HittableEntity entity, int dmg) {
+    public override AttackType GenerateAttack() {
+        return new AttackType(this, baseData.attackDamage, baseData.attackKnockback);
+    }
+
+    public override void GotHit(AttackType atk) {
         if (BlockState.duringHitboxTime) {
-            entity.GotBlocked(this, dmg);
+            atk.owner.GotBlocked(atk);
             gameController.NotifyPlayerBlock(this);
             Vector2 pos = new Vector2(weaponpoint.transform.position.x, weaponpoint.transform.position.y);
             Instantiate(gameController.BlockSparks, pos, Quaternion.identity); ;
@@ -200,8 +205,10 @@ public class Player: LivingEntity {
         }
         else {
             gameController.NotifyPlayerHit();
-            meshColorer.SetTintColor(gameController.Stylesheet.playerHitOverlay);
-            base.GotHit(entity, dmg);
+            SetVelocityX(CalculateKnockback(atk));
+
+            //meshColorer.SetTintColor(gameController.Stylesheet.playerHitOverlay);
+            base.GotHit(atk);
         }
     }
 
