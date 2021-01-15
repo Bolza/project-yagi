@@ -43,9 +43,24 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Fire
-    uniqueID: 3804908061
+  - name: Background
+    uniqueID: 2665318615
+    locked: 0
+  - name: Near Background
+    uniqueID: 3815307685
+    locked: 0
+  - name: Cave
+    uniqueID: 3743524105
+    locked: 0
+  - name: Exterior
+    uniqueID: 1846636835
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 4151314497
+    locked: 0
+  - name: Near Foreground
+    uniqueID: 2130330143
     locked: 0
