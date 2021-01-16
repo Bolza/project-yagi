@@ -24,7 +24,7 @@ public class PlayerJumpState: PlayerAbilityState {
     public override void Enter() {
         base.Enter();
         DecreaseJumps();
-        float jumpy = Mathf.Sqrt(2f * baseData.jumpForce * -baseData.gravity);
+        float jumpy = Mathf.Sqrt(2f * baseData.jumpForce * -Physics2D.gravity.y);
         player.SetVelocityY(jumpy);
     }
 

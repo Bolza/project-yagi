@@ -119,21 +119,18 @@ public class Player: LivingEntity {
 
         StateMachine.CurrentState.LogicUpdate();
         if (freezeMovement) return;
-        float gravity = CheckIsGrounded() ? 0 : baseData.gravity;
+        float gravity = CheckIsGrounded() ? 0 : Physics2D.gravity.y;
         float yPlusGravity = CurrentVelocity.y + gravity * Time.deltaTime;
-        //CurrentVelocity.x = Math.Sign(CurrentVelocity.x) * ((Math.Abs(CurrentVelocity.x)) - groundAttrition * Time.deltaTime);
+        CurrentVelocity.x = Math.Sign(CurrentVelocity.x) * ((Math.Abs(CurrentVelocity.x)) - Math.Abs(Physics2D.gravity.y) * Time.deltaTime);
         CurrentVelocity.Set(CurrentVelocity.x, yPlusGravity);
         CC.move(CurrentVelocity * Time.deltaTime);
-
     }
 
     private void FixedUpdate() {
         StateMachine.CurrentState.PhysicsUpdate();
         if (debugMode) StateMachine.DebugModeOn();
         else StateMachine.DebugModeOff();
-        CheckSlope();
     }
-
 
 
     #region Movement
@@ -169,9 +166,7 @@ public class Player: LivingEntity {
     }
 
 
-
     #endregion
-
 
     public Vector2 getCornerPosition() {
         // OR THIS https://youtu.be/0OE-jSDRIok?list=PLy78FINcVmjA0zDBhLuLNL1Jo6xNMMq-W&t=983

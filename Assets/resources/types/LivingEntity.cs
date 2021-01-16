@@ -11,7 +11,7 @@ public enum FacingDirections {
 [RequireComponent(typeof(Collider2D))]
 public class LivingEntity: HittableEntity {
 
-    public float skinWidth = 1f;
+    public float skinWidth = 0.1f;
     public bool debugMode;
     public int FacingDirection { get; private set; }
     public Collider2D Collider { get; private set; }
@@ -73,17 +73,11 @@ public class LivingEntity: HittableEntity {
     public bool CheckSlope() {
         Vector2 bottomPoint = new Vector2(Collider.bounds.center.x, Collider.bounds.center.y - Collider.bounds.extents.y);
         RaycastHit2D down = Physics2D.Raycast(bottomPoint, Vector2.down, skinWidth, gameController.groundLayer);
-        //RaycastHit2D fwd = Physics2D.Raycast(bottomPoint, Vector2.right * FacingDirection * skinWidth, gameController.groundLayer);
-        //RaycastHit2D bkw = Physics2D.Raycast(bottomPoint, Vector2.left * FacingDirection * skinWidth, gameController.groundLayer);
-
         if (down) {
             slopeNormalPerp = Vector2.Perpendicular(down.normal).normalized;
             slopeDownAngle = Vector2.Angle(down.normal, Vector2.up);
             if (slopeDownAngle != slopeDownAngleOld) isOnSlope = true;
             slopeDownAngleOld = slopeDownAngle;
-
-            //Debug.DrawRay(down.point, slopeNormalPerp, Color.red);
-            //Debug.DrawRay(down.point, down.normal, Color.black);
         }
         return down;
     }

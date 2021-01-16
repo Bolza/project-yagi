@@ -5,9 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newPlayerData", menuName = "Data/Player Data/Base Data")]
 public class PlayerData: LivingEntityData {
 
-    [Header("World State")]
-    public float gravity = -25f;
-
     [Header("Move State")]
     public float rollSpeed = 4f;
     public float rollDistance = 3f;

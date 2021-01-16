@@ -57,9 +57,6 @@ public class CharacterController2D: MonoBehaviour {
     /// when true, one way platforms will be ignored when moving vertically for a single frame
     /// </summary>
     public bool ignoreOneWayPlatformsThisFrame;
-
-    [SerializeField]
-    [Range(0.001f, 0.3f)]
     float _skinWidth = 0.02f;
 
     /// <summary>
@@ -74,8 +71,10 @@ public class CharacterController2D: MonoBehaviour {
         }
     }
 
-    [SerializeField] PlayerData playerData;
-    public LayerMask platformMask { get; private set; }
+    [SerializeField] private SO_GameController gameController;
+    private Player player;
+    private LayerMask platformMask;
+
 
     /// <summary>
     /// mask with all layers that trigger events should fire when intersected
@@ -173,17 +172,14 @@ public class CharacterController2D: MonoBehaviour {
     #region Monobehaviour
 
     void Awake() {
-        platformMask = GetComponent<Player>().baseData.groundMask;
-        // add our one-way platforms to our normal platform mask so that we can land on them from above
-        platformMask |= oneWayPlatformMask;
-
-        // cache some components
+        player = GetComponent<Player>();
         transform = GetComponent<Transform>();
         boxCollider = GetComponent<CapsuleCollider2D>();
         rigidBody2D = GetComponent<Rigidbody2D>();
-
-        // here, we trigger our properties that have setters with bodies
-        skinWidth = _skinWidth;
+        platformMask = gameController.groundLayer;
+        // add our one-way platforms to our normal platform mask so that we can land on them from above
+        platformMask |= oneWayPlatformMask;
+        skinWidth = player.skinWidth;
 
         // we want to set our CC2D to ignore all collision layers except what is in our triggerMask
         for (var i = 0; i < 32; i++) {
