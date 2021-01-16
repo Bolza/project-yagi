@@ -5,7 +5,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(PlayerInputHandler))]
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(MeshColorer3D))]
 
 public class Player: LivingEntity {
     #region States
@@ -43,8 +42,9 @@ public class Player: LivingEntity {
     [SerializeField] bool ColorMe;
 
     private GameObject weaponpoint;
-    private BoxCollider2D BoxCollider;
+    private CapsuleCollider2D BoxCollider;
     private Vector2 BoxDefaultSize;
+    [SerializeField] private float groundAttrition;
     [SerializeField] private Transform leftFoot;
     [SerializeField] private Transform rightFoot;
     [SerializeField] private Transform head;
@@ -73,7 +73,7 @@ public class Player: LivingEntity {
         InputHandler = GetComponent<PlayerInputHandler>();
         CC = GetComponent<CharacterController2D>();
         meshColorer = GetComponent<MeshColorer3D>();
-        BoxCollider = (BoxCollider2D)Collider;
+        BoxCollider = (CapsuleCollider2D)Collider;
 
         Anim = GetComponentInChildren<Animator>();
         Body = GetComponentInChildren<Rigidbody2D>();
@@ -121,15 +121,17 @@ public class Player: LivingEntity {
         if (freezeMovement) return;
         float gravity = CheckIsGrounded() ? 0 : baseData.gravity;
         float yPlusGravity = CurrentVelocity.y + gravity * Time.deltaTime;
-        CurrentVelocity.x = Math.Sign(CurrentVelocity.x) * ((Math.Abs(CurrentVelocity.x)) - 9f * Time.deltaTime);
+        //CurrentVelocity.x = Math.Sign(CurrentVelocity.x) * ((Math.Abs(CurrentVelocity.x)) - groundAttrition * Time.deltaTime);
         CurrentVelocity.Set(CurrentVelocity.x, yPlusGravity);
         CC.move(CurrentVelocity * Time.deltaTime);
+
     }
 
     private void FixedUpdate() {
         StateMachine.CurrentState.PhysicsUpdate();
         if (debugMode) StateMachine.DebugModeOn();
         else StateMachine.DebugModeOff();
+        CheckSlope();
     }
 
 

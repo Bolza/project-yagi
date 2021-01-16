@@ -10,6 +10,7 @@ public enum FacingDirections {
 
 [RequireComponent(typeof(Collider2D))]
 public class LivingEntity: HittableEntity {
+
     public float skinWidth = 1f;
     public bool debugMode;
     public int FacingDirection { get; private set; }
@@ -18,10 +19,15 @@ public class LivingEntity: HittableEntity {
     public bool isGrounded { get; protected set; }
     public bool isWalled { get; protected set; }
     public bool isLedged { get; protected set; }
+    public bool isOnSlope { get; protected set; }
     public bool headIsFree { get; protected set; }
     [SerializeField] private FacingDirections animationIsFacing = new FacingDirections();
     [SerializeField] private FacingDirections startDirection = new FacingDirections();
 
+    private Vector2 gizmoCenter;
+    private float slopeDownAngle;
+    private float slopeDownAngleOld;
+    private Vector2 slopeNormalPerp;
 
     public override void Start() {
         base.Start();
@@ -52,15 +58,40 @@ public class LivingEntity: HittableEntity {
         return hittin;
     }
 
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(gizmoCenter, skinWidth);
+    }
+
+
     public bool CheckIsGrounded() {
         Vector2 side = new Vector2(Collider.bounds.center.x, Collider.bounds.center.y - Collider.bounds.extents.y);
-        bool hittin = Physics2D.Raycast(side, Vector2.down, skinWidth * 2, gameController.groundLayer);
-        if (debugMode) Debug.DrawRay(side, Vector2.down * skinWidth * 2, hittin ? Color.cyan : Color.green);
+        bool hittin = Physics2D.OverlapCircle(side, skinWidth, gameController.groundLayer);
+        gizmoCenter = side;
         return hittin;
     }
 
-    public void CheckIfShouldFlip(float xInput) {
-        if (xInput != 0 && xInput != FacingDirection) Flip();
+    public bool CheckSlope() {
+        Vector2 bottomPoint = new Vector2(Collider.bounds.center.x, Collider.bounds.center.y - Collider.bounds.extents.y);
+        RaycastHit2D down = Physics2D.Raycast(bottomPoint, Vector2.down, skinWidth, gameController.groundLayer);
+        //RaycastHit2D fwd = Physics2D.Raycast(bottomPoint, Vector2.right * FacingDirection * skinWidth, gameController.groundLayer);
+        //RaycastHit2D bkw = Physics2D.Raycast(bottomPoint, Vector2.left * FacingDirection * skinWidth, gameController.groundLayer);
+
+        if (down) {
+            slopeNormalPerp = Vector2.Perpendicular(down.normal).normalized;
+            slopeDownAngle = Vector2.Angle(down.normal, Vector2.up);
+            if (slopeDownAngle != slopeDownAngleOld) isOnSlope = true;
+            slopeDownAngleOld = slopeDownAngle;
+
+            //Debug.DrawRay(down.point, slopeNormalPerp, Color.red);
+            //Debug.DrawRay(down.point, down.normal, Color.black);
+        }
+        return down;
+    }
+
+    public bool CheckIfShouldFlip(float xInput) {
+        bool should = xInput != 0 && Math.Sign(xInput) != Math.Sign(FacingDirection);
+        if (should) Flip();
+        return should;
     }
 
     public bool CheckIsTouchingLedge() {
