@@ -7,6 +7,7 @@ public class EnemyData: LivingEntityData {
 
     [Header("Move State")]
     public float wallDetectionRange = 1f;
+    public float patrolRange = 4f;
     public float minIdleTime = 1;
     public float maxIdleTime = 5;
 

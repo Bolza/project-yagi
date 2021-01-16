@@ -7,6 +7,7 @@ public class IdleState: EnemyState {
     private bool flipAfterIdle;
     private bool idleIsExpired;
     private int counter = 0;
+    public Vector2 lastPosition { get; protected set; }
 
     public IdleState(Enemy entity, EnemyStateMachine stateMachine, string animBoolName, EnemyData enemyData) : base(entity, stateMachine, animBoolName, enemyData) {
     }
@@ -33,6 +34,7 @@ public class IdleState: EnemyState {
 
     public override void Exit() {
         base.Exit();
+        lastPosition = entity.transform.position;
         if (flipAfterIdle && counter > 1) entity.Flip();
     }
 
