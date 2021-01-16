@@ -20,4 +20,9 @@ public class AttackType {
     public Vector3 getDirectionTo(Vector3 to) {
         return (to - origin).normalized;
     }
+
+    public void setOwner(HittableEntity owner) {
+        this.owner = owner;
+        this.origin = owner.transform.position;
+    }
 }

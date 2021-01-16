@@ -12,6 +12,7 @@ public class EnemyData: LivingEntityData {
 
     [Header("Attack State")]
     public float targetDetectionRange = 3f;
+    public float targetDetectionTime = 3f;
     public float attackSpeed = 1f;
     public float attackRange = 1f;
 }

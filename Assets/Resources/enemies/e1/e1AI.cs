@@ -23,6 +23,9 @@ public class e1AI: Enemy {
         StunState = new e1_StunState(this, stateMachine, "stun", baseData);
         stateMachine.Initialize(IdleState);
     }
+
+
+
 }
 
 

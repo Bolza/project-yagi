@@ -25,8 +25,6 @@ public class PlayerHitState: PlayerState {
         base.LogicUpdate();
         if (gotHit) {
             stateMachine.ChangeState(player.HitState);
-
-
         }
         else if (!duringAnimation) {
             stateMachine.ChangeState(player.IdleState);

@@ -36,8 +36,8 @@ public class PlayerState {
 
 
     public virtual void Enter() {
-        maxXMovement = 0;
-        maxYMovement = 0;
+        maxXMovement = -1;
+        maxYMovement = -1;
         startPosition = player.transform.position;
         isExitingState = false;
         duringAnimation = true;
@@ -83,10 +83,10 @@ public class PlayerState {
     }
 
     protected virtual bool canMoveX() =>
-        maxXMovement == 0 || Mathf.Abs(startPosition.x - player.transform.position.x) < maxXMovement;
+        maxXMovement < 0 || Mathf.Abs(startPosition.x - player.transform.position.x) < maxXMovement;
 
     protected virtual bool canMoveY() =>
-        maxYMovement == 0 || Mathf.Abs(startPosition.y - player.transform.position.y) < maxYMovement;
+        maxYMovement < 0 || Mathf.Abs(startPosition.y - player.transform.position.y) < maxYMovement;
 
 
     public virtual void AnimationTrigger() {

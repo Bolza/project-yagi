@@ -31,5 +31,6 @@ MonoBehaviour:
   minIdleTime: 1
   maxIdleTime: 5
   targetDetectionRange: 5
-  attackSpeed: 1
+  targetDetectionTime: 1
+  attackSpeed: 3
   attackRange: 0.6

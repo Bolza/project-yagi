@@ -10,9 +10,9 @@ public class EnemyState {
     protected EnemyData baseData;
     protected bool wallDetected;
     protected bool groundDetected;
-    protected RaycastHit2D targetDetectedForward;
-    protected RaycastHit2D targetDetectedBackward;
-    protected RaycastHit2D targetDetected;
+    protected bool targetDetectedForward;
+    protected bool targetDetectedBackward;
+    protected Collider2D targetDetected;
     protected float distanceFromTarget;
     protected bool duringAnimation;
     protected bool gotHit;
@@ -54,9 +54,8 @@ public class EnemyState {
         groundDetected = entity.isGrounded;
         targetDetectedForward = entity.targetDetectedForward;
         targetDetectedBackward = entity.targetDetectedBackward;
-
-        targetDetected = targetDetectedForward ? targetDetectedForward : targetDetectedBackward;
-        distanceFromTarget = targetDetected.distance;
+        targetDetected = entity.targetDetected;
+        distanceFromTarget = entity.distanceFromTarget;
     }
 
     public virtual void AnimationTrigger() {

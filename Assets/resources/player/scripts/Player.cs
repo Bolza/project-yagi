@@ -192,7 +192,9 @@ public class Player: LivingEntity {
 
     public override void GotHit(AttackType atk) {
         if (BlockState.duringHitboxTime) {
-            atk.owner.GotBlocked(atk);
+            HittableEntity attacker = atk.owner;
+            atk.setOwner(this);
+            attacker.GotBlocked(atk);
             gameController.NotifyPlayerBlock(this);
             Vector2 pos = new Vector2(weaponpoint.transform.position.x, weaponpoint.transform.position.y);
             Instantiate(gameController.BlockSparks, pos, Quaternion.identity); ;

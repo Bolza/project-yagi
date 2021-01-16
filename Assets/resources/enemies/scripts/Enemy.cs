@@ -15,10 +15,11 @@ public class Enemy: LivingEntity {
     public EnemyData baseData;
 
     public bool wallDetected { get; protected set; }
-    public RaycastHit2D targetDetectedForward;
-    public RaycastHit2D targetDetectedBackward;
-    public RaycastHit2D targetDetected;
+    public bool targetDetectedForward;
+    public bool targetDetectedBackward;
+    public Collider2D targetDetected;
     public float distanceFromTarget { get; protected set; }
+
 
     private Vector2 workspace;
 
@@ -43,10 +44,18 @@ public class Enemy: LivingEntity {
         else if (!blockStates) stateMachine.UnfreezeState();
 
         wallDetected = CheckWall();
-        targetDetectedForward = CheckTargetForward();
-        targetDetectedBackward = CheckTargetBackward();
-        targetDetected = targetDetectedForward ? targetDetectedForward : targetDetectedBackward;
-        distanceFromTarget = targetDetected.distance;
+        targetDetected = CheckTarget();
+
+        if (targetDetected) {
+            float relativePos = targetDetected.transform.position.x - transform.position.x;
+            distanceFromTarget = Vector2.Distance(targetDetected.transform.position, transform.position);
+            targetDetectedForward = Math.Sign(relativePos) == FacingDirection;
+            targetDetectedBackward = Math.Sign(relativePos) != FacingDirection;
+        }
+        else {
+            targetDetectedForward = false;
+            targetDetectedBackward = false;
+        }
     }
 
     public virtual void FixedUpdate() {
@@ -65,25 +74,16 @@ public class Enemy: LivingEntity {
         return hittin;
     }
 
-    public virtual RaycastHit2D CheckTargetForward() {
-        Vector2 forward = new Vector2(Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection), Collider.bounds.center.y);
-        RaycastHit2D hittin = Physics2D.Raycast(forward, Vector2.right * FacingDirection, baseData.targetDetectionRange, baseData.playerMask);
-        if (debugMode) Debug.DrawRay(forward, Vector2.right * FacingDirection, hittin ? Color.red : Color.green);
+    public virtual Collider2D CheckTarget() {
+        Collider2D hittin = Physics2D.OverlapCircle(transform.position, baseData.targetDetectionRange, gameController.playerLayer);
         return hittin;
     }
 
-    public virtual RaycastHit2D CheckTargetBackward() {
-        Vector2 back = new Vector2(Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection), Collider.bounds.center.y);
-        RaycastHit2D hittin = Physics2D.Raycast(back, Vector2.right * -FacingDirection, baseData.targetDetectionRange / 2, baseData.playerMask);
-        if (debugMode) Debug.DrawRay(back, Vector2.right * -FacingDirection, hittin ? Color.red : Color.green);
-        return hittin;
-    }
 
-    private void OnDrawGizmos() {
-        //Vector2 side = new Vector2(Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection), Collider.bounds.center.y);
-        //Gizmos.DrawLine()
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, baseData.targetDetectionRange);
     }
-
 
     public void AnimationStartTrigger() => stateMachine.currentState.AnimationTrigger();
     public void AnimationFinishTrigger() => stateMachine.currentState.AnimationFinishTrigger();
@@ -93,6 +93,10 @@ public class Enemy: LivingEntity {
 
     public override void GotHit(AttackType atk) {
         base.GotHit(atk);
+        SetVelocityX(CalculateKnockback(atk));
+    }
+
+    public override void GotBlocked(AttackType atk) {
         SetVelocityX(CalculateKnockback(atk));
     }
 

@@ -20,7 +20,7 @@ public class AnimationController: MonoBehaviour {
     public bool showTrail;
 
     private void Update() {
-        if (showTrail && !vfx.isPlaying) vfx.Play();
+        if (showTrail && vfx && !vfx.isPlaying) vfx.Play();
     }
 
 }

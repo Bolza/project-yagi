@@ -4,16 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+[RequireComponent(typeof(Collider2D))]
 public class HittableEntity: MonoBehaviour {
     [SerializeField] protected SO_GameController gameController;
-
     public event Action onGotHit;
     public event Action onGotBlocked;
     public Hitpoint hitpoint { get; private set; }
+    public Collider2D Collider { get; private set; }
     public AttackType lastHit { get; private set; }
 
     public virtual void Start() {
         hitpoint = GetComponentInChildren<Hitpoint>();
+        Collider = GetComponent<CapsuleCollider2D>();
+
         if (!hitpoint) Debug.LogError("Hitpoint required in children");
     }
 
@@ -39,4 +42,5 @@ public class HittableEntity: MonoBehaviour {
     public virtual AttackType GenerateAttack() {
         return new AttackType(this, 0, 0);
     }
+
 }

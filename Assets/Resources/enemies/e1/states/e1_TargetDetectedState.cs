@@ -38,7 +38,8 @@ public class e1_TargetDetectedState: TargetDetectedState {
         else if (!targetDetected) {
             stateMachine.ChangeState(enemy.IdleState);
         }
-        else {
+        else if (targetDetected && Time.time >= startTime + baseData.targetDetectionTime) {
+            //Debug.Log("Backward: " + targetDetectedBackward + ", Forward: " + targetDetectedForward + ", distance: " + distanceFromTarget);
             if (targetDetectedBackward) entity.Flip();
             if (distanceFromTarget > baseData.attackRange) {
                 stateMachine.ChangeState(enemy.PursuitState);

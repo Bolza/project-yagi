@@ -36,7 +36,8 @@ public class e1_AttackState: AttackState {
         }
         else if (duringAnimation) {
             if (gotBlocked) {
-                stateMachine.ChangeState(enemy.HitState);
+                //stateMachine.ChangeState(enemy.HitState);
+                stateMachine.ChangeState(enemy.IdleState);
             }
             else if (duringHitboxTime && enemy.hitpoint.currentHit) {
                 enemy.HitCurrentTarget(enemy.GenerateAttack());

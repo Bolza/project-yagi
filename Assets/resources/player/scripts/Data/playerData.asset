@@ -27,13 +27,12 @@ MonoBehaviour:
     m_Bits: 512
   walkSpeed: 3
   runSpeed: 5
-  gravity: -25
   rollSpeed: 10
   rollDistance: 5
-  jumpForce: 3
-  jumpMaxY: 0
+  jumpForce: 1
+  jumpMaxY: -1
   airMovementSpeed: 3
-  jumpMaxX: 0
+  jumpMaxX: -1
   jumpsAmount: 1
   coyoteTime: 0.05
   wallJumpForce: 10

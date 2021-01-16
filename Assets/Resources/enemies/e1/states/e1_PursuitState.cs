@@ -34,7 +34,7 @@ public class e1_PursuitState: PursuitState {
         if (gotHit) {
             stateMachine.ChangeState(enemy.HitState);
         }
-        else if (!targetDetected) {
+        else if (!targetDetected || targetDetectedBackward) {
             stateMachine.ChangeState(enemy.IdleState);
         }
         else {

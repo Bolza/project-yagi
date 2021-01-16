@@ -71,7 +71,6 @@ public class CharacterController2D: MonoBehaviour {
         }
     }
 
-    [SerializeField] private SO_GameController gameController;
     private Player player;
     private LayerMask platformMask;
 
@@ -176,7 +175,7 @@ public class CharacterController2D: MonoBehaviour {
         transform = GetComponent<Transform>();
         boxCollider = GetComponent<CapsuleCollider2D>();
         rigidBody2D = GetComponent<Rigidbody2D>();
-        platformMask = gameController.groundLayer;
+        platformMask = player.groundLayer;
         // add our one-way platforms to our normal platform mask so that we can land on them from above
         platformMask |= oneWayPlatformMask;
         skinWidth = player.skinWidth;
