@@ -12,8 +12,8 @@ public class PlayerInAirState: PlayerState {
 
     public override void Enter() {
         base.Enter();
-        maxYMovement = baseData.jumpMaxY;
-        maxXMovement = baseData.jumpMaxX;
+        //maxYMovement = baseData.jumpForce;
+        //maxXMovement = baseData.airMovementSpeed;
     }
 
     public override void Exit() {
@@ -22,14 +22,16 @@ public class PlayerInAirState: PlayerState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
+        //Debug.Log(startPosition.y + "/" + player.transform.position.y);
         // check oldVelocity to avoid LandState from programmatic Y adjustements
         if (isGrounded && player.CurrentVelocity.y < -baseData.landAnimationSpeedLimit) {
             stateMachine.ChangeState(player.LandState);
         }
-        else if (isGrounded && player.CurrentVelocity.y < 0) {
+        else if (isGrounded && player.CurrentVelocity.y <= 0) {
             stateMachine.ChangeState(player.IdleState);
         }
         else if (isLedged && inputX == player.FacingDirection) {
+            Debug.Log("Player is Ledged");
             player.FreezeMovement();
             stateMachine.ChangeState(player.LedgeClimbState);
         }
@@ -44,15 +46,18 @@ public class PlayerInAirState: PlayerState {
             }
         }
         else if (isWalled && inputX == player.FacingDirection && baseData.enableWallGrab) {
+            Debug.Log("Player is WallGrab");
             stateMachine.ChangeState(player.WallGrabState);
         }
         else if (isWalled && inputX == player.FacingDirection && player.CurrentVelocity.y <= 0) {
-
+            Debug.Log("Player is i don't know");
         }
         else {
             player.CheckIfShouldFlip(inputX);
 
-            if (canMoveX()) player.SetVelocityX(baseData.airMovementSpeed * inputX);
+            if (canMoveX()) {
+                player.SetVelocityX(baseData.airMovementSpeed * inputX);
+            }
 
             if (!canMoveY() && player.CurrentVelocity.y > 0) {
                 player.SetVelocityY(0);

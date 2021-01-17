@@ -11,9 +11,7 @@ public class PlayerData: LivingEntityData {
 
     [Header("Jump State")]
     public float jumpForce = 10f;
-    public float jumpMaxY = 3f;
     public float airMovementSpeed = 4f;
-    public float jumpMaxX = 3f;
     public int jumpsAmount = 1;
     public float coyoteTime = 0.05f;
     public float wallJumpForce = 10f;

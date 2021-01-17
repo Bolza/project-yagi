@@ -10,9 +10,6 @@ using UnityEngine.SceneManagement;
 public class SO_GameController: ScriptableObject {
     public SO_Stylesheet Stylesheet;
     public GameObject BlockSparks;
-    public LayerMask groundLayer;
-    public LayerMask playerLayer;
-    public LayerMask enemyLayer;
 
     public event Action onPlayerBlocked;
     public event Action onPlayerDodged;

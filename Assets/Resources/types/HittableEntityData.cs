@@ -10,7 +10,8 @@ public class HittableEntityData: ScriptableObject {
     public float attackKnockback = 10;
     public float knockbackAttenuation = 0;
 
-    public LayerMask playerMask;
+    public LayerMask ownMask;
+    public LayerMask friendlyMask;
     public LayerMask enemyMask;
     public LayerMask groundMask;
 }

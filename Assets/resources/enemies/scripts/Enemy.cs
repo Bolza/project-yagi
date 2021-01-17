@@ -69,13 +69,13 @@ public class Enemy: LivingEntity {
 
     public virtual bool CheckWall() {
         Vector2 side = new Vector2(Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection), Collider.bounds.center.y);
-        bool hittin = Physics2D.Raycast(side, Vector2.right * FacingDirection, baseData.wallDetectionRange, baseData.groundMask);
+        bool hittin = Physics2D.Raycast(side, Vector2.right * FacingDirection, baseData.wallDetectionRange, getGroundMask());
         if (debugMode) Debug.DrawRay(side, Vector2.right * FacingDirection, hittin ? Color.red : Color.green);
         return hittin;
     }
 
     public virtual Collider2D CheckTarget() {
-        Collider2D hittin = Physics2D.OverlapCircle(transform.position, baseData.targetDetectionRange, gameController.playerLayer);
+        Collider2D hittin = Physics2D.OverlapCircle(transform.position, baseData.targetDetectionRange, baseData.enemyMask);
         return hittin;
     }
 
@@ -105,6 +105,10 @@ public class Enemy: LivingEntity {
     }
 
     //override HitCurrentTGt to pass dmg?
+
+    public override LayerMask getGroundMask() {
+        return baseData.groundMask;
+    }
 
     #endregion
 

@@ -28,6 +28,7 @@ MonoBehaviour:
   walkSpeed: 3
   runSpeed: 5
   wallDetectionRange: 1
+  patrolRange: 6
   minIdleTime: 1
   maxIdleTime: 5
   targetDetectionRange: 5

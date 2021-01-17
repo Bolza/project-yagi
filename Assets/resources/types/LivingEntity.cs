@@ -23,12 +23,12 @@ public class LivingEntity: HittableEntity {
     public bool headIsFree { get; protected set; }
     [SerializeField] private FacingDirections animationIsFacing = new FacingDirections();
     [SerializeField] private FacingDirections startDirection = new FacingDirections();
-    [SerializeField] public LayerMask groundLayer;
 
     private Vector2 gizmoCenter;
     private float slopeDownAngle;
     private float slopeDownAngleOld;
     private Vector2 slopeNormalPerp;
+
 
     public override void Start() {
         base.Start();
@@ -45,17 +45,14 @@ public class LivingEntity: HittableEntity {
         isLedged = headIsFree && ledgeRay;
     }
 
-    private Vector2 getRayDistance() {
-        return Vector2.right * FacingDirection * skinWidth * 2;
-    }
-
     public bool CheckIsWalled() {
         Vector2 side = new Vector2(
             Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection) - (skinWidth * FacingDirection),
             Collider.bounds.center.y);
-        bool hittin = Physics2D.Raycast(side, getRayDistance(), groundLayer);
+        gizmoCenter = side;
 
-        if (debugMode) Debug.DrawRay(side, getRayDistance(), hittin ? Color.red : Color.green);
+        RaycastHit2D hittin = Physics2D.Raycast(side, Vector2.right * FacingDirection, skinWidth * 2, getGroundMask());
+        Debug.DrawRay(side, Vector2.right * FacingDirection * skinWidth * 2, hittin ? Color.red : Color.green);
         return hittin;
     }
 
@@ -66,14 +63,13 @@ public class LivingEntity: HittableEntity {
 
     public bool CheckIsGrounded() {
         Vector2 side = new Vector2(Collider.bounds.center.x, Collider.bounds.center.y - Collider.bounds.extents.y);
-        bool hittin = Physics2D.OverlapCircle(side, skinWidth, groundLayer);
-        gizmoCenter = side;
+        bool hittin = Physics2D.OverlapCircle(side, skinWidth, getGroundMask());
         return hittin;
     }
 
     public bool CheckSlope() {
         Vector2 bottomPoint = new Vector2(Collider.bounds.center.x, Collider.bounds.center.y - Collider.bounds.extents.y);
-        RaycastHit2D down = Physics2D.Raycast(bottomPoint, Vector2.down, skinWidth, groundLayer);
+        RaycastHit2D down = Physics2D.Raycast(bottomPoint, Vector2.down, skinWidth, getGroundMask());
         if (down) {
             slopeNormalPerp = Vector2.Perpendicular(down.normal).normalized;
             slopeDownAngle = Vector2.Angle(down.normal, Vector2.up);
@@ -93,9 +89,9 @@ public class LivingEntity: HittableEntity {
         Vector2 side = new Vector2(
             Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection) - (skinWidth * FacingDirection),
             Collider.bounds.center.y + (Collider.bounds.extents.y / 3 * 2));
-        bool hittin = Physics2D.Raycast(side, getRayDistance(), groundLayer);
+        bool hittin = Physics2D.Raycast(side, Vector2.right * FacingDirection, skinWidth * 2, getGroundMask(), getGroundMask());
 
-        if (debugMode) Debug.DrawRay(side, getRayDistance(), hittin ? Color.red : Color.green);
+        if (debugMode) Debug.DrawRay(side, Vector2.right * FacingDirection * skinWidth * 2, hittin ? Color.red : Color.green);
         return hittin;
     }
 
@@ -103,14 +99,19 @@ public class LivingEntity: HittableEntity {
         Vector2 side = new Vector2(
             Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection) - (skinWidth * FacingDirection),
             Collider.bounds.center.y + Collider.bounds.extents.y);
-        bool hittin = Physics2D.Raycast(side, getRayDistance(), groundLayer);
+        bool hittin = Physics2D.Raycast(side, Vector2.right * FacingDirection, skinWidth * 2, getGroundMask());
 
-        if (debugMode) Debug.DrawRay(side, getRayDistance(), hittin ? Color.red : Color.green);
+        if (debugMode) Debug.DrawRay(side, Vector2.right * FacingDirection * skinWidth * 2, hittin ? Color.red : Color.green);
         return hittin;
     }
 
     public void Flip() {
         FacingDirection *= -1;
         transform.Rotate(0f, 180f, 0f);
+    }
+
+    public virtual LayerMask getGroundMask() {
+        Debug.Log("Need to override in your class");
+        return LayerMask.GetMask("Ground");
     }
 }

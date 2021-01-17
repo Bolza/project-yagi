@@ -211,6 +211,9 @@ public class Player: LivingEntity {
         }
     }
 
+    public override LayerMask getGroundMask() {
+        return baseData.groundMask;
+    }
 
 
     #endregion

@@ -175,7 +175,7 @@ public class CharacterController2D: MonoBehaviour {
         transform = GetComponent<Transform>();
         boxCollider = GetComponent<CapsuleCollider2D>();
         rigidBody2D = GetComponent<Rigidbody2D>();
-        platformMask = player.groundLayer;
+        platformMask = player.getGroundMask();
         // add our one-way platforms to our normal platform mask so that we can land on them from above
         platformMask |= oneWayPlatformMask;
         skinWidth = player.skinWidth;
