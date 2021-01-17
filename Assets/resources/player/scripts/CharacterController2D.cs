@@ -72,7 +72,6 @@ public class CharacterController2D: MonoBehaviour {
     }
 
     private Player player;
-    private LayerMask platformMask;
 
 
     /// <summary>
@@ -175,9 +174,9 @@ public class CharacterController2D: MonoBehaviour {
         transform = GetComponent<Transform>();
         boxCollider = GetComponent<CapsuleCollider2D>();
         rigidBody2D = GetComponent<Rigidbody2D>();
-        platformMask = player.getGroundMask();
+
         // add our one-way platforms to our normal platform mask so that we can land on them from above
-        platformMask |= oneWayPlatformMask;
+        //platformMask |= oneWayPlatformMask;
         skinWidth = player.skinWidth;
 
         // we want to set our CC2D to ignore all collision layers except what is in our triggerMask
@@ -349,9 +348,9 @@ public class CharacterController2D: MonoBehaviour {
             // if we are grounded we will include oneWayPlatforms only on the first ray (the bottom one). this will allow us to
             // walk up sloped oneWayPlatforms
             if (i == 0 && collisionState.wasGroundedLastFrame)
-                _raycastHit = Physics2D.Raycast(ray, rayDirection, rayDistance, platformMask);
+                _raycastHit = Physics2D.Raycast(ray, rayDirection, rayDistance, player.getGroundMask());
             else
-                _raycastHit = Physics2D.Raycast(ray, rayDirection, rayDistance, platformMask & ~oneWayPlatformMask);
+                _raycastHit = Physics2D.Raycast(ray, rayDirection, rayDistance, player.getGroundMask() & ~oneWayPlatformMask);
 
 
             if (_raycastHit) {
@@ -425,9 +424,9 @@ public class CharacterController2D: MonoBehaviour {
                 var ray = isGoingRight ? _raycastOrigins.bottomRight : _raycastOrigins.bottomLeft;
                 RaycastHit2D raycastHit;
                 if (collisionState.wasGroundedLastFrame)
-                    raycastHit = Physics2D.Raycast(ray, deltaMovement.normalized, deltaMovement.magnitude, platformMask);
+                    raycastHit = Physics2D.Raycast(ray, deltaMovement.normalized, deltaMovement.magnitude, player.getGroundMask());
                 else
-                    raycastHit = Physics2D.Raycast(ray, deltaMovement.normalized, deltaMovement.magnitude, platformMask & ~oneWayPlatformMask);
+                    raycastHit = Physics2D.Raycast(ray, deltaMovement.normalized, deltaMovement.magnitude, player.getGroundMask() & ~oneWayPlatformMask);
 
                 if (raycastHit) {
                     // we crossed an edge when using Pythagoras calculation, so we set the actual delta movement to the ray hit location
@@ -462,7 +461,7 @@ public class CharacterController2D: MonoBehaviour {
         initialRayOrigin.x += deltaMovement.x;
 
         // if we are moving up, we should ignore the layers in oneWayPlatformMask
-        var mask = platformMask;
+        var mask = player.getGroundMask();
         if ((isGoingUp && !collisionState.wasGroundedLastFrame) || ignoreOneWayPlatformsThisFrame)
             mask &= ~oneWayPlatformMask;
 
@@ -506,7 +505,7 @@ public class CharacterController2D: MonoBehaviour {
         Vector2 rayDirection = Vector2.down;
         Vector2 slopeRay = new Vector2(centerOfCollider, _raycastOrigins.bottomLeft.y - skinWidth);
         //Debug.DrawRay(slopeRay, rayDirection * distance, Color.yellow);
-        return Physics2D.Raycast(slopeRay, rayDirection, distance, platformMask);
+        return Physics2D.Raycast(slopeRay, rayDirection, distance, player.getGroundMask());
     }
 
     /// <summary>

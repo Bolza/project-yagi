@@ -212,7 +212,10 @@ public class Player: LivingEntity {
     }
 
     public override LayerMask getGroundMask() {
-        return baseData.groundMask;
+        if (RollState != null && RollState.duringHitboxTime) {
+            return baseData.groundMask;
+        }
+        return baseData.groundMask | baseData.enemyMask;
     }
 
 
