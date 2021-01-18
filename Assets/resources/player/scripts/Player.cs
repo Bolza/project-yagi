@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInputHandler))]
 [RequireComponent(typeof(Rigidbody2D))]
 
-public class Player: LivingEntity {
+public class Player: ActorEntity {
     #region States
     public PlayerInputHandler InputHandler { get; private set; }
     public PlayerStateMachine StateMachine { get; private set; }
@@ -35,16 +35,15 @@ public class Player: LivingEntity {
     public CharacterController2D CC { get; private set; }
     public MeshColorer3D meshColorer { get; private set; }
 
-
-    public Vector2 CurrentVelocity;
-    private bool freezeMovement;
-
     [SerializeField] bool ColorMe;
+    public Vector2 CurrentVelocity;
 
+    private bool freezeMovement;
     private GameObject weaponpoint;
     private CapsuleCollider2D BoxCollider;
     private Vector2 BoxDefaultSize;
-    [SerializeField] private float groundAttrition;
+    [SerializeField] protected SO_GameController gameController;
+    [SerializeField] public PlayerEventsChannel playerEvents;
     [SerializeField] private Transform leftFoot;
     [SerializeField] private Transform rightFoot;
     [SerializeField] private Transform head;
@@ -179,6 +178,7 @@ public class Player: LivingEntity {
 
     #region Events
 
+
     public void AnimationStartTrigger() => StateMachine.CurrentState.AnimationTrigger();
     public void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
@@ -192,20 +192,21 @@ public class Player: LivingEntity {
 
     public override void GotHit(AttackType atk) {
         if (BlockState.duringHitboxTime) {
+            combatEvents.EntityBlock(this, atk); // block is different than GOT blocked
+            playerEvents.PlayerBlocked(this, atk);
             HittableEntity attacker = atk.owner;
             atk.setOwner(this);
             attacker.GotBlocked(atk);
-            gameController.NotifyPlayerBlock(this);
             Vector2 pos = new Vector2(weaponpoint.transform.position.x, weaponpoint.transform.position.y);
-            Instantiate(gameController.BlockSparks, pos, Quaternion.identity); ;
+            Instantiate(gameController.BlockSparks, pos, Quaternion.identity); // last use of gameController in player
         }
         else if (RollState.duringHitboxTime) {
-            gameController.NotifyPlayerDodged(this);
+            combatEvents.EntityDodge(this, atk);
         }
         else {
-            gameController.NotifyPlayerHit();
             SetVelocityX(CalculateKnockback(atk));
-
+            combatEvents.EntityTookDamage(this, atk);
+            playerEvents.PlayerGotHit(this, atk);
             //meshColorer.SetTintColor(gameController.Stylesheet.playerHitOverlay);
             base.GotHit(atk);
         }

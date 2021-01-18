@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum FacingDirections {
+public enum FacingDirections
+{
     right = 1,
     left = -1,
 };
 
 
-public class LivingEntity: HittableEntity {
-
+public class ActorEntity : HittableEntity
+{
     public float skinWidth = 0.1f;
     public bool debugMode;
     public int FacingDirection { get; private set; }
@@ -30,14 +31,16 @@ public class LivingEntity: HittableEntity {
     private Vector2 slopeNormalPerp;
 
 
-    public override void Start() {
+    public override void Start()
+    {
         base.Start();
 
         FacingDirection = (int)animationIsFacing;
         if (startDirection != animationIsFacing) Flip();
     }
 
-    protected virtual void Update() {
+    protected virtual void Update()
+    {
         isGrounded = CheckIsGrounded();
         isWalled = CheckIsWalled();
         bool ledgeRay = CheckIsTouchingLedge();
@@ -45,7 +48,8 @@ public class LivingEntity: HittableEntity {
         isLedged = headIsFree && ledgeRay;
     }
 
-    public bool CheckIsWalled() {
+    public bool CheckIsWalled()
+    {
         Vector2 side = new Vector2(
             Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection) - (skinWidth * FacingDirection),
             Collider.bounds.center.y);
@@ -61,16 +65,19 @@ public class LivingEntity: HittableEntity {
     //}
 
 
-    public bool CheckIsGrounded() {
+    public bool CheckIsGrounded()
+    {
         Vector2 side = new Vector2(Collider.bounds.center.x, Collider.bounds.center.y - Collider.bounds.extents.y);
         bool hittin = Physics2D.OverlapCircle(side, skinWidth, getGroundMask());
         return hittin;
     }
 
-    public bool CheckSlope() {
+    public bool CheckSlope()
+    {
         Vector2 bottomPoint = new Vector2(Collider.bounds.center.x, Collider.bounds.center.y - Collider.bounds.extents.y);
         RaycastHit2D down = Physics2D.Raycast(bottomPoint, Vector2.down, skinWidth, getGroundMask());
-        if (down) {
+        if (down)
+        {
             slopeNormalPerp = Vector2.Perpendicular(down.normal).normalized;
             slopeDownAngle = Vector2.Angle(down.normal, Vector2.up);
             if (slopeDownAngle != slopeDownAngleOld) isOnSlope = true;
@@ -79,13 +86,15 @@ public class LivingEntity: HittableEntity {
         return down;
     }
 
-    public bool CheckIfShouldFlip(float xInput) {
+    public bool CheckIfShouldFlip(float xInput)
+    {
         bool should = xInput != 0 && Math.Sign(xInput) != Math.Sign(FacingDirection);
         if (should) Flip();
         return should;
     }
 
-    public bool CheckIsTouchingLedge() {
+    public bool CheckIsTouchingLedge()
+    {
         Vector2 side = new Vector2(
             Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection) - (skinWidth * FacingDirection),
             Collider.bounds.center.y + (Collider.bounds.extents.y / 3 * 2));
@@ -95,7 +104,8 @@ public class LivingEntity: HittableEntity {
         return hittin;
     }
 
-    public bool CheckHeadIsWalled() {
+    public bool CheckHeadIsWalled()
+    {
         Vector2 side = new Vector2(
             Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection) - (skinWidth * FacingDirection),
             Collider.bounds.center.y + Collider.bounds.extents.y);
@@ -105,12 +115,14 @@ public class LivingEntity: HittableEntity {
         return hittin;
     }
 
-    public void Flip() {
+    public void Flip()
+    {
         FacingDirection *= -1;
         transform.Rotate(0f, 180f, 0f);
     }
 
-    public virtual LayerMask getGroundMask() {
+    public virtual LayerMask getGroundMask()
+    {
         Debug.Log("Need to override in your class");
         return LayerMask.GetMask("Ground");
     }

@@ -6,12 +6,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class HittableEntity: MonoBehaviour {
-    [SerializeField] protected SO_GameController gameController;
+    [SerializeField] public CombatEventsChannel combatEvents;
     public event Action onGotHit;
     public event Action onGotBlocked;
     public Hitpoint hitpoint { get; private set; }
     public Collider2D Collider { get; private set; }
     public AttackType lastHit { get; private set; }
+
 
     public virtual void Start() {
         hitpoint = GetComponentInChildren<Hitpoint>();
@@ -20,6 +21,7 @@ public class HittableEntity: MonoBehaviour {
         if (!hitpoint) Debug.LogError("Hitpoint required in children");
     }
 
+    //this should handle multiple objects hit with the same attack
     public virtual void HitCurrentTarget(AttackType atk) {
         HittableEntity tgt = hitpoint.currentHit.gameObject.GetComponent<HittableEntity>();
         tgt.GotHit(atk);

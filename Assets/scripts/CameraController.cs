@@ -11,7 +11,7 @@ public class CameraController: MonoBehaviour {
 
     private float shakeTime;
 
-    [SerializeField] private SO_GameController gameController;
+    [SerializeField] private PlayerEventsChannel playerEvents;
 
     private void Start() {
         cam = GetComponent<CinemachineVirtualCamera>();
@@ -19,7 +19,7 @@ public class CameraController: MonoBehaviour {
     }
 
     void Awake() {
-        gameController.onPlayerBlocked += onPlayerBlocked;
+        playerEvents.OnPlayerBlocked += onPlayerBlocked;
     }
 
     private void Update() {
@@ -33,7 +33,7 @@ public class CameraController: MonoBehaviour {
 
     }
 
-    private void onPlayerBlocked() {
+    private void onPlayerBlocked(Player player, AttackType atk) {
         shakeTime = 1f;
     }
 

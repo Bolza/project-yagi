@@ -11,26 +11,15 @@ public class SO_GameController: ScriptableObject {
     public SO_Stylesheet Stylesheet;
     public GameObject BlockSparks;
 
-    public event Action onPlayerBlocked;
-    public event Action onPlayerDodged;
-    public event Action onPlayerHit;
-
+    [SerializeField] private PlayerEventsChannel playerEvents;
 
     private void Awake() {
+        playerEvents.OnPlayerBlocked += onPlayerBlock;
     }
 
-    public void NotifyPlayerBlock(Player player) {
-        onPlayerBlocked?.Invoke();
+    public void onPlayerBlock(HittableEntity owner, AttackType atk) {
         Time.timeScale = 0.5f;
         FunctionTimer.Create(ResetTimescale, 0.4f);
-    }
-
-    public void NotifyPlayerDodged(Player player) {
-        onPlayerDodged?.Invoke();
-    }
-
-    public void NotifyPlayerHit() {
-        onPlayerHit?.Invoke();
     }
 
     public void ResetTimescale() {

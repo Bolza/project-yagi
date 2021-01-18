@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Enemy: LivingEntity {
+public class Enemy: ActorEntity {
     public Rigidbody2D Body { get; private set; }
     public Animator Anim { get; private set; }
     public EnemyAnimationController ATSM { get; private set; }
@@ -93,6 +93,7 @@ public class Enemy: LivingEntity {
 
     public override void GotHit(AttackType atk) {
         base.GotHit(atk);
+        combatEvents.EntityTookDamage(this, atk);
         SetVelocityX(CalculateKnockback(atk));
     }
 
