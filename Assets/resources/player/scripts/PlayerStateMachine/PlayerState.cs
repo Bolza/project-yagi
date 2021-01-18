@@ -24,6 +24,8 @@ public class PlayerState {
     protected Vector2 startPosition;
     protected float maxYMovement;
     protected float maxXMovement;
+    private float animationMovementX;
+    private float animationMovementY;
 
     protected bool isExitingState { get; private set; }
 
@@ -38,6 +40,8 @@ public class PlayerState {
     public virtual void Enter() {
         maxXMovement = -1;
         maxYMovement = -1;
+        animationMovementX = -1;
+        animationMovementY = -1;
         startPosition = player.transform.position;
         isExitingState = false;
         duringAnimation = true;
@@ -77,6 +81,7 @@ public class PlayerState {
         isWalled = player.isWalled;
         isLedged = player.isLedged;
         headIsFree = !isWalled;
+
         if (isLedged) {
             player.LedgeClimbState.setDetectedPosition(player.transform.position);
         }
@@ -88,6 +93,16 @@ public class PlayerState {
     protected virtual bool canMoveY() =>
         maxYMovement < 0 || Mathf.Abs(startPosition.y - player.transform.position.y) < maxYMovement;
 
+    protected virtual bool hasRemainingAnimationMovementX() =>
+        animationMovementX > 0 && Mathf.Abs(startPosition.x - player.transform.position.x) < animationMovementX;
+
+    protected virtual bool hasRemainingAnimationMovementY() =>
+        animationMovementY > 0 && Mathf.Abs(startPosition.y - player.transform.position.y) < animationMovementY;
+
+    protected virtual void setAnimationMovement(float x, float y) {
+        animationMovementX = x;
+        animationMovementY = y;
+    }
 
     public virtual void AnimationTrigger() {
         duringAnimation = true;
@@ -103,4 +118,6 @@ public class PlayerState {
     public virtual void OnGotHit() {
         gotHit = true;
     }
+
+
 }

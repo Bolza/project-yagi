@@ -44,5 +44,5 @@ MonoBehaviour:
   wallSlideVelocity: 3
   wallGrabDuration: 0.3
   canJumpFromWall: 1
-  attackMotionX: 2
+  attackMotionX: 1
   blockKnockbackAttenuation: 0

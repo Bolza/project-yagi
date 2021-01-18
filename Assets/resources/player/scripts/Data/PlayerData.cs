@@ -6,8 +6,8 @@ using UnityEngine;
 public class PlayerData: LivingEntityData {
 
     [Header("Move State")]
-    public float rollSpeed = 4f;
-    public float rollDistance = 3f;
+    public float rollkMotionSpaceX = 3f;
+    public float rollMotionSpeedX = 6f;
 
     [Header("Jump State")]
     public float jumpForce = 10f;
@@ -26,7 +26,8 @@ public class PlayerData: LivingEntityData {
     public bool canJumpFromWall = true;
 
     [Header("Attack State")]
-    public float attackMotionX = 2f;
+    public float attackMotionSpaceX = 1f;
+    public float attackMotionSpeedX = 2f;
     public float blockKnockbackAttenuation = 2f;
 
 }

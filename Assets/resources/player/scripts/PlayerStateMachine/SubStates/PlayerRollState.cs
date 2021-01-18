@@ -8,7 +8,7 @@ public class PlayerRollState: PlayerAbilityState {
 
     public override void Enter() {
         base.Enter();
-        maxXMovement = baseData.rollDistance;
+        setAnimationMovement(baseData.rollkMotionSpaceX, 0);
     }
 
     public override void LogicUpdate() {
@@ -17,8 +17,8 @@ public class PlayerRollState: PlayerAbilityState {
             Debug.LogError("Not grounded during roll");
         }
         if (duringAnimation) {
-            if (duringHitboxTime && canMoveX()) {
-                player.SetVelocityX(baseData.rollSpeed * player.FacingDirection);
+            if (duringHitboxTime) {
+                player.SetVelocityX(baseData.rollMotionSpeedX * player.FacingDirection);
             }
         }
         else {

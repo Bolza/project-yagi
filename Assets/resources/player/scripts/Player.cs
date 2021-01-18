@@ -35,9 +35,8 @@ public class Player: ActorEntity {
     public CharacterController2D CC { get; private set; }
     public MeshColorer3D meshColorer { get; private set; }
 
-    [SerializeField] bool ColorMe;
-    public Vector2 CurrentVelocity;
 
+    public Vector2 CurrentVelocity;
     private bool freezeMovement;
     private GameObject weaponpoint;
     private CapsuleCollider2D BoxCollider;
@@ -120,7 +119,12 @@ public class Player: ActorEntity {
         if (freezeMovement) return;
         float gravity = CheckIsGrounded() ? 0 : Physics2D.gravity.y;
         float yPlusGravity = CurrentVelocity.y + gravity * Time.deltaTime;
+
+        //Friction
         CurrentVelocity.x = Math.Sign(CurrentVelocity.x) * ((Math.Abs(CurrentVelocity.x)) - Math.Abs(Physics2D.gravity.y) * Time.deltaTime);
+        //Snap to 0
+        if (Math.Abs(CurrentVelocity.x) < 0.1) CurrentVelocity.x = 0;
+
         CurrentVelocity.Set(CurrentVelocity.x, yPlusGravity);
         CC.move(CurrentVelocity * Time.deltaTime);
     }

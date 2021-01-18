@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0170111bb1e0242d1bcd7f77746f17ea, type: 3}
-  m_Name: New Combat Events Channel
+  m_Name: Combat Events Channel
   m_EditorClassIdentifier: 
