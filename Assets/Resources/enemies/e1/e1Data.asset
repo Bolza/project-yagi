@@ -16,9 +16,12 @@ MonoBehaviour:
   attackDamage: 10
   attackKnockback: 5
   knockbackAttenuation: 0
-  playerMask:
+  ownMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 4096
+  friendlyMask:
+    serializedVersion: 2
+    m_Bits: 0
   enemyMask:
     serializedVersion: 2
     m_Bits: 2048
