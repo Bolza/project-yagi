@@ -32,5 +32,6 @@ public class Initializer: MonoBehaviour {
         }
         //Raise the event to load the main menu
         sceneChannel.RequestLoading(MenuToLoad, showLoadScreen);
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
     }
 }

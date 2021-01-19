@@ -7,20 +7,19 @@ using UnityEngine.SceneManagement;
 /// This class manages the scene loading and unloading.
 /// </summary>
 public class SceneLoader: MonoBehaviour {
-    [Header("Persistent Manager Scene")]
-    [SerializeField] private ManagerSceneSO persistentManagersScene = default;
-
-    [Header("Gameplay Scene")]
+    [Header("Persistent Scenes")]
+    [SerializeField] private ManagerSceneSO managerScene = default;
     [SerializeField] private ManagerSceneSO gameplayScene = default;
 
     [Header("Load Events")]
-
     [SerializeField] private SceneManagementEventsChannel eventsChannel = default;
 
     private List<AsyncOperation> scenesToLoadAsyncOperations = new List<AsyncOperation>();
-    private List<Scene> scenesToUnload = new List<Scene>();
+    private List<GameSceneSO> scenesToUnload = new List<GameSceneSO>();
+    private List<GameSceneSO> loadedScenes = new List<GameSceneSO>();
     private GameSceneSO activeScene; // The scene we want to set as active (for lighting/skybox)
-    private List<GameSceneSO> persistentScenes = new List<GameSceneSO>(); //Scenes to keep loaded when a load event is raised
+    //private List<GameSceneSO> persistentScenes = new List<GameSceneSO>(); //Scenes to keep loaded when a load event is raised
+    //private List<Scene> scenesToUnload = new List<Scene>();
 
     private void OnEnable() {
         if (eventsChannel != null) {
@@ -40,39 +39,40 @@ public class SceneLoader: MonoBehaviour {
     /// <param name="locationsToLoad"></param>
     /// <param name="showLoadingScreen"></param>
     private void LoadLocation(GameSceneSO[] sceneToLoad, bool showLoadingScreen) {
-        bool hasLocation = GlobalUtils.GetLocationScene(sceneToLoad) != null;
-        if (hasLocation) {
-            //When loading a location, we want to keep the persistent managers and gameplay scenes loaded
-            persistentScenes.Add(gameplayScene);
+        Debug.Log("sceneToLoad " + sceneToLoad);
+
+        List<GameSceneSO> tmpScenesToLoad = new List<GameSceneSO>();
+        GameSceneSO locationScene = GlobalUtils.GetLocationScene(sceneToLoad);
+        bool hasLocation = locationScene != null;
+
+        UnloadScenes();
+
+        if (!loadedScenes.Exists(scene => scene.scenePath == gameplayScene.scenePath)) {
+            tmpScenesToLoad.Add(gameplayScene);
         }
-        persistentScenes.Add(persistentManagersScene);
-        AddScenesToUnload(persistentScenes);
-        LoadScenes(sceneToLoad, showLoadingScreen);
+        if (!loadedScenes.Exists(scene => scene.scenePath == locationScene.scenePath)) {
+            tmpScenesToLoad.Add(locationScene);
+            AddSceneToUnload(locationScene);
+        }
+
+        LoadScenes(tmpScenesToLoad, showLoadingScreen);
     }
 
-    private void LoadScenes(GameSceneSO[] scenesToLoad, bool showLoadingScreen) {
+    private void LoadScenes(List<GameSceneSO> scenesToLoad, bool showLoadingScreen) {
         //Take the first scene in the array as the scene we want to set active
 
         activeScene = GlobalUtils.GetLocationScene(scenesToLoad);
 
-        UnloadScenes();
 
         if (showLoadingScreen) {
             eventsChannel.ToggleLoadingScreen(true);
         }
 
         if (scenesToLoadAsyncOperations.Count == 0) {
-            for (int i = 0; i < scenesToLoad.Length; i++) {
+            for (int i = 0; i < scenesToLoad.Count; i++) {
+                loadedScenes.Add(scenesToLoad[i]);
                 string currentScenePath = scenesToLoad[i].scenePath;
                 scenesToLoadAsyncOperations.Add(SceneManager.LoadSceneAsync(currentScenePath, LoadSceneMode.Additive));
-            }
-        }
-
-        //Checks if any of the persistent scenes is not loaded yet and load it if unloaded
-        //This is especially useful when we go from main menu to first location
-        for (int i = 0; i < persistentScenes.Count; ++i) {
-            if (IsSceneLoaded(persistentScenes[i].scenePath) == false) {
-                scenesToLoadAsyncOperations.Add(SceneManager.LoadSceneAsync(persistentScenes[i].scenePath, LoadSceneMode.Additive));
             }
         }
         StartCoroutine(WaitForLoading(showLoadingScreen));
@@ -89,7 +89,6 @@ public class SceneLoader: MonoBehaviour {
                 else {
                     _loadingDone = true;
                     scenesToLoadAsyncOperations.Clear();
-                    persistentScenes.Clear();
                 }
             }
             yield return null;
@@ -115,34 +114,27 @@ public class SceneLoader: MonoBehaviour {
         eventsChannel.OnSceneReady(activeScene);
     }
 
-    private void AddScenesToUnload(List<GameSceneSO> persistentScenes) {
-        for (int i = 0; i < SceneManager.sceneCount; ++i) {
-            Scene scene = SceneManager.GetSceneAt(i);
-            string scenePath = scene.path;
-            for (int j = 0; j < persistentScenes.Count; ++j) {
-                if (scenePath != persistentScenes[j].scenePath) {
-                    //Check if we reached the last persistent scenes check
-                    if (j == persistentScenes.Count - 1) {
-                        //If the scene is not one of the persistent scenes, we add it to the scenes to unload
-                        scenesToUnload.Add(scene);
-                    }
-                }
-                else {
-                    //We move the next scene check as soon as we find that the scene is one of the persistent scenes
-                    break;
-                }
-            }
-        }
+
+    private void AddSceneToUnload(GameSceneSO scene) {
+        scenesToUnload.Add(scene);
     }
 
     private void UnloadScenes() {
-        if (scenesToUnload != null) {
-            for (int i = 0; i < scenesToUnload.Count; ++i) {
-                SceneManager.UnloadSceneAsync(scenesToUnload[i]);
+        if (scenesToUnload.Count <= 0) return;
+        Debug.Log(scenesToUnload);
+        for (int i = 0; i < SceneManager.sceneCount; ++i) {
+            Scene scene = SceneManager.GetSceneAt(i);
+            string scenePath = scene.path;
+            for (int j = 0; j < scenesToUnload.Count; ++j) {
+                if (scenePath == scenesToUnload[j].scenePath) {
+                    SceneManager.UnloadSceneAsync(scene);
+                    loadedScenes.Remove(scenesToUnload[j]);
+                }
             }
-            scenesToUnload.Clear();
         }
+        scenesToUnload.Clear();
     }
+
 
     /// <summary>
     /// This function checks if a scene is already loaded
