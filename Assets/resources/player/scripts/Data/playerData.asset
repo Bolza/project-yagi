@@ -30,8 +30,8 @@ MonoBehaviour:
     m_Bits: 512
   walkSpeed: 3
   runSpeed: 5
-  rollSpeed: 10
-  rollDistance: 5
+  rollkMotionSpaceX: 3
+  rollMotionSpeedX: 6
   jumpForce: 2
   airMovementSpeed: 3
   jumpsAmount: 1
@@ -44,5 +44,6 @@ MonoBehaviour:
   wallSlideVelocity: 3
   wallGrabDuration: 0.3
   canJumpFromWall: 1
-  attackMotionX: 1
+  attackMotionSpaceX: 0.2
+  attackMotionSpeedX: 3
   blockKnockbackAttenuation: 0
