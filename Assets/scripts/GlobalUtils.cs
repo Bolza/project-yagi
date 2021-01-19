@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public static class GlobalUtils {
 
+    public static LocationSceneSO GetLocationScene(GameSceneSO[] sceneToLoad) {
+        return System.Array.Find(sceneToLoad, (GameSceneSO scene) => scene.type == SceneType.Location) as LocationSceneSO;
+    }
 
     public static GameObject FindGameObjectChildWithTag(this GameObject parent, string tag) {
         Transform t = parent.transform;

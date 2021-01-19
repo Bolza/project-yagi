@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a34a5d5d1df744781be91eef576d5ead
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - persistentManagersScene: {instanceID: 0}
+  - gameplayScene: {instanceID: 0}
+  - eventsChannel: {fileID: 11400000, guid: 0337c9fd6b72b49268ad24f46ddd97c9, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
