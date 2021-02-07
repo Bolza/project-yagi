@@ -3,8 +3,8 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(Collider2D), typeof(Rigidbody2D))]
-public class CharacterController2D: MonoBehaviour {
+[RequireComponent(typeof(Collider2D))]
+public class CharacterController2D : MonoBehaviour {
     #region internal types
 
     struct CharacterRaycastOrigins {
@@ -24,17 +24,14 @@ public class CharacterController2D: MonoBehaviour {
         public bool movingDownSlope;
         public float slopeAngle;
 
-
         public bool hasCollision() {
             return below || right || left || above;
         }
-
 
         public void reset() {
             right = left = above = below = becameGroundedThisFrame = movingDownSlope = false;
             slopeAngle = 0f;
         }
-
 
         public override string ToString() {
             return string.Format("[CharacterCollisionState2D] r: {0}, l: {1}, a: {2}, b: {3}, movingDownSlope: {4}, angle: {5}, wasGroundedLastFrame: {6}, becameGroundedThisFrame: {7}",
@@ -44,14 +41,12 @@ public class CharacterController2D: MonoBehaviour {
 
     #endregion
 
-
     #region events, properties and fields
 
     public event Action<RaycastHit2D> onControllerCollidedEvent;
     public event Action<Collider2D> onTriggerEnterEvent;
     public event Action<Collider2D> onTriggerStayEvent;
     public event Action<Collider2D> onTriggerExitEvent;
-
 
     /// <summary>
     /// when true, one way platforms will be ignored when moving vertically for a single frame
@@ -72,7 +67,6 @@ public class CharacterController2D: MonoBehaviour {
     }
 
     private Player player;
-
 
     /// <summary>
     /// mask with all layers that trigger events should fire when intersected
@@ -110,13 +104,11 @@ public class CharacterController2D: MonoBehaviour {
     [Range(2, 20)]
     public int totalVerticalRays = 4;
 
-
     /// <summary>
     /// this is used to calculate the downward ray that is cast to check for slopes. We use the somewhat arbitrary value 75 degrees
     /// to calculate the length of the ray that checks for slopes.
     /// </summary>
     float _slopeLimitTangent = Mathf.Tan(75f * Mathf.Deg2Rad);
-
 
     [HideInInspector]
     [NonSerialized]
@@ -124,9 +116,6 @@ public class CharacterController2D: MonoBehaviour {
     [HideInInspector]
     [NonSerialized]
     public CapsuleCollider2D boxCollider;
-    [HideInInspector]
-    [NonSerialized]
-    public Rigidbody2D rigidBody2D;
 
     [HideInInspector]
     [NonSerialized]
@@ -140,7 +129,6 @@ public class CharacterController2D: MonoBehaviour {
     const float kSkinWidthFloatFudgeFactor = 0.001f;
 
     #endregion
-
 
     /// <summary>
     /// holder for our raycast origin corners (TR, TL, BR, BL)
@@ -166,14 +154,12 @@ public class CharacterController2D: MonoBehaviour {
     // the reason is so that if we reach the end of the slope we can make an adjustment to stay grounded
     bool _isGoingUpSlope = false;
 
-
     #region Monobehaviour
 
     void Awake() {
         player = GetComponent<Player>();
         transform = GetComponent<Transform>();
         boxCollider = GetComponent<CapsuleCollider2D>();
-        rigidBody2D = GetComponent<Rigidbody2D>();
 
         // add our one-way platforms to our normal platform mask so that we can land on them from above
         //platformMask |= oneWayPlatformMask;
@@ -187,32 +173,26 @@ public class CharacterController2D: MonoBehaviour {
         }
     }
 
-
     public void OnTriggerEnter2D(Collider2D col) {
         if (onTriggerEnterEvent != null)
             onTriggerEnterEvent(col);
     }
-
 
     public void OnTriggerStay2D(Collider2D col) {
         if (onTriggerStayEvent != null)
             onTriggerStayEvent(col);
     }
 
-
     public void OnTriggerExit2D(Collider2D col) {
         if (onTriggerExitEvent != null)
             onTriggerExitEvent(col);
     }
-
     #endregion
-
 
     [System.Diagnostics.Conditional("DEBUG_CC2D_RAYS")]
     void DrawRay(Vector3 start, Vector3 dir, Color color) {
-        if (false) Debug.DrawRay(start, dir, color);
+        // if (false) Debug.DrawRay(start, dir, color);
     }
-
 
     #region Public
 
@@ -231,7 +211,6 @@ public class CharacterController2D: MonoBehaviour {
         _isGoingUpSlope = false;
 
         primeRaycastOrigins();
-
 
         // first, we check for a slope below us before moving
         // only check slopes if we are going down and grounded
@@ -315,7 +294,6 @@ public class CharacterController2D: MonoBehaviour {
         var modifiedBounds = boxCollider.bounds;
         _raycastOrigins.center = modifiedBounds.center;
 
-
         modifiedBounds.Expand(-2f * _skinWidth);
         _raycastOrigins.topLeft = new Vector2(modifiedBounds.min.x, modifiedBounds.max.y);
         _raycastOrigins.bottomRight = new Vector2(modifiedBounds.max.x, modifiedBounds.min.y);
@@ -352,7 +330,6 @@ public class CharacterController2D: MonoBehaviour {
             else
                 _raycastHit = Physics2D.Raycast(ray, rayDirection, rayDistance, player.getGroundMask() & ~oneWayPlatformMask);
 
-
             if (_raycastHit) {
                 //Debug.DrawRay(ray, rayDirection * rayDistance, Color.yellow);
 
@@ -376,8 +353,7 @@ public class CharacterController2D: MonoBehaviour {
                 if (isGoingRight) {
                     deltaMovement.x -= _skinWidth;
                     collisionState.right = true;
-                }
-                else {
+                } else {
                     deltaMovement.x += _skinWidth;
                     collisionState.left = true;
                 }
@@ -441,9 +417,8 @@ public class CharacterController2D: MonoBehaviour {
                 collisionState.below = true;
                 collisionState.slopeAngle = -angle;
             }
-        }
-        else // too steep. get out of here
-        {
+        } else // too steep. get out of here
+          {
             deltaMovement.x = 0;
         }
 
@@ -479,8 +454,7 @@ public class CharacterController2D: MonoBehaviour {
                 if (isGoingUp) {
                     deltaMovement.y -= _skinWidth;
                     collisionState.above = true;
-                }
-                else {
+                } else {
                     deltaMovement.y += _skinWidth;
                     collisionState.below = true;
                 }

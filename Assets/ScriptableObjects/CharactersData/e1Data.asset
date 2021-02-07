@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   totalHealth: 100
   attackDamage: 10
-  attackKnockback: 5
+  attackKnockback: 3
   knockbackAttenuation: 0
   ownMask:
     serializedVersion: 2
@@ -37,4 +37,4 @@ MonoBehaviour:
   targetDetectionRange: 5
   targetDetectionTime: 1
   attackSpeed: 3
-  attackRange: 0.6
+  attackRange: 0.8

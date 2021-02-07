@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerInputHandler))]
-[RequireComponent(typeof(Rigidbody2D))]
 
-public class Player: ActorEntity {
+public class Player : ActorEntity {
     #region States
     public PlayerInputHandler InputHandler { get; private set; }
     public PlayerStateMachine StateMachine { get; private set; }
@@ -30,18 +27,19 @@ public class Player: ActorEntity {
     public PlayerData baseData;
 
     public Animator Anim { get; private set; }
-    public Rigidbody2D Body { get; private set; }
     public AnimationController ATSM { get; private set; }
     public CharacterController2D CC { get; private set; }
     public MeshColorer3D meshColorer { get; private set; }
 
 
+    private Interaction availableInteraction;
     public Vector2 CurrentVelocity;
     private bool freezeMovement;
     private GameObject weaponpoint;
     private CapsuleCollider2D BoxCollider;
     private Vector2 BoxDefaultSize;
     [SerializeField] protected SO_GameController gameController;
+    [SerializeField] protected LayerMask interactionLayer;
     [SerializeField] public PlayerEventsChannel playerEvents;
     [SerializeField] private Transform leftFoot;
     [SerializeField] private Transform rightFoot;
@@ -74,7 +72,6 @@ public class Player: ActorEntity {
         BoxCollider = (CapsuleCollider2D)Collider;
 
         Anim = GetComponentInChildren<Animator>();
-        Body = GetComponentInChildren<Rigidbody2D>();
         ATSM = GetComponentInChildren<AnimationController>();
 
         weaponpoint = GameObject.FindGameObjectWithTag("weaponpoint");
@@ -107,11 +104,13 @@ public class Player: ActorEntity {
 
     protected override void Update() {
         base.Update();
+        if (InputHandler.activate.hasInput && availableInteraction != null) {
+            availableInteraction.Interact(this.gameObject);
+        }
 
         if (StateMachine.CurrentState.colliderShouldFitAnimation) {
             FitColliderToAnimation();
-        }
-        else if (BoxCollider.size.y != BoxDefaultSize.y) {
+        } else if (BoxCollider.size.y != BoxDefaultSize.y) {
             BoxCollider.size = BoxDefaultSize;
         }
 
@@ -121,7 +120,8 @@ public class Player: ActorEntity {
         float yPlusGravity = CurrentVelocity.y + gravity * Time.deltaTime;
 
         //Friction
-        CurrentVelocity.x = Math.Sign(CurrentVelocity.x) * ((Math.Abs(CurrentVelocity.x)) - Math.Abs(Physics2D.gravity.y) * Time.deltaTime);
+        float friction = Math.Abs(Physics2D.gravity.y) * Time.deltaTime;
+        CurrentVelocity.x = Math.Sign(CurrentVelocity.x) * (Math.Abs(CurrentVelocity.x) - friction);
         //Snap to 0
         if (Math.Abs(CurrentVelocity.x) < 0.1) CurrentVelocity.x = 0;
 
@@ -133,8 +133,16 @@ public class Player: ActorEntity {
         StateMachine.CurrentState.PhysicsUpdate();
         if (debugMode) StateMachine.DebugModeOn();
         else StateMachine.DebugModeOff();
-    }
 
+        // Check for available Interactions
+        Collider2D collider = Physics2D.OverlapCircle(transform.position, 1f, interactionLayer);
+        if (collider && availableInteraction == null) {
+            availableInteraction = collider.GetComponent<Interaction>();
+        } else if (!collider) {
+            availableInteraction = null;
+        }
+        // will need to show some UI
+    }
 
     #region Movement
 
@@ -168,17 +176,14 @@ public class Player: ActorEntity {
         transform.position = pos;
     }
 
-
-    #endregion
-
     public Vector2 getCornerPosition() {
         // OR THIS https://youtu.be/0OE-jSDRIok?list=PLy78FINcVmjA0zDBhLuLNL1Jo6xNMMq-W&t=983
         return new Vector2(
            Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection) - (CC.skinWidth * FacingDirection),
            Collider.bounds.center.y + Collider.bounds.extents.y / 2);
-
     }
 
+    #endregion
 
     #region Events
 
@@ -203,11 +208,9 @@ public class Player: ActorEntity {
             attacker.GotBlocked(atk);
             Vector2 pos = new Vector2(weaponpoint.transform.position.x, weaponpoint.transform.position.y);
             Instantiate(gameController.BlockSparks, pos, Quaternion.identity); // last use of gameController in player
-        }
-        else if (RollState.duringHitboxTime) {
+        } else if (RollState.duringHitboxTime) {
             combatEvents.EntityDodge(this, atk);
-        }
-        else {
+        } else {
             SetVelocityX(CalculateKnockback(atk));
             combatEvents.EntityTookDamage(this, atk);
             playerEvents.PlayerGotHit(this, atk);

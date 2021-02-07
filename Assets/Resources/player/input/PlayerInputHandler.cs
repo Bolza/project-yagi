@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Dynamic;
 
 public class Ability {
     public Ability(string name) {
@@ -24,7 +21,7 @@ public class Ability {
 }
 
 
-public class PlayerInputHandler: MonoBehaviour {
+public class PlayerInputHandler : MonoBehaviour {
     private bool frozen;
     public Vector2 RawMovementInput { get; private set; }
     public float NormInputX { get; private set; }
@@ -34,19 +31,20 @@ public class PlayerInputHandler: MonoBehaviour {
     public Ability attack = new Ability("attack");
     public Ability block = new Ability("block");
     public Ability roll = new Ability("roll");
+    public Ability activate = new Ability("activate");
 
     public void Update() {
         jump.Update();
         attack.Update();
         block.Update();
         roll.Update();
+        activate.Update();
     }
 
     public void OnMoveInput(InputAction.CallbackContext ctx) {
         if (frozen) {
             RawMovementInput = new Vector2(0, 0);
-        }
-        else {
+        } else {
             RawMovementInput = ctx.ReadValue<Vector2>();
         }
         NormInputX = (RawMovementInput.x * Vector2.right).normalized.x;
@@ -71,6 +69,11 @@ public class PlayerInputHandler: MonoBehaviour {
     public void UseRollInput() => roll.Use();
     public void OnRollInput(InputAction.CallbackContext ctx) {
         if (ctx.started) roll.Start();
+    }
+
+    public void UseActivateInput() => activate.Use();
+    public void OnActivateInput(InputAction.CallbackContext ctx) {
+        if (ctx.performed) activate.Start();
     }
 
     public void MuteInput() => frozen = true;

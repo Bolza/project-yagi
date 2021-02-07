@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "newPlayerData", menuName = "Data/Player Data/Base Data")]
-public class PlayerData: LivingEntityData {
+public class PlayerData : LivingEntityData {
 
     [Header("Move State")]
     public float rollkMotionSpaceX = 3f;

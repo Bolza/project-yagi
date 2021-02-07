@@ -121,7 +121,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &1742761035
+--- !u!1 &1026067737
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,44 +129,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1742761036}
-  - component: {fileID: 1742761037}
+  - component: {fileID: 1026067739}
+  - component: {fileID: 1026067738}
   m_Layer: 0
-  m_Name: Initializer
+  m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1742761036
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742761035}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.8000283, y: -1.134196, z: -22.359375}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1742761037
+--- !u!114 &1026067738
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742761035}
+  m_GameObject: {fileID: 1026067737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d977ed31352a49b6827b5e10cdc6962, type: 3}
+  m_Script: {fileID: 11500000, guid: 8db470d74b3704a89a21aa688063bad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ManagersScene: {fileID: 11400000, guid: db582005015614c848598c40e995b614, type: 2}
-  InitializerScene: {fileID: 11400000, guid: 9766ca199f67149ffa3585f4dfce7ab5, type: 2}
-  defaultLocation:
-  - {fileID: 11400000, guid: 861c2f91ef8c542eab32c62e5b001950, type: 2}
-  showLoadScreen: 1
-  sceneChannel: {fileID: 11400000, guid: 0337c9fd6b72b49268ad24f46ddd97c9, type: 2}
+--- !u!4 &1026067739
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026067737}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.711499, y: 0.07999305, z: -153.97804}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

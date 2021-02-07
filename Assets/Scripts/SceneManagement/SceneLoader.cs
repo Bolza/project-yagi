@@ -6,20 +6,17 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// This class manages the scene loading and unloading.
 /// </summary>
-public class SceneLoader: MonoBehaviour {
+public class SceneLoader : MonoBehaviour {
     [Header("Persistent Scenes")]
-    [SerializeField] private ManagerSceneSO managerScene = default;
-    [SerializeField] private ManagerSceneSO gameplayScene = default;
+    [SerializeField] private ManagerSceneSO persistentScenes = default;
 
     [Header("Load Events")]
     [SerializeField] private SceneManagementEventsChannel eventsChannel = default;
 
+    private string sceneToActivate = "";
+    private Dictionary<string, SceneRecord> record = new Dictionary<string, SceneRecord>();
     private List<AsyncOperation> scenesToLoadAsyncOperations = new List<AsyncOperation>();
-    private List<GameSceneSO> scenesToUnload = new List<GameSceneSO>();
-    private List<GameSceneSO> loadedScenes = new List<GameSceneSO>();
-    private GameSceneSO activeScene; // The scene we want to set as active (for lighting/skybox)
-    //private List<GameSceneSO> persistentScenes = new List<GameSceneSO>(); //Scenes to keep loaded when a load event is raised
-    //private List<Scene> scenesToUnload = new List<Scene>();
+    private PathSO lastPathTaken;
 
     private void OnEnable() {
         if (eventsChannel != null) {
@@ -33,46 +30,49 @@ public class SceneLoader: MonoBehaviour {
         }
     }
 
+    private void Awake() {
+        for (int i = 0; i < SceneManager.sceneCount; ++i) {
+            Scene sc = SceneManager.GetSceneAt(i);
+            record.Add(sc.name, new SceneRecord(sc.name, sc.path));
+            record[sc.name].Loaded();
+        }
+    }
+
     /// <summary>
     /// This function loads the location scenes passed as array parameter 
     /// </summary>
-    /// <param name="locationsToLoad"></param>
-    /// <param name="showLoadingScreen"></param>
-    private void LoadLocation(GameSceneSO[] sceneToLoad, bool showLoadingScreen) {
-        Debug.Log("sceneToLoad " + sceneToLoad);
+    private void LoadLocation(GameSceneSO[] scenesToLoad, PathSO path, bool showLoadingScreen) {
+        GameSceneSO locationScene = GlobalUtils.GetLocationScene(scenesToLoad);
+        lastPathTaken = path;
 
-        List<GameSceneSO> tmpScenesToLoad = new List<GameSceneSO>();
-        GameSceneSO locationScene = GlobalUtils.GetLocationScene(sceneToLoad);
-        bool hasLocation = locationScene != null;
+        if (!record.ContainsKey(persistentScenes.name)) {
+            record.Add(persistentScenes.name, new SceneRecord(persistentScenes.name, persistentScenes.scenePath));
+        }
+        if (!record.ContainsKey(locationScene.name)) {
+            record.Add(locationScene.name, new SceneRecord(locationScene.name, locationScene.scenePath));
+        }
 
+        record[SceneManager.GetActiveScene().name].MarkForUnload();
+        record[persistentScenes.name].MarkForLoad();
+        record[locationScene.name].isLocation = true;
+        record[locationScene.name].MarkForLoad();
+        sceneToActivate = locationScene.name;
         UnloadScenes();
-
-        if (!loadedScenes.Exists(scene => scene.scenePath == gameplayScene.scenePath)) {
-            tmpScenesToLoad.Add(gameplayScene);
-        }
-        if (!loadedScenes.Exists(scene => scene.scenePath == locationScene.scenePath)) {
-            tmpScenesToLoad.Add(locationScene);
-            AddSceneToUnload(locationScene);
-        }
-
-        LoadScenes(tmpScenesToLoad, showLoadingScreen);
+        LoadScenes(showLoadingScreen);
     }
 
-    private void LoadScenes(List<GameSceneSO> scenesToLoad, bool showLoadingScreen) {
-        //Take the first scene in the array as the scene we want to set active
-
-        activeScene = GlobalUtils.GetLocationScene(scenesToLoad);
-
-
-        if (showLoadingScreen) {
-            eventsChannel.ToggleLoadingScreen(true);
-        }
-
+    private void LoadScenes(bool showLoadingScreen) {
+        if (showLoadingScreen) eventsChannel.ToggleLoadingScreen(true);
         if (scenesToLoadAsyncOperations.Count == 0) {
-            for (int i = 0; i < scenesToLoad.Count; i++) {
-                loadedScenes.Add(scenesToLoad[i]);
-                string currentScenePath = scenesToLoad[i].scenePath;
-                scenesToLoadAsyncOperations.Add(SceneManager.LoadSceneAsync(currentScenePath, LoadSceneMode.Additive));
+            foreach (KeyValuePair<string, SceneRecord> scene in record) {
+                if (scene.Value.willLoad) {
+                    string currentScenePath = scene.Value.path;
+                    scenesToLoadAsyncOperations.Add(SceneManager.LoadSceneAsync(currentScenePath, LoadSceneMode.Additive));
+                    scene.Value.Loaded();
+                    if (scene.Value.isLocation) {
+                        sceneToActivate = scene.Key;
+                    }
+                }
             }
         }
         StartCoroutine(WaitForLoading(showLoadingScreen));
@@ -80,80 +80,91 @@ public class SceneLoader: MonoBehaviour {
 
     private IEnumerator WaitForLoading(bool showLoadingScreen) {
         bool _loadingDone = false;
-        // Wait until all scenes are loaded
         while (!_loadingDone) {
             for (int i = 0; i < scenesToLoadAsyncOperations.Count; ++i) {
                 if (!scenesToLoadAsyncOperations[i].isDone) {
                     break;
-                }
-                else {
+                } else {
                     _loadingDone = true;
                     scenesToLoadAsyncOperations.Clear();
                 }
             }
             yield return null;
         }
-        //Set the active scene
-        SetActiveScene();
-        if (showLoadingScreen) {
-            //Raise event to disable loading screen 
-            eventsChannel.ToggleLoadingScreen(false);
-        }
 
+        SetActiveScene(record[sceneToActivate].path);
+        if (showLoadingScreen) eventsChannel.ToggleLoadingScreen(false);
     }
 
-    /// <summary>
-    /// This function is called when all the scenes have been loaded
-    /// </summary>
-    private void SetActiveScene() {
-        Scene scene = SceneManager.GetSceneByPath(activeScene.scenePath);
+    private void SetActiveScene(string activeScenePath) {
+        Scene scene = SceneManager.GetSceneByPath(activeScenePath);
         SceneManager.SetActiveScene(scene);
         // Will reconstruct LightProbe tetrahedrons to include the probes from the newly-loaded scene
         LightProbes.TetrahedralizeAsync();
         //Raise the event to inform that the scene is loaded and set active
-        eventsChannel.OnSceneReady(activeScene);
-    }
-
-
-    private void AddSceneToUnload(GameSceneSO scene) {
-        scenesToUnload.Add(scene);
+        eventsChannel.OnSceneReady(scene, lastPathTaken);
     }
 
     private void UnloadScenes() {
-        if (scenesToUnload.Count <= 0) return;
-        Debug.Log(scenesToUnload);
         for (int i = 0; i < SceneManager.sceneCount; ++i) {
             Scene scene = SceneManager.GetSceneAt(i);
-            string scenePath = scene.path;
-            for (int j = 0; j < scenesToUnload.Count; ++j) {
-                if (scenePath == scenesToUnload[j].scenePath) {
-                    SceneManager.UnloadSceneAsync(scene);
-                    loadedScenes.Remove(scenesToUnload[j]);
-                }
+            if (record[scene.name].willUnload) {
+                SceneManager.UnloadSceneAsync(scene);
+                record[scene.name].Unloaded();
             }
         }
-        scenesToUnload.Clear();
-    }
-
-
-    /// <summary>
-    /// This function checks if a scene is already loaded
-    /// </summary>
-    /// <param name="scenePath"></param>
-    /// <returns>bool</returns>
-    private bool IsSceneLoaded(string scenePath) {
-        for (int i = 0; i < SceneManager.sceneCount; i++) {
-            Scene scene = SceneManager.GetSceneAt(i);
-            if (scene.path == scenePath) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private void ExitGame() {
         Application.Quit();
         Debug.Log("Exit!");
     }
+}
 
+
+class SceneRecord {
+    public string name { get; private set; }
+    public string path;
+    public bool willLoad = false;
+    public bool willUnload = false;
+    public bool isLoaded = false;
+    public bool isLocation = false;
+
+    public SceneRecord(string name = "", string path = "") {
+        this.name = name;
+        this.path = path;
+    }
+
+    public void Unload() {
+        for (int i = 0; i < SceneManager.sceneCount; ++i) {
+            Scene sc = SceneManager.GetSceneAt(i);
+            if (sc.path == path) {
+                SceneManager.UnloadSceneAsync(sc);
+                willUnload = false;
+                isLoaded = false;
+            }
+        }
+    }
+
+    public void MarkForLoad() {
+        if (!isLoaded) {
+            willLoad = true;
+            willUnload = false;
+        }
+    }
+
+    public void Loaded() {
+        willLoad = false;
+        isLoaded = true;
+    }
+
+    public void MarkForUnload() {
+        willLoad = false;
+        willUnload = true;
+    }
+
+    public void Unloaded() {
+        willUnload = false;
+        isLoaded = false;
+    }
 }

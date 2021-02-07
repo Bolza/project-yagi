@@ -4,12 +4,15 @@ using System.Collections.Generic;
 
 
 public static class GlobalUtils {
-
-    public static LocationSceneSO GetLocationScene(GameSceneSO[] sceneToLoad) {
-        return System.Array.Find(sceneToLoad, (GameSceneSO scene) => scene.type == SceneType.Location) as LocationSceneSO;
+    public static GameSceneSO GetLocationScene(GameSceneSO[] sceneToLoad) {
+        return System.Array.Find(sceneToLoad, (GameSceneSO scene) => {
+            return scene.type == SceneType.Location;
+        });
     }
-    public static LocationSceneSO GetLocationScene(List<GameSceneSO> sceneToLoad) {
-        return sceneToLoad.Find((GameSceneSO scene) => scene.type == SceneType.Location) as LocationSceneSO;
+    public static GameSceneSO GetLocationScene(List<GameSceneSO> sceneToLoad) {
+        return sceneToLoad.Find((GameSceneSO scene) => {
+            return scene.type == SceneType.Location;
+        });
     }
 
     public static GameObject FindGameObjectChildWithTag(this GameObject parent, string tag) {

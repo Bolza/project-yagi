@@ -7,12 +7,14 @@ using UnityEngine.SceneManagement;
 /// and raising the event to load the Main Menu
 /// </summary>
 
-public class Initializer: MonoBehaviour {
+public class Initializer : MonoBehaviour {
     [Header("Persistent managers Scene")]
     [SerializeField] private GameSceneSO ManagersScene = default;
+    [SerializeField] private GameSceneSO InitializerScene = default;
 
     [Header("Loading settings")]
-    [SerializeField] private GameSceneSO[] MenuToLoad = default;
+    [SerializeField] private LocationSceneSO[] defaultLocation = default;
+    // [SerializeField] private GameSceneSO[] MenuToLoad = default;
     [SerializeField] private bool showLoadScreen = default;
 
     [Header("Broadcasting on")]
@@ -24,14 +26,26 @@ public class Initializer: MonoBehaviour {
     }
 
     IEnumerator loadScene(string scenePath) {
-        AsyncOperation loadingSceneAsyncOp = SceneManager.LoadSceneAsync(scenePath, LoadSceneMode.Additive);
-
-        //Wait until we are done loading the scene
-        while (!loadingSceneAsyncOp.isDone) {
-            yield return null;
+        bool hasManagerAlreadyLoaded = false;
+        for (int i = 0; i < SceneManager.sceneCount; ++i) {
+            Scene sc = SceneManager.GetSceneAt(i);
+            if (sc.name == ManagersScene.name) hasManagerAlreadyLoaded = true;
         }
+
+        if (!hasManagerAlreadyLoaded) {
+            AsyncOperation loadingSceneAsyncOp = SceneManager.LoadSceneAsync(scenePath, LoadSceneMode.Additive);
+            //Wait until we are done loading the scene
+            while (!loadingSceneAsyncOp.isDone) yield return null;
+        }
+
         //Raise the event to load the main menu
-        sceneChannel.RequestLoading(MenuToLoad, showLoadScreen);
-        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        sceneChannel.RequestLoading(defaultLocation, default, showLoadScreen);
+        // Remove Initializer scene
+        for (int i = 0; i < SceneManager.sceneCount; ++i) {
+            Scene sc = SceneManager.GetSceneAt(i);
+            if (sc.name == InitializerScene.name)
+                SceneManager.UnloadSceneAsync(sc);
+        }
     }
+
 }
