@@ -1,5 +1,7 @@
 ﻿using System;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(PlayerInputHandler))]
 
@@ -104,6 +106,7 @@ public class Player : ActorEntity {
 
     protected override void Update() {
         base.Update();
+        // maybe make this a state? especially if there will be animations
         if (InputHandler.activate.hasInput && availableInteraction != null) {
             availableInteraction.Interact(this.gameObject);
         }
@@ -225,6 +228,27 @@ public class Player : ActorEntity {
         }
         return baseData.groundMask | baseData.enemyMask;
     }
+
+    Vector3 groundCheck;
+
+    void OnDrawGizmos() {
+        if (groundCheck != null) {
+            Gizmos.color = CheckIsGrounded() ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(
+                new Vector2(groundCheck.x, groundCheck.y),
+                groundCheck.y
+            );
+        }
+    }
+
+    public override bool CheckIsGrounded() {
+        Vector2 side = new Vector2(Collider.bounds.center.x, Collider.bounds.center.y - Collider.bounds.extents.y);
+        LayerMask layers = getGroundMask();
+        if (InputHandler.NormInputY < -0.1f) layers = getGroundMask() & ~CC.oneWayPlatformMask;
+        bool hittin = Physics2D.OverlapCircle(side, skinWidth, layers);
+        return hittin;
+    }
+
 
 
     #endregion

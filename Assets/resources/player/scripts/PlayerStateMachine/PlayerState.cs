@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerState {
     protected Player player;
@@ -8,6 +6,7 @@ public class PlayerState {
     protected PlayerData baseData;
     private string animBoolName;
     protected float inputX;
+    protected float inputY;
     protected float startTime;
     protected float endTime;
     protected bool isGrounded;
@@ -73,6 +72,7 @@ public class PlayerState {
 
     public virtual void DoChecks() {
         inputX = player.InputHandler.NormInputX;
+        inputY = player.InputHandler.NormInputY;
         jumpInput = player.InputHandler.jump.hasInput;
         attackInput = player.InputHandler.attack.hasInput;
         blockInput = player.InputHandler.block.hasInput;
@@ -118,6 +118,5 @@ public class PlayerState {
     public virtual void OnGotHit() {
         gotHit = true;
     }
-
 
 }

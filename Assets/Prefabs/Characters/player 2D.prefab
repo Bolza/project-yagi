@@ -5283,7 +5283,7 @@ MonoBehaviour:
     m_Bits: 0
   oneWayPlatformMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 16384
   slopeLimit: 45
   jumpingThreshold: 0.07
   slopeSpeedMultiplier:

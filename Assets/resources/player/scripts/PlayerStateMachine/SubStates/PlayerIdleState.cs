@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState: PlayerGroundedState {
+public class PlayerIdleState : PlayerGroundedState {
     public PlayerIdleState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) {
     }
 
@@ -20,7 +20,7 @@ public class PlayerIdleState: PlayerGroundedState {
 
     public override void LogicUpdate() {
         base.LogicUpdate();
-        if (inputX != 0f && !isExitingState) stateMachine.ChangeState(player.MoveState);
+        if ((inputX != 0) && !isExitingState) stateMachine.ChangeState(player.MoveState);
     }
 
     public override void PhysicsUpdate() {

@@ -27,7 +27,7 @@ MonoBehaviour:
     m_Bits: 4096
   groundMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 16896
   walkSpeed: 3
   runSpeed: 5
   rollkMotionSpaceX: 3
