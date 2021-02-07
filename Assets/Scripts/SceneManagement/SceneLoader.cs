@@ -52,7 +52,8 @@ public class SceneLoader : MonoBehaviour {
             record.Add(locationScene.name, new SceneRecord(locationScene.name, locationScene.scenePath));
         }
 
-        record[SceneManager.GetActiveScene().name].MarkForUnload();
+        string currentlyActiveScene = SceneManager.GetActiveScene().name;
+        if (currentlyActiveScene != locationScene.name) record[currentlyActiveScene].MarkForUnload();
         record[persistentScenes.name].MarkForLoad();
         record[locationScene.name].isLocation = true;
         record[locationScene.name].MarkForLoad();

@@ -251,7 +251,6 @@ public class CharacterController2D : MonoBehaviour {
         ignoreOneWayPlatformsThisFrame = false;
     }
 
-
     /// <summary>
     /// moves directly down until grounded
     /// </summary>
@@ -261,7 +260,6 @@ public class CharacterController2D : MonoBehaviour {
             move(new Vector3(0, -1f, 0));
         } while (!isGrounded);
     }
-
 
     /// <summary>
     /// this should be called anytime you have to modify the BoxCollider2D at runtime. It will recalculate the distance between the rays used for collision detection.
@@ -279,7 +277,6 @@ public class CharacterController2D : MonoBehaviour {
     }
 
     #endregion
-
 
     #region Movement Methods
 

@@ -10,7 +10,6 @@ public class SpawnManager : MonoBehaviour {
 
     [Header("Asset References")]
     [SerializeField] private Player _playerPrefab = default;
-    [SerializeField] private PlayerEventsChannel playerEvents = default;
     [SerializeField] private SceneManagementEventsChannel sceneEvents = default; //Raised when the scene is loaded and set active
 
     [Header("Scene References")]
@@ -55,8 +54,8 @@ public class SpawnManager : MonoBehaviour {
     private void Spawn(int spawnIndex) {
         Transform spawnLocation = GetSpawnLocation(spawnIndex, _spawnLocations);
         Player playerInstance = InstantiatePlayer(_playerPrefab, spawnLocation);
-        playerEvents.PlayerIstantiated(playerInstance, playerInstance.transform); // The CameraSystem will pick this up to frame the player
-                                                                                  //_playerTransformAnchor.Transform = playerInstance.transform;
+        sceneEvents.PlayerIstantiated(playerInstance); // The CameraSystem will pick this up to frame the player
+                                                       //_playerTransformAnchor.Transform = playerInstance.transform;
 
     }
 

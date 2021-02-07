@@ -14,9 +14,4 @@ public class PlayerEventsChannel : ScriptableObject {
         OnPlayerGotHit?.Invoke(player, atk);
     }
 
-    public UnityAction<Player, Transform> OnPlayerIstantiated;
-    public void PlayerIstantiated(Player player, Transform where) {
-        OnPlayerIstantiated?.Invoke(player, where);
-    }
-
 }

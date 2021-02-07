@@ -5,13 +5,14 @@ using Cinemachine;
 
 
 [RequireComponent(typeof(CinemachineVirtualCamera))]
-public class CameraController: MonoBehaviour {
+public class CameraController : MonoBehaviour {
     private CinemachineVirtualCamera cam;
     private CinemachineBasicMultiChannelPerlin cameraNoise;
 
     private float shakeTime;
 
     [SerializeField] private PlayerEventsChannel playerEvents;
+    [SerializeField] private SceneManagementEventsChannel sceneEvents;
 
     private void Start() {
         cam = GetComponent<CinemachineVirtualCamera>();
@@ -20,6 +21,7 @@ public class CameraController: MonoBehaviour {
 
     void Awake() {
         playerEvents.OnPlayerBlocked += onPlayerBlocked;
+        sceneEvents.OnPlayerIstantiated += OnPlayerIstantiated;
     }
 
     private void Update() {
@@ -35,6 +37,10 @@ public class CameraController: MonoBehaviour {
 
     private void onPlayerBlocked(Player player, AttackType atk) {
         shakeTime = 1f;
+    }
+
+    private void OnPlayerIstantiated(Player player) {
+        cam.Follow = player.transform;
     }
 
 }

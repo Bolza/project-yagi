@@ -22,6 +22,13 @@ public class SceneManagementEventsChannel : ScriptableObject {
     public UnityAction<Scene, PathSO> OnSceneReady;
     public void SceneReady(Scene scene, PathSO path) => OnSceneReady?.Invoke(scene, path);
 
+
+    public UnityAction<Player> OnPlayerIstantiated;
+    public void PlayerIstantiated(Player player) {
+        OnPlayerIstantiated?.Invoke(player);
+    }
+
+
     public List<string> getLoadedScenes() {
         List<string> res = new List<string>();
         for (int i = 0; i < SceneManager.sceneCount; ++i) {
