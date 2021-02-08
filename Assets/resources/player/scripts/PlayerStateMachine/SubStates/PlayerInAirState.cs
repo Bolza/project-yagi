@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInAirState: PlayerState {
+public class PlayerInAirState : PlayerState {
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) {
     }
 
@@ -26,33 +26,26 @@ public class PlayerInAirState: PlayerState {
         // check oldVelocity to avoid LandState from programmatic Y adjustements
         if (isGrounded && player.CurrentVelocity.y < -baseData.landAnimationSpeedLimit) {
             stateMachine.ChangeState(player.LandState);
-        }
-        else if (isGrounded && player.CurrentVelocity.y <= 0) {
+        } else if (isGrounded && player.CurrentVelocity.y <= 0) {
             stateMachine.ChangeState(player.IdleState);
-        }
-        else if (isLedged && inputX == player.FacingDirection) {
+        } else if (isLedged && inputX == player.FacingDirection) {
             Debug.Log("Player is Ledged");
             player.FreezeMovement();
             stateMachine.ChangeState(player.LedgeClimbState);
-        }
-        else if (jumpInput && isWalled) {
+        } else if (jumpInput && isWalled) {
             //stateMachine.ChangeState(player.WallJumpState);
-        }
-        else if (jumpInput && player.JumpState.CanPerform()) {
+        } else if (jumpInput && player.JumpState.CanPerform()) {
             // we can make this action more smooth
             if (baseData.canJumpFromWall) {
                 player.InputHandler.UseJumpInput();
                 stateMachine.ChangeState(player.JumpState);
             }
-        }
-        else if (isWalled && inputX == player.FacingDirection && baseData.enableWallGrab) {
+        } else if (isWalled && inputX == player.FacingDirection && baseData.enableWallGrab) {
             Debug.Log("Player is WallGrab");
             stateMachine.ChangeState(player.WallGrabState);
-        }
-        else if (isWalled && inputX == player.FacingDirection && player.CurrentVelocity.y <= 0) {
+        } else if (isWalled && inputX == player.FacingDirection && player.CurrentVelocity.y <= 0) {
             Debug.Log("Player is i don't know");
-        }
-        else {
+        } else {
             player.CheckIfShouldFlip(inputX);
 
             if (canMoveX()) {

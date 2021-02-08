@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGroundedState: PlayerState {
+public class PlayerGroundedState : PlayerState {
     private float lastGroundedTime;
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) {
     }
@@ -25,23 +25,19 @@ public class PlayerGroundedState: PlayerState {
         bool isCoyoteTimeOn = Time.time <= lastGroundedTime + baseData.coyoteTime;
         if (gotHit) {
             stateMachine.ChangeState(player.HitState);
-        }
-        else if (blockInput && player.BlockState.CanPerform()) {
+        } else if (blockInput && player.BlockState.CanPerform()) {
             player.StateMachine.ChangeState(player.BlockState);
-        }
-        else if (rollInput && player.RollState.CanPerform()) {
+        } else if (rollInput && player.RollState.CanPerform()) {
             player.StateMachine.ChangeState(player.RollState);
-        }
-        else if (attackInput && player.AttackState.CanPerform()) {
+        } else if (attackInput && player.AttackState.CanPerform()) {
             player.StateMachine.ChangeState(player.AttackState);
-        }
-        else if (jumpInput && player.JumpState.CanPerform()) {
+        } else if (jumpInput && player.JumpState.CanPerform()) {
             player.InputHandler.UseJumpInput();
             stateMachine.ChangeState(player.JumpState);
-        }
-        else if (!isGrounded && !isCoyoteTimeOn) {
+        } else if (!isGrounded && !isCoyoteTimeOn) {
             // Falling w/o jumping
             player.JumpState.DecreaseJumps();
+            player.SetVelocityY(0);
             player.StateMachine.ChangeState(player.InAirState);
         }
         if (isGrounded) {

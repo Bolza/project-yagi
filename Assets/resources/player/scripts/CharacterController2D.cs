@@ -321,7 +321,7 @@ public class CharacterController2D : MonoBehaviour {
         for (int i = 0; i < totalHorizontalRays; i++) {
             Vector2 ray = new Vector2(initialRayOrigin.x, initialRayOrigin.y + i * _verticalDistanceBetweenRays);
 
-            //Debug.DrawRay(ray, rayDirection, Color.green);
+            Debug.DrawRay(ray, rayDirection, Color.green);
             // if we are grounded we will include oneWayPlatforms only on the first ray (the bottom one). this will allow us to
             // walk up sloped oneWayPlatforms
             if (i == 0 && collisionState.wasGroundedLastFrame)
@@ -333,13 +333,15 @@ public class CharacterController2D : MonoBehaviour {
                 //Debug.DrawRay(ray, rayDirection * rayDistance, Color.yellow);
 
                 // the bottom ray can hit a slope but no other ray can so we have special handling for these cases
+                // Debug.Log("_raycastHit.normal:" + _raycastHit.normal + "  | angle: " + Vector2.Angle(_raycastHit.normal, Vector2.up));
+                if (_raycastHit.normal.y < 0) continue; //back of the ramp
                 if (i == 0 && handleHorizontalSlope(ref deltaMovement, Vector2.Angle(_raycastHit.normal, Vector2.up))) {
                     _raycastHitsThisFrame.Add(_raycastHit);
                     // if we weren't grounded last frame, that means we're landing on a slope horizontally.
                     // this ensures that we stay flush to that slope
                     if (!collisionState.wasGroundedLastFrame) {
-                        //float flushDistance = Mathf.Sign(deltaMovement.x) * (_raycastHit.distance - skinWidth);
-                        //transform.Translate(new Vector2(flushDistance, 0));
+                        float flushDistance = Mathf.Sign(deltaMovement.x) * (_raycastHit.distance - skinWidth);
+                        transform.Translate(new Vector2(flushDistance, 0));
                     }
                     break;
                 }

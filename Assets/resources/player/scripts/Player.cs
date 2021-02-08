@@ -36,6 +36,7 @@ public class Player : ActorEntity {
 
     private Interaction availableInteraction;
     public Vector2 CurrentVelocity;
+    private bool wasGroundedLastFrame;
     private bool freezeMovement;
     private GameObject weaponpoint;
     private CapsuleCollider2D BoxCollider;
@@ -103,7 +104,6 @@ public class Player : ActorEntity {
         float newY = Math.Max(upperBound - lowerBound, 0.1f) / this.transform.localScale.y;
         BoxCollider.size = new Vector2(BoxDefaultSize.x, newY);
     }
-
     protected override void Update() {
         base.Update();
         // maybe make this a state? especially if there will be animations
@@ -119,7 +119,10 @@ public class Player : ActorEntity {
 
         StateMachine.CurrentState.LogicUpdate();
         if (freezeMovement) return;
-        float gravity = CheckIsGrounded() ? 0 : Physics2D.gravity.y;
+
+        bool isNowGrounded = CheckIsGrounded();
+        wasGroundedLastFrame = isNowGrounded;
+        float gravity = isNowGrounded ? 0 : Physics2D.gravity.y;
         float yPlusGravity = CurrentVelocity.y + gravity * Time.deltaTime;
 
         //Friction
@@ -156,6 +159,7 @@ public class Player : ActorEntity {
 
     public void SetVelocityY(float velocity) {
         freezeMovement = false;
+
         CurrentVelocity.Set(CurrentVelocity.x, velocity);
         //Debug.Log(velocity + " / " + CurrentVelocity.y + " / " + InputHandler.NormInputY);
     }

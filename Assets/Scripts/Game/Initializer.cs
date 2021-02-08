@@ -11,12 +11,9 @@ public class Initializer : MonoBehaviour {
     [Header("Persistent managers Scene")]
     [SerializeField] private GameSceneSO ManagersScene = default;
     [SerializeField] private GameSceneSO InitializerScene = default;
-
     [Header("Loading settings")]
     [SerializeField] private LocationSceneSO[] defaultLocation = default;
-    // [SerializeField] private GameSceneSO[] MenuToLoad = default;
     [SerializeField] private bool showLoadScreen = default;
-
     [Header("Broadcasting on")]
     [SerializeField] private SceneManagementEventsChannel sceneChannel = default;
 
