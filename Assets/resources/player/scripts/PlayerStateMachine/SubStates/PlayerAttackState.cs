@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttackState: PlayerAbilityState {
+public class PlayerAttackState : PlayerAbilityState {
 
     public PlayerAttackState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName) {
     }
@@ -17,13 +17,12 @@ public class PlayerAttackState: PlayerAbilityState {
             if (hasRemainingAnimationMovementX()) player.SetVelocityX(baseData.attackMotionSpeedX * player.FacingDirection);
             if (duringHitboxTime) {
                 if (!hasRemainingAnimationMovementX()) setAnimationMovement(baseData.attackMotionSpaceX, 0);
-                if (player.hitpoint.currentHit) {
-                    player.HitCurrentTarget(player.GenerateAttack());
+                if (player.TestTargetHit()) {
+                    player.ConfirmTargetHit(player.GenerateAttack());
                     EndHitbox();
                 }
             }
-        }
-        else {
+        } else {
             stateMachine.ChangeState(player.IdleState);
         }
     }

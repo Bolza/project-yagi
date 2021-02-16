@@ -24,4 +24,8 @@ public static class GlobalUtils {
         }
         return null;
     }
+
+    public static bool LayerInMask(LayerMask mask, int layer) {
+        return mask == (mask | (1 << layer));
+    }
 }

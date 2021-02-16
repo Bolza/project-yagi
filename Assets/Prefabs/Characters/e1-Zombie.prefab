@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 3879790459956172721}
   - component: {fileID: 3879790459956172722}
   - component: {fileID: 3879790459956172723}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: hitpoint
   m_TagString: hitpoint
   m_Icon: {fileID: 0}
@@ -251,6 +251,9 @@ MonoBehaviour:
   targetDetectedForward: 0
   targetDetectedBackward: 0
   targetDetected: {fileID: 0}
+  oneWayPlatformMask:
+    serializedVersion: 2
+    m_Bits: 16384
 --- !u!70 &3879790461676812340
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -84,7 +84,6 @@ public class Player : ActorEntity {
 
         if (!weaponpoint) Debug.LogError("Weaponpoint tag required in children");
         if (!Anim) Debug.LogError("Animator required in children");
-        if (!hitpoint) Debug.LogError("Hitpoint required in children");
         if (!ATSM) Debug.LogError("EnemyAnimationController required in children");
         ATSM.OnAnimationStart += AnimationStartTrigger;
         ATSM.OnAnimationFinish += AnimationFinishTrigger;
@@ -245,6 +244,10 @@ public class Player : ActorEntity {
         return baseData.climbableMask;
     }
 
+    protected override LayerMask getHittableMask() {
+        return baseData.hittablesMask;
+    }
+
     Vector3 groundCheck;
 
     // void OnDrawGizmos() {
@@ -264,6 +267,7 @@ public class Player : ActorEntity {
         bool hittin = Physics2D.OverlapCircle(side, skinWidth, layers);
         return hittin;
     }
+
 
 
 

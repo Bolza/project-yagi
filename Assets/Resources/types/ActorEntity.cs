@@ -1,16 +1,10 @@
 ﻿using System;
 using UnityEngine;
 
-public enum FacingDirections {
-    right = 1,
-    left = -1,
-};
-
 
 public class ActorEntity : HittableEntity {
     public float skinWidth = 0.1f;
     public bool debugMode;
-    public int FacingDirection { get; private set; }
 
 
     public bool isGrounded { get; protected set; }
@@ -26,7 +20,8 @@ public class ActorEntity : HittableEntity {
     private float slopeDownAngleOld;
     private Vector2 slopeNormalPerp;
 
-
+    // private Vector2 gizmoPosition;
+    // private float gizmoSize;
 
     public override void Start() {
         base.Start();
@@ -65,9 +60,9 @@ public class ActorEntity : HittableEntity {
         return hittin2;
     }
 
-    private void OnDrawGizmos() {
-        Gizmos.DrawWireSphere(gizmoCenter, skinWidth * 4);
-    }
+    // private void OnDrawGizmos() {
+    //     Gizmos.DrawWireSphere(gizmoCenter, skinWidth * 4);
+    // }
 
 
     public virtual bool CheckIsGrounded() {

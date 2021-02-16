@@ -5011,7 +5011,6 @@ GameObject:
   - component: {fileID: 2665669264139946643}
   - component: {fileID: 2665669264139946642}
   - component: {fileID: 2665669264139946669}
-  - component: {fileID: 2665669264139946668}
   - component: {fileID: 2665669264139946670}
   - component: {fileID: 2665669264139946665}
   - component: {fileID: 7222204477439097953}
@@ -5052,6 +5051,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   combatEvents: {fileID: 11400000, guid: e4a8eb1fc908644aeba452c249ae57ed, type: 2}
+  hitpointPosition: {x: 0, y: 0}
+  hitpointRadius: 0
+  hittables:
+    serializedVersion: 2
+    m_Bits: 0
   skinWidth: 0.1
   debugMode: 0
   animationIsFacing: 1
@@ -5245,27 +5249,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!50 &2665669264139946668
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2665669264139946664}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!114 &2665669264139946670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5340,7 +5323,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.094031334, y: 0.056418538}
@@ -5533,7 +5516,7 @@ GameObject:
   - component: {fileID: 2665669265055789212}
   - component: {fileID: 2665669265055789186}
   - component: {fileID: 2665669265055789213}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: hitpoint
   m_TagString: hitpoint
   m_Icon: {fileID: 0}
@@ -5596,7 +5579,6 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  hit: []
 --- !u!1001 &2665669264995441121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6102,12 +6084,12 @@ PrefabInstance:
     - target: {fileID: 4197430279179809114, guid: 2b6489d4b97934aac9b398762ec4379a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.96728027
+      value: -0.9962029
       objectReference: {fileID: 0}
     - target: {fileID: 4197430279179809114, guid: 2b6489d4b97934aac9b398762ec4379a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.2537102
+      value: 0.08706308
       objectReference: {fileID: 0}
     - target: {fileID: 4197430279179809114, guid: 2b6489d4b97934aac9b398762ec4379a,
         type: 3}
@@ -6122,7 +6104,7 @@ PrefabInstance:
     - target: {fileID: 4197430279179809114, guid: 2b6489d4b97934aac9b398762ec4379a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -158.79301
+      value: -170.011
       objectReference: {fileID: 0}
     - target: {fileID: 4197430279179809114, guid: 2b6489d4b97934aac9b398762ec4379a,
         type: 3}
@@ -6287,22 +6269,22 @@ PrefabInstance:
     - target: {fileID: 8892741890757844599, guid: 2b6489d4b97934aac9b398762ec4379a,
         type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: 0.36180738
+      value: 0.18375564
       objectReference: {fileID: 0}
     - target: {fileID: 8892741890757844599, guid: 2b6489d4b97934aac9b398762ec4379a,
         type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 2.5802402
+      value: 2.594591
       objectReference: {fileID: 0}
     - target: {fileID: 8892741890757844599, guid: 2b6489d4b97934aac9b398762ec4379a,
         type: 3}
       propertyPath: m_Bounds.m_Extent.x
-      value: 0.34892806
+      value: 0.37174177
       objectReference: {fileID: 0}
     - target: {fileID: 8892741890757844599, guid: 2b6489d4b97934aac9b398762ec4379a,
         type: 3}
       propertyPath: m_Bounds.m_Extent.y
-      value: 0.80390203
+      value: 0.78312415
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: -5790383636994976313, guid: 2b6489d4b97934aac9b398762ec4379a,

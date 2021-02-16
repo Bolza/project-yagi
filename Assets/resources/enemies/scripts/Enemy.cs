@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Enemy: ActorEntity {
+public class Enemy : ActorEntity {
     public Rigidbody2D Body { get; private set; }
     public Animator Anim { get; private set; }
     public EnemyAnimationController ATSM { get; private set; }
@@ -51,8 +51,7 @@ public class Enemy: ActorEntity {
             distanceFromTarget = Vector2.Distance(targetDetected.transform.position, transform.position);
             targetDetectedForward = Math.Sign(relativePos) == FacingDirection;
             targetDetectedBackward = Math.Sign(relativePos) != FacingDirection;
-        }
-        else {
+        } else {
             targetDetectedForward = false;
             targetDetectedBackward = false;
         }
@@ -60,6 +59,12 @@ public class Enemy: ActorEntity {
 
     public virtual void FixedUpdate() {
         stateMachine.currentState.PhysicsUpdate();
+    }
+
+    void OnCollisionEnter2D(Collision2D collision) {
+        if (!StandingOnPlatform() && GlobalUtils.LayerInMask(baseData.platformMask, collision.gameObject.layer)) {
+            Physics2D.IgnoreCollision(collision.collider, Collider);
+        }
     }
 
     public virtual void SetVelocityX(float x) {
@@ -105,10 +110,19 @@ public class Enemy: ActorEntity {
         return new AttackType(this, baseData.attackDamage, baseData.attackKnockback);
     }
 
-    //override HitCurrentTGt to pass dmg?
-
     public override LayerMask getGroundMask() {
         return baseData.groundMask;
+    }
+
+    protected override LayerMask getHittableMask() {
+        return baseData.hittablesMask;
+    }
+
+    public bool StandingOnPlatform() {
+        Vector2 side = new Vector2(Collider.bounds.center.x, Collider.bounds.center.y - Collider.bounds.extents.y);
+        LayerMask layers = getGroundMask();
+        bool hittin = Physics2D.OverlapCircle(side, skinWidth, baseData.platformMask);
+        return hittin;
     }
 
     #endregion

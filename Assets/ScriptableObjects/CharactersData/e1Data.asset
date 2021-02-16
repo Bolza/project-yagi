@@ -19,22 +19,28 @@ MonoBehaviour:
   ownMask:
     serializedVersion: 2
     m_Bits: 4096
-  friendlyMask:
-    serializedVersion: 2
-    m_Bits: 0
   enemyMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  hittablesMask:
     serializedVersion: 2
     m_Bits: 2048
   groundMask:
     serializedVersion: 2
     m_Bits: 512
+  platformMask:
+    serializedVersion: 2
+    m_Bits: 16384
+  climbableMask:
+    serializedVersion: 2
+    m_Bits: 32768
   walkSpeed: 3
   runSpeed: 5
   wallDetectionRange: 1
   patrolRange: 6
   minIdleTime: 1
   maxIdleTime: 5
-  targetDetectionRange: 5
+  targetDetectionRange: 4
   targetDetectionTime: 1
   attackSpeed: 3
   attackRange: 0.8

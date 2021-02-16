@@ -19,15 +19,18 @@ MonoBehaviour:
   ownMask:
     serializedVersion: 2
     m_Bits: 2048
-  friendlyMask:
-    serializedVersion: 2
-    m_Bits: 0
   enemyMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  hittablesMask:
     serializedVersion: 2
     m_Bits: 4096
   groundMask:
     serializedVersion: 2
     m_Bits: 16896
+  platformMask:
+    serializedVersion: 2
+    m_Bits: 16384
   climbableMask:
     serializedVersion: 2
     m_Bits: 32768

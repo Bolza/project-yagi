@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class e1_AttackState: AttackState {
-    private e1AI enemy;
+public class e1_AttackState : AttackState {
+    private e1AI thisEntity;
     public e1_AttackState(Enemy entity, EnemyStateMachine stateMachine, string animBoolName, EnemyData enemyData, Transform attackPosition) : base(entity, stateMachine, animBoolName, enemyData, attackPosition) {
-        this.enemy = (e1AI)entity;
+        this.thisEntity = (e1AI)entity;
     }
 
     public override void AnimationFinishTrigger() {
@@ -22,7 +20,7 @@ public class e1_AttackState: AttackState {
 
     public override void Enter() {
         base.Enter();
-        enemy.SetVelocityX(0);
+        thisEntity.SetVelocityX(0);
     }
 
     public override void Exit() {
@@ -32,30 +30,25 @@ public class e1_AttackState: AttackState {
     public override void LogicUpdate() {
         base.LogicUpdate();
         if (gotHit) {
-            stateMachine.ChangeState(enemy.HitState);
-        }
-        else if (duringAnimation) {
+            stateMachine.ChangeState(thisEntity.HitState);
+        } else if (duringAnimation) {
             if (gotBlocked) {
                 //stateMachine.ChangeState(enemy.HitState);
-                stateMachine.ChangeState(enemy.IdleState);
-            }
-            else if (duringHitboxTime && enemy.hitpoint.currentHit) {
-                enemy.HitCurrentTarget(enemy.GenerateAttack());
+                stateMachine.ChangeState(thisEntity.IdleState);
+            } else if (duringHitboxTime && thisEntity.TestTargetHit()) {
+                thisEntity.ConfirmTargetHit(thisEntity.GenerateAttack());
                 EndHitbox();
             }
-        }
-        else {
+        } else {
             EvaluateNextState();
         }
-
     }
 
     private void EvaluateNextState() {
         if (!targetDetected) {
-            stateMachine.ChangeState(enemy.IdleState);
-        }
-        else {
-            stateMachine.ChangeState(enemy.TargetDetectedState);
+            stateMachine.ChangeState(thisEntity.IdleState);
+        } else {
+            stateMachine.ChangeState(thisEntity.TargetDetectedState);
         }
     }
 
