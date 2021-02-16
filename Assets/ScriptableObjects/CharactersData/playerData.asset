@@ -28,6 +28,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 16896
+  climbableMask:
+    serializedVersion: 2
+    m_Bits: 32768
   walkSpeed: 3
   runSpeed: 5
   rollkMotionSpaceX: 3

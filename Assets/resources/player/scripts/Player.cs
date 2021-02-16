@@ -23,6 +23,7 @@ public class Player : ActorEntity {
     public PlayerBlockState BlockState { get; private set; }
     public PlayerHitState HitState { get; private set; }
     public PlayerRollState RollState { get; private set; }
+    public PlayerOnLadderState LadderState { get; private set; }
 
     #endregion
 
@@ -47,6 +48,7 @@ public class Player : ActorEntity {
     [SerializeField] private Transform leftFoot;
     [SerializeField] private Transform rightFoot;
     [SerializeField] private Transform head;
+    [SerializeField] private String currentState;
     public float climbWhyPos = 1.4f;
 
     private void Awake() {
@@ -65,6 +67,7 @@ public class Player : ActorEntity {
         BlockState = new PlayerBlockState(this, StateMachine, baseData, "block");
         HitState = new PlayerHitState(this, StateMachine, baseData, "hit");
         RollState = new PlayerRollState(this, StateMachine, baseData, "roll");
+        LadderState = new PlayerOnLadderState(this, StateMachine, baseData, "climb");
     }
 
     public override void Start() {
@@ -120,9 +123,10 @@ public class Player : ActorEntity {
         StateMachine.CurrentState.LogicUpdate();
         if (freezeMovement) return;
 
+        bool isControlled = StateMachine.CurrentState.stateControlledPhysics;
         bool isNowGrounded = CheckIsGrounded();
         wasGroundedLastFrame = isNowGrounded;
-        float gravity = isNowGrounded ? 0 : Physics2D.gravity.y;
+        float gravity = isNowGrounded || isControlled ? 0 : Physics2D.gravity.y;
         float yPlusGravity = CurrentVelocity.y + gravity * Time.deltaTime;
 
         //Friction
@@ -130,7 +134,7 @@ public class Player : ActorEntity {
         CurrentVelocity.x = Math.Sign(CurrentVelocity.x) * (Math.Abs(CurrentVelocity.x) - friction);
         //Snap to 0
         if (Math.Abs(CurrentVelocity.x) < 0.1) CurrentVelocity.x = 0;
-
+        currentState = StateMachine.CurrentState.ToString();
         CurrentVelocity.Set(CurrentVelocity.x, yPlusGravity);
         CC.move(CurrentVelocity * Time.deltaTime);
     }
@@ -233,17 +237,25 @@ public class Player : ActorEntity {
         return baseData.groundMask | baseData.enemyMask;
     }
 
+    public override LayerMask getPlatformMask() {
+        return CC.oneWayPlatformMask;
+    }
+
+    public override LayerMask getClimbableMask() {
+        return baseData.climbableMask;
+    }
+
     Vector3 groundCheck;
 
-    void OnDrawGizmos() {
-        if (groundCheck != null) {
-            Gizmos.color = CheckIsGrounded() ? Color.green : Color.red;
-            Gizmos.DrawWireSphere(
-                new Vector2(groundCheck.x, groundCheck.y),
-                groundCheck.y
-            );
-        }
-    }
+    // void OnDrawGizmos() {
+    //     if (groundCheck != null) {
+    //         Gizmos.color = CheckIsGrounded() ? Color.green : Color.red;
+    //         Gizmos.DrawWireSphere(
+    //             new Vector2(groundCheck.x, groundCheck.y),
+    //             groundCheck.y
+    //         );
+    //     }
+    // }
 
     public override bool CheckIsGrounded() {
         Vector2 side = new Vector2(Collider.bounds.center.x, Collider.bounds.center.y - Collider.bounds.extents.y);

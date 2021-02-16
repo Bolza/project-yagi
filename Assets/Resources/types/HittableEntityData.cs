@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "newHittableEntityData", menuName = "Base Types")]
-public class HittableEntityData: ScriptableObject {
+public class HittableEntityData : ScriptableObject {
     [Header("Stats")]
     public int totalHealth = 100;
     public float attackDamage = 10;
@@ -14,4 +12,5 @@ public class HittableEntityData: ScriptableObject {
     public LayerMask friendlyMask;
     public LayerMask enemyMask;
     public LayerMask groundMask;
+    public LayerMask climbableMask;
 }

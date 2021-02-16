@@ -45,6 +45,8 @@ public class PlayerInAirState : PlayerState {
             stateMachine.ChangeState(player.WallGrabState);
         } else if (isWalled && inputX == player.FacingDirection && player.CurrentVelocity.y <= 0) {
             Debug.Log("Player is i don't know");
+        } else if (inputY != 0 && player.CheckHasLadder()) {
+            stateMachine.ChangeState(player.LadderState);
         } else {
             player.CheckIfShouldFlip(inputX);
 

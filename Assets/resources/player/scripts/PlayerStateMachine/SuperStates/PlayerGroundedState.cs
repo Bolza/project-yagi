@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerGroundedState : PlayerState {
     private float lastGroundedTime;
@@ -34,6 +32,8 @@ public class PlayerGroundedState : PlayerState {
         } else if (jumpInput && player.JumpState.CanPerform()) {
             player.InputHandler.UseJumpInput();
             stateMachine.ChangeState(player.JumpState);
+        } else if (inputY > 0 && player.CheckHasLadder()) {
+            stateMachine.ChangeState(player.LadderState);
         } else if (!isGrounded && !isCoyoteTimeOn) {
             // Falling w/o jumping
             player.JumpState.DecreaseJumps();

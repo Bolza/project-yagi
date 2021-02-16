@@ -47,16 +47,27 @@ public class ActorEntity : HittableEntity {
         Vector2 side = new Vector2(
             Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection) - (skinWidth * FacingDirection),
             Collider.bounds.center.y);
-        gizmoCenter = side;
-
+        // gizmoCenter = side;
         RaycastHit2D hittin = Physics2D.Raycast(side, Vector2.right * FacingDirection, skinWidth * 2, getGroundMask());
-        Debug.DrawRay(side, Vector2.right * FacingDirection * skinWidth * 2, hittin ? Color.red : Color.green);
+        // if (hittin) Debug.Log("normal: " + hittin.normal + " | angle: " + Vector2.Angle(hittin.normal, Vector2.up));
+        if (debugMode) Debug.DrawRay(side, Vector2.right * FacingDirection * skinWidth * 2, hittin ? Color.red : Color.green);
         return hittin;
     }
 
-    //private void OnDrawGizmos() {
-    //    Gizmos.DrawWireSphere(gizmoCenter, skinWidth);
-    //}
+    public Collider2D CheckHasLadder() {
+        Vector2 side = new Vector2(
+            Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection) - (skinWidth * FacingDirection),
+            Collider.bounds.center.y);
+        gizmoCenter = side;
+        // RaycastHit2D hittin = Physics2D.Raycast(side, Vector2.right * FacingDirection, skinWidth * 2, getClimbableMask());
+        Collider2D hittin2 = Physics2D.OverlapCircle(side, skinWidth * 4, getClimbableMask());
+        // if (hittin) Debug.Log("normal: " + hittin.normal + " | angle: " + Math.Round(Vector2.Angle(hittin.normal, Vector2.up)));
+        return hittin2;
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.DrawWireSphere(gizmoCenter, skinWidth * 4);
+    }
 
 
     public virtual bool CheckIsGrounded() {
@@ -97,7 +108,7 @@ public class ActorEntity : HittableEntity {
         Vector2 side = new Vector2(
             Collider.bounds.center.x + (Collider.bounds.extents.x * FacingDirection) - (skinWidth * FacingDirection),
             Collider.bounds.center.y + Collider.bounds.extents.y);
-        bool hittin = Physics2D.Raycast(side, Vector2.right * FacingDirection, skinWidth * 2, getGroundMask());
+        RaycastHit2D hittin = Physics2D.Raycast(side, Vector2.right * FacingDirection, skinWidth * 2, getGroundMask());
 
         if (debugMode) Debug.DrawRay(side, Vector2.right * FacingDirection * skinWidth * 2, hittin ? Color.red : Color.green);
         return hittin;
@@ -111,5 +122,15 @@ public class ActorEntity : HittableEntity {
     public virtual LayerMask getGroundMask() {
         Debug.Log("Need to override in your class");
         return LayerMask.GetMask("Ground");
+    }
+
+    public virtual LayerMask getPlatformMask() {
+        Debug.Log("Need to override in your class");
+        return LayerMask.GetMask("Platform");
+    }
+
+    public virtual LayerMask getClimbableMask() {
+        Debug.Log("Need to override in your class");
+        return LayerMask.GetMask("Climbable");
     }
 }

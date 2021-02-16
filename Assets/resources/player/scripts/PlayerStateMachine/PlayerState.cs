@@ -20,6 +20,7 @@ public class PlayerState {
     protected bool headIsFree;
     protected bool gotHit;
     public bool colliderShouldFitAnimation;
+    public bool stateControlledPhysics;
     protected Vector2 startPosition;
     protected float maxYMovement;
     protected float maxXMovement;
@@ -50,6 +51,7 @@ public class PlayerState {
         player.onGotHit += OnGotHit;
         gotHit = false;
         colliderShouldFitAnimation = false;
+        stateControlledPhysics = false;
         DoChecks();
     }
 
@@ -60,6 +62,7 @@ public class PlayerState {
         duringAnimation = false;
         player.Anim.SetBool(animBoolName, false);
         colliderShouldFitAnimation = false;
+        stateControlledPhysics = false;
         endTime = Time.time;
     }
 
