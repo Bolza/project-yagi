@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Bolza.Pool;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : ActorEntity {
@@ -20,6 +20,7 @@ public class Enemy : ActorEntity {
     public Collider2D targetDetected;
     public float distanceFromTarget { get; protected set; }
 
+    public SpritePoolSO onHitAnimation;
 
     private Vector2 workspace;
 
@@ -98,8 +99,18 @@ public class Enemy : ActorEntity {
 
     public override void GotHit(AttackType atk) {
         base.GotHit(atk);
+        Debug.Log("ENEMY GOT HIT");
         combatEvents.EntityTookDamage(this, atk);
         SetVelocityX(CalculateKnockback(atk));
+        // GameObject o = Instantiate(onHitAnimation, transform.position, Quaternion.identity);
+        GameObject o = onHitAnimation.Request();
+        o.transform.position = this.transform.position;
+        StartCoroutine(ReturnAfterTime(o, 1));
+    }
+
+    private IEnumerator ReturnAfterTime(GameObject obj, float time) {
+        yield return new WaitForSeconds(time);
+        onHitAnimation.Return(obj);
     }
 
     public override void GotBlocked(AttackType atk) {

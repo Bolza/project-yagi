@@ -1,0 +1,2228 @@
+fileFormatVersion: 2
+guid: a356fa3acdb9241a5839ad68ea36c137
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5056259822084032569
+    second: blood-trace_0
+  - first:
+      213: 8379894419627883933
+    second: blood-trace_1
+  - first:
+      213: 3185985445898906530
+    second: blood-trace_2
+  - first:
+      213: -4546406061248341831
+    second: blood-trace_3
+  - first:
+      213: -5922321041596864954
+    second: blood-trace_4
+  - first:
+      213: -1656376601212597958
+    second: blood-trace_5
+  - first:
+      213: -29811218764631358
+    second: blood-trace_6
+  - first:
+      213: -8079826467061363138
+    second: blood-trace_7
+  - first:
+      213: 3929020871574122039
+    second: blood-trace_8
+  - first:
+      213: 3817727770823599666
+    second: blood-trace_9
+  - first:
+      213: -5712845685564974214
+    second: blood-trace_10
+  - first:
+      213: 7725277391173461012
+    second: blood-trace_11
+  - first:
+      213: 3708247862638185940
+    second: blood-trace_12
+  - first:
+      213: -306900189864461964
+    second: blood-trace_13
+  - first:
+      213: -5248403520572286699
+    second: blood-trace_14
+  - first:
+      213: 2296822519394574495
+    second: blood-trace_15
+  - first:
+      213: 1507963061008787097
+    second: blood-trace_16
+  - first:
+      213: 523328458266348714
+    second: blood-trace_17
+  - first:
+      213: -3955838436640889504
+    second: blood-trace_18
+  - first:
+      213: -3825957275922731541
+    second: blood-trace_19
+  - first:
+      213: -3383813657217752165
+    second: blood-trace_20
+  - first:
+      213: -3073614351192346351
+    second: blood-trace_21
+  - first:
+      213: -4120569264925604331
+    second: blood-trace_22
+  - first:
+      213: 2191859755419535944
+    second: blood-trace_23
+  - first:
+      213: -6343707598978945750
+    second: blood-trace_24
+  - first:
+      213: 7356964785290942403
+    second: blood-trace_25
+  - first:
+      213: -5889258605854062848
+    second: blood-trace_26
+  - first:
+      213: -8123335945270461390
+    second: blood-trace_27
+  - first:
+      213: 5889283354743637533
+    second: blood-trace_28
+  - first:
+      213: 8015003589980999759
+    second: blood-trace_29
+  - first:
+      213: 4880526144403707591
+    second: blood-trace_30
+  - first:
+      213: -5396325122988259458
+    second: blood-trace_31
+  - first:
+      213: -9014186221451178548
+    second: blood-trace_32
+  - first:
+      213: -3532499193591776110
+    second: blood-trace_33
+  - first:
+      213: -3054251041321061741
+    second: blood-trace_34
+  - first:
+      213: -2516555046636137028
+    second: blood-trace_35
+  - first:
+      213: 4908282129493321006
+    second: blood-trace_36
+  - first:
+      213: -2182105660758229390
+    second: blood-trace_37
+  - first:
+      213: 8896580968908506605
+    second: blood-trace_38
+  - first:
+      213: 2672354270418909225
+    second: blood-trace_39
+  - first:
+      213: 230386430883937893
+    second: blood-trace_40
+  - first:
+      213: 1141930046674551252
+    second: blood-trace_41
+  - first:
+      213: -8286374940022421262
+    second: blood-trace_42
+  - first:
+      213: 5193663990395298006
+    second: blood-trace_43
+  - first:
+      213: 3540609511736303268
+    second: blood-trace_44
+  - first:
+      213: -6701909338855543522
+    second: blood-trace_45
+  - first:
+      213: -1990304468345658512
+    second: blood-trace_46
+  - first:
+      213: 1018211153903185023
+    second: blood-trace_47
+  - first:
+      213: 2693662931706025497
+    second: blood-trace_48
+  - first:
+      213: 5931490168881439012
+    second: blood-trace_49
+  - first:
+      213: -257189021766506443
+    second: blood-trace_50
+  - first:
+      213: 7683687811981631486
+    second: blood-trace_51
+  - first:
+      213: 6568326247317940718
+    second: blood-trace_52
+  - first:
+      213: -2233659699603365827
+    second: blood-trace_53
+  - first:
+      213: -1895492206736503562
+    second: blood-trace_54
+  - first:
+      213: 3594307466080821823
+    second: blood-trace_55
+  - first:
+      213: 5633415629857588703
+    second: blood-trace_56
+  - first:
+      213: -2288081831215474731
+    second: blood-trace_57
+  - first:
+      213: -7131335608917684223
+    second: blood-trace_58
+  - first:
+      213: 4606041468346192383
+    second: blood-trace_59
+  - first:
+      213: -7072975083533971775
+    second: blood-trace_60
+  - first:
+      213: 1874216663296622886
+    second: blood-trace_61
+  - first:
+      213: 4425642686245423716
+    second: blood-trace_62
+  - first:
+      213: -6445724285865063364
+    second: blood-trace_63
+  - first:
+      213: 5010956052311124137
+    second: blood-trace_64
+  - first:
+      213: -1136387616025260704
+    second: blood-trace_65
+  - first:
+      213: 7016425249238539155
+    second: blood-trace_66
+  - first:
+      213: -5390126781485403614
+    second: blood-trace_67
+  - first:
+      213: 5071867422382424528
+    second: blood-trace_68
+  - first:
+      213: 5615868044327038173
+    second: blood-trace_69
+  - first:
+      213: -266593881412028986
+    second: blood-trace_70
+  - first:
+      213: -2798013263564375626
+    second: blood-trace_71
+  - first:
+      213: -7780404948816146589
+    second: blood-trace_72
+  - first:
+      213: 276483603307300572
+    second: blood-trace_73
+  - first:
+      213: -1297591885274969260
+    second: blood-trace_74
+  - first:
+      213: -6820397661158663392
+    second: blood-trace_75
+  - first:
+      213: -2313509253849277384
+    second: blood-trace_76
+  - first:
+      213: -4730187548315384381
+    second: blood-trace_77
+  - first:
+      213: 4738889730627087390
+    second: blood-trace_78
+  - first:
+      213: -5769657523491872529
+    second: blood-trace_79
+  - first:
+      213: -4433552973546245850
+    second: blood-trace_80
+  - first:
+      213: 4321501218941803287
+    second: blood-trace_81
+  - first:
+      213: 8975523834905802958
+    second: blood-trace_82
+  - first:
+      213: 170268042408924782
+    second: blood-trace_83
+  - first:
+      213: -4682140545951473945
+    second: blood-trace_84
+  - first:
+      213: 6671260597670549328
+    second: blood-trace_85
+  - first:
+      213: 5505924376323551560
+    second: blood-trace_86
+  - first:
+      213: 7261475183965286174
+    second: blood-trace_87
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 2000
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: blood-trace_0
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 3190
+        width: 467
+        height: 354
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 938066bd4817b2640800000000000000
+      internalID: 5056259822084032569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_1
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 3190.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9db239739d5b4470800000000000000
+      internalID: 8379894419627883933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_2
+      rect:
+        serializedVersion: 2
+        x: 1398
+        y: 3190.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ab6e5a02e4e63c20800000000000000
+      internalID: 3185985445898906530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_3
+      rect:
+        serializedVersion: 2
+        x: 1864
+        y: 3190.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b81c9276cbe7e0c0800000000000000
+      internalID: -4546406061248341831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_4
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 3190.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6462cc5f360bfcda0800000000000000
+      internalID: -5922321041596864954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_5
+      rect:
+        serializedVersion: 2
+        x: 2796
+        y: 3190.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a39447ec14e5309e0800000000000000
+      internalID: -1656376601212597958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_6
+      rect:
+        serializedVersion: 2
+        x: 3262
+        y: 3190.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c2763fbad6169ff0800000000000000
+      internalID: -29811218764631358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_7
+      rect:
+        serializedVersion: 2
+        x: 3728
+        y: 3190.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3e020013a0bedf80800000000000000
+      internalID: -8079826467061363138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2836.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73e65457aafa68630800000000000000
+      internalID: 3929020871574122039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_9
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 2836.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 236a51d2e2b4bf430800000000000000
+      internalID: 3817727770823599666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_10
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 2836.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7bd64fed15e7b0b0800000000000000
+      internalID: -5712845685564974214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_11
+      rect:
+        serializedVersion: 2
+        x: 1398
+        y: 2836.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41420446bd2b53b60800000000000000
+      internalID: 7725277391173461012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_12
+      rect:
+        serializedVersion: 2
+        x: 1864
+        y: 2836.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dd86afa8c7567330800000000000000
+      internalID: 3708247862638185940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_13
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 2836.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 479f0a147ebadbbf0800000000000000
+      internalID: -306900189864461964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_14
+      rect:
+        serializedVersion: 2
+        x: 2796
+        y: 2836.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51911662ecce927b0800000000000000
+      internalID: -5248403520572286699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_15
+      rect:
+        serializedVersion: 2
+        x: 3262
+        y: 2836.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f90a1ac89e3ffdf10800000000000000
+      internalID: 2296822519394574495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_16
+      rect:
+        serializedVersion: 2
+        x: 3728
+        y: 2836.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 996e6d91a6c5de410800000000000000
+      internalID: 1507963061008787097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2482.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aac81d7c57c334700800000000000000
+      internalID: 523328458266348714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_18
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 2482.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 065ee2b96e90a19c0800000000000000
+      internalID: -3955838436640889504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_19
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 2482.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bededcad02877eac0800000000000000
+      internalID: -3825957275922731541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_20
+      rect:
+        serializedVersion: 2
+        x: 1398
+        y: 2482.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b93ab6f28674a01d0800000000000000
+      internalID: -3383813657217752165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_21
+      rect:
+        serializedVersion: 2
+        x: 1864
+        y: 2482.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11133a448045855d0800000000000000
+      internalID: -3073614351192346351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_22
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 2482.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51687b3d51cc0d6c0800000000000000
+      internalID: -4120569264925604331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_23
+      rect:
+        serializedVersion: 2
+        x: 2796
+        y: 2482.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84a8147a5dc0b6e10800000000000000
+      internalID: 2191859755419535944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_24
+      rect:
+        serializedVersion: 2
+        x: 3262
+        y: 2482.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2de9e39c8f96f7a0800000000000000
+      internalID: -6343707598978945750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_25
+      rect:
+        serializedVersion: 2
+        x: 3728
+        y: 2482.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c7135c4e70391660800000000000000
+      internalID: 7356964785290942403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_26
+      rect:
+        serializedVersion: 2
+        x: 4194
+        y: 2482.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00708a72086254ea0800000000000000
+      internalID: -5889258605854062848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2128.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23cfdfe3ffc144f80800000000000000
+      internalID: -8123335945270461390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_28
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 2128.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d168d152200fab150800000000000000
+      internalID: 5889283354743637533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_29
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 2128.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f405c4ebc430b3f60800000000000000
+      internalID: 8015003589980999759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_30
+      rect:
+        serializedVersion: 2
+        x: 1398
+        y: 2128.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c690329bac1bb340800000000000000
+      internalID: 4880526144403707591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_31
+      rect:
+        serializedVersion: 2
+        x: 1864
+        y: 2128.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e77c4cf34e66c15b0800000000000000
+      internalID: -5396325122988259458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_32
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 2128.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccd8e2b046d27e280800000000000000
+      internalID: -9014186221451178548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_33
+      rect:
+        serializedVersion: 2
+        x: 2796
+        y: 2128.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29cbb9c03ba0afec0800000000000000
+      internalID: -3532499193591776110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_34
+      rect:
+        serializedVersion: 2
+        x: 3262
+        y: 2128.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 392f03b2cde1d95d0800000000000000
+      internalID: -3054251041321061741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_35
+      rect:
+        serializedVersion: 2
+        x: 3728
+        y: 2128.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb55983b486631dd0800000000000000
+      internalID: -2516555046636137028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_36
+      rect:
+        serializedVersion: 2
+        x: 4194
+        y: 2128.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e25e8d17798bd1440800000000000000
+      internalID: 4908282129493321006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_37
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1774.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27ef22c767a97b1e0800000000000000
+      internalID: -2182105660758229390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_38
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 1774.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de5ca4f4141077b70800000000000000
+      internalID: 8896580968908506605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_39
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 1774.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 928315adc0c161520800000000000000
+      internalID: 2672354270418909225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_40
+      rect:
+        serializedVersion: 2
+        x: 1398
+        y: 1774.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56e38edfc3f723300800000000000000
+      internalID: 230386430883937893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_41
+      rect:
+        serializedVersion: 2
+        x: 1864
+        y: 1774.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d1c166c353f8df00800000000000000
+      internalID: 1141930046674551252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_42
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 1774.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f8c34825e1e00d80800000000000000
+      internalID: -8286374940022421262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_43
+      rect:
+        serializedVersion: 2
+        x: 2796
+        y: 1774.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d0ef3ec1e9931840800000000000000
+      internalID: 5193663990395298006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_44
+      rect:
+        serializedVersion: 2
+        x: 3262
+        y: 1774.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ae596b8795c22130800000000000000
+      internalID: 3540609511736303268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_45
+      rect:
+        serializedVersion: 2
+        x: 3728
+        y: 1774.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1d64ace6f80ef2a0800000000000000
+      internalID: -6701909338855543522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_46
+      rect:
+        serializedVersion: 2
+        x: 4194
+        y: 1774.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 073626191a40164e0800000000000000
+      internalID: -1990304468345658512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_47
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1420.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7c6db656a9612e00800000000000000
+      internalID: 1018211153903185023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_48
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 1420.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91699fc2a20d16520800000000000000
+      internalID: 2693662931706025497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_49
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 1420.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42166e8d1e2e05250800000000000000
+      internalID: 5931490168881439012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_50
+      rect:
+        serializedVersion: 2
+        x: 1398
+        y: 1420.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5382a7582f74e6cf0800000000000000
+      internalID: -257189021766506443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_51
+      rect:
+        serializedVersion: 2
+        x: 1864
+        y: 1420.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: effd926ea51f1aa60800000000000000
+      internalID: 7683687811981631486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_52
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 1420.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee9a244ebe1672b50800000000000000
+      internalID: 6568326247317940718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_53
+      rect:
+        serializedVersion: 2
+        x: 2796
+        y: 1420.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d30290076527001e0800000000000000
+      internalID: -2233659699603365827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_54
+      rect:
+        serializedVersion: 2
+        x: 3262
+        y: 1420.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fc03f671ebd1b5e0800000000000000
+      internalID: -1895492206736503562
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_55
+      rect:
+        serializedVersion: 2
+        x: 3728
+        y: 1420.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f322841d89b81e130800000000000000
+      internalID: 3594307466080821823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_56
+      rect:
+        serializedVersion: 2
+        x: 4194
+        y: 1420.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd58bc11ba9ed2e40800000000000000
+      internalID: 5633415629857588703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_57
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1066.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d7506182b91f30e0800000000000000
+      internalID: -2288081831215474731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_58
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 1066.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1001e501c08680d90800000000000000
+      internalID: -7131335608917684223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_59
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 1066.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff15e75cf42fbef30800000000000000
+      internalID: 4606041468346192383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_60
+      rect:
+        serializedVersion: 2
+        x: 1398
+        y: 1066.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cec4c0c2aeb7dd90800000000000000
+      internalID: -7072975083533971775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_61
+      rect:
+        serializedVersion: 2
+        x: 1864
+        y: 1066.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 621c9ef002e820a10800000000000000
+      internalID: 1874216663296622886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_62
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 1066.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46ac678339a0b6d30800000000000000
+      internalID: 4425642686245423716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_63
+      rect:
+        serializedVersion: 2
+        x: 2796
+        y: 1066.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3c87e4b9ef2c86a0800000000000000
+      internalID: -6445724285865063364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_64
+      rect:
+        serializedVersion: 2
+        x: 3262
+        y: 1066.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a8291bfafd7a8540800000000000000
+      internalID: 5010956052311124137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_65
+      rect:
+        serializedVersion: 2
+        x: 3728
+        y: 1066.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06d49abeb7dba30f0800000000000000
+      internalID: -1136387616025260704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_66
+      rect:
+        serializedVersion: 2
+        x: 4194
+        y: 1066.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39bd1fde6995f5160800000000000000
+      internalID: 7016425249238539155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_67
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 712.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2223e37104c6235b0800000000000000
+      internalID: -5390126781485403614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_68
+      rect:
+        serializedVersion: 2
+        x: 1398
+        y: 712.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d10bfa7c84e26640800000000000000
+      internalID: 5071867422382424528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_69
+      rect:
+        serializedVersion: 2
+        x: 1864
+        y: 712.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddca49f6b329fed40800000000000000
+      internalID: 5615868044327038173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_70
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 712.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c5b42ff64edc4cf0800000000000000
+      internalID: -266593881412028986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_71
+      rect:
+        serializedVersion: 2
+        x: 2796
+        y: 712.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b9f964e2c57b29d0800000000000000
+      internalID: -2798013263564375626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_72
+      rect:
+        serializedVersion: 2
+        x: 3262
+        y: 712.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36f4f11ebe2760490800000000000000
+      internalID: -7780404948816146589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_73
+      rect:
+        serializedVersion: 2
+        x: 3728
+        y: 712.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd60a515f5446d300800000000000000
+      internalID: 276483603307300572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_74
+      rect:
+        serializedVersion: 2
+        x: 4194
+        y: 712.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45b81c62e070efde0800000000000000
+      internalID: -1297591885274969260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_75
+      rect:
+        serializedVersion: 2
+        x: 932
+        y: 358.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02b9bb396741951a0800000000000000
+      internalID: -6820397661158663392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_76
+      rect:
+        serializedVersion: 2
+        x: 1398
+        y: 358.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83c1cb35793c4efd0800000000000000
+      internalID: -2313509253849277384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_77
+      rect:
+        serializedVersion: 2
+        x: 1864
+        y: 358.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c58fa58c7ffa5eb0800000000000000
+      internalID: -4730187548315384381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_78
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 358.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1c26cf2a1be3c140800000000000000
+      internalID: 4738889730627087390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_79
+      rect:
+        serializedVersion: 2
+        x: 2796
+        y: 358.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe06b942d0f0eefa0800000000000000
+      internalID: -5769657523491872529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_80
+      rect:
+        serializedVersion: 2
+        x: 3262
+        y: 358.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62136ee7f0bd872c0800000000000000
+      internalID: -4433552973546245850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_81
+      rect:
+        serializedVersion: 2
+        x: 3728
+        y: 358.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71b917b567e09fb30800000000000000
+      internalID: 4321501218941803287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_82
+      rect:
+        serializedVersion: 2
+        x: 4194
+        y: 358.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec8bc9c9f577f8c70800000000000000
+      internalID: 8975523834905802958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_83
+      rect:
+        serializedVersion: 2
+        x: 1864
+        y: 4.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e669268e1e9ec5200800000000000000
+      internalID: 170268042408924782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_84
+      rect:
+        serializedVersion: 2
+        x: 2330
+        y: 4.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7eedb120bf1b50fb0800000000000000
+      internalID: -4682140545951473945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_85
+      rect:
+        serializedVersion: 2
+        x: 2796
+        y: 4.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0579630fa24159c50800000000000000
+      internalID: 6671260597670549328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_86
+      rect:
+        serializedVersion: 2
+        x: 3262
+        y: 4.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 841fde27c09f86c40800000000000000
+      internalID: 5505924376323551560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: blood-trace_87
+      rect:
+        serializedVersion: 2
+        x: 3728
+        y: 4.5
+        width: 466.8
+        height: 354.5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1fa095f431f5c460800000000000000
+      internalID: 7261475183965286174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

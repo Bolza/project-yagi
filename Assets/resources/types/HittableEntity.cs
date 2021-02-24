@@ -40,7 +40,6 @@ public class HittableEntity : MonoBehaviour {
     public virtual bool TestTargetHit() {
         Vector2 pos = (Vector2)transform.position + hitpointPosition * FacingDirection;
         Collider2D x = Physics2D.OverlapCircle(pos, hitpointRadius, getHittableMask());
-        Debug.Log(x);
         return x != null;
     }
 
@@ -59,6 +58,7 @@ public class HittableEntity : MonoBehaviour {
 
     public virtual void GotHit(AttackType atk) {
         lastHit = atk;
+
         onGotHit?.Invoke();
     }
 
